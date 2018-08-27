@@ -1,0 +1,4 @@
+#!/bin/sh
+#Uses solc to generate a JSON file containing an AST for a given solidity file
+astName="$1-AST.json"
+solc --ast-json $1 > ./generated_ast/$astName

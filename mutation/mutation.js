@@ -7,6 +7,6 @@ var unOp = require('./UnaryOperators.js');
 
 exports.generateMutant = function(file){
 	binOp.mutateBinaryOperator(file);
-	boolOp.mutateBooleanOperator(file);
-	unOp.mutateUnaryOperator(file);
+//	boolOp.mutateBooleanOperator(file);
+//	unOp.mutateUnaryOperator(file);
 }
