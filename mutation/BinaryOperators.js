@@ -1,7 +1,12 @@
-var parser = require("solidity-parser-antlr");
+//var parser = require("solidity-parser-antlr");
 var fs = require('fs');
 var solm = require('solmeister');
-var solp = require('solidity-parser');
+//var solp = require('solidity-parser');
+var jsonAST = require('json-to-ast');
+var path = require('path');
+
+var amp = "&";
+var pipe = "|";
 var operators = {
             "+": '-',
             "-": '+',
@@ -16,11 +21,11 @@ var operators = {
             "!=": '==',
             "===": "!==",
             "!==": "===",
-	    "&&": "\|\|",
-	    "\\|\\|": "&&",
-	    "&": "\|",
-	    "\\|": "&",
-	    "^": ["\\|", "&"],
+	    '&&': '||',
+	    '||': '&&',
+	    '&': '|',
+	    '|': '&',
+	    "^": ['|', "&"],
 	    "<<": ">>",
 	    ">>": "<<"
 };
@@ -37,6 +42,8 @@ let options = {
 	}
 };
 
+
+
 exports.mutateBinaryOperator = function(file){
 //	console.log("Binary Operators Found");
 	var ast;
@@ -45,7 +52,7 @@ exports.mutateBinaryOperator = function(file){
 		console.log("Binary Operators");
 
 		try {
-			ast = parser.parse(data.toString());
+			//ast = parser.parse(data.toString());
 		} catch(e) {
 			//if(e instanceof parser.ParserError){
 			//	console.log(e.errors);
@@ -53,34 +60,75 @@ exports.mutateBinaryOperator = function(file){
 			//console.log(e.errors);
 			//throw new Error("Parser Error");
 		}
-		parser.visit(ast, {
-			BinaryOperation: function(node) {
-				if(node.operator != "="){
-					console.log(node.operator + "\t --> \t" + operators[node.operator]);
+		//using sol parser
+	//	parser.visit(ast, {
+	//		BinaryOperation: function(node) {
+	//			if(node.operator != "="){
+	//				console.log(node.operator + "\t --> \t" + operators[node.operator]);
 					//node.operator = operators[node.operator];
-				}
-			}
-		});
+	//			}
+	//		}
+				
+		//USING json-to-ast
+	//	var settings = {
+	//		loc: true,
+	//		source: file.substring(0, file.indexOf('.'));
+
+		//});
+		//TODO: FIX THIS
+		//ast = jsonAST(
 
 //		console.log(JSON.stringify(solp.parseFile(file)));
 //		console.log("----------------------------------------------");
+
+		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type === 'BinaryExpression') {
 				var mutOperator;
 				mutOperatorList = operators[node.operator];
+				console.log(typeof mutOperatorList);
 				if(typeof mutOperatorList !== 'string'){
 					mutOperator = mutOperatorList[Math.floor(Math.random()*mutOperatorList.length)];
 				}else{
-					mutOperator = [mutOperatorList];
+					mutOperator = mutOperatorList;
 				}
-				node.transform(node.getSourceCode().replace(node.operator, mutOperator));
+				//if(node.operator != "&&"){
+				//if(node.operator == "<="){ 
+				//	console.log(node);
+				//	console.log("---------------------------------------");
+				//	console.log(node.parent);
+				//}
+				//
+				//node.transform(node.getSourceCode().replace(node.operator, mutOperator));
+				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
+
+				//node2 = node;
+				//while(typeof node2.parent !== "undefined"){
+				//	node2 = node2.parent;
+				//}
+
+				fs.writeFile("./sol_output/" 
+				+ path.basename(file).slice(0, -4) + "BinMut" 
+				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
+					if(err) throw err;
+				});
+				fileNum++
+				
+					//console.log(node.operator)
+					//console.log(mutOperator);
+					//console.log(node.getSourceCode().replace(node.operator, mutOperator));
+
+				//}
 			}
+
 		});
 		
-		fs.writeFile(file.substring(0, file.indexOf('.')) + "-BinMut.sol", mutCode, function(err) {
-			if(err) throw err;
-		});
-
+		//fs.writeFile("./sol_output/" 
+		//+ path.basename(file).slice(0, -4) + "BinMut" 
+		//+ fileNum.toString() + ".sol", mutCode, 'ascii', function(err) {
+		//	if(err) throw err;
+		//});
+		//fileNum++;
 
 
 		//var lines = data.toString().split("\n");
