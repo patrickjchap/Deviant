@@ -21,18 +21,9 @@ var usage = (function() {
 	throw new Error();
 });
 
-if(args.length == 0)
-	usage()
-
-for(var i = 0; i < args.length; i ++) {
-	if(!args[i].includes(".sol"))
-		usage();
-//	console.log(args[i]);
-	
-//	settings = {
-//		loc: true;
-//		source: "./generated_ast/" + args[i] +"-AST.json";
-//	}
-
-	mutations.generateMutant(args[i]);
+if(args.length < 1){
+	usage();
 }
+console.log(args[1]);
+mutations.generateMutant(args[0], args[1]);
+

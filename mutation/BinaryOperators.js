@@ -1,9 +1,7 @@
-//var parser = require("solidity-parser-antlr");
 var fs = require('fs');
 var solm = require('solmeister');
-//var solp = require('solidity-parser');
-var jsonAST = require('json-to-ast');
 var path = require('path');
+var parser = require('solparse');
 
 var amp = "&";
 var pipe = "|";
@@ -51,15 +49,10 @@ exports.mutateBinaryOperator = function(file){
 		if(err) throw err;
 		console.log("Binary Operators");
 
-		try {
-			//ast = parser.parse(data.toString());
-		} catch(e) {
-			//if(e instanceof parser.ParserError){
-			//	console.log(e.errors);
-			//}
-			//console.log(e.errors);
-			//throw new Error("Parser Error");
-		}
+	ast = parser.parse(data.toString());
+	fs.writeFile('./ast', JSON.stringify(ast, null, 2));
+
+
 		//using sol parser
 	//	parser.visit(ast, {
 	//		BinaryOperation: function(node) {
@@ -86,7 +79,6 @@ exports.mutateBinaryOperator = function(file){
 			if(node.type === 'BinaryExpression') {
 				var mutOperator;
 				mutOperatorList = operators[node.operator];
-				console.log(typeof mutOperatorList);
 				if(typeof mutOperatorList !== 'string'){
 					mutOperator = mutOperatorList[Math.floor(Math.random()*mutOperatorList.length)];
 				}else{
@@ -107,13 +99,15 @@ exports.mutateBinaryOperator = function(file){
 				//	node2 = node2.parent;
 				//}
 
+				console.log(mutOperator);
+
 				fs.writeFile("./sol_output/" 
 				+ path.basename(file).slice(0, -4) + "BinMut" 
 				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
 					if(err) throw err;
 				});
 				fileNum++
-				
+			
 					//console.log(node.operator)
 					//console.log(mutOperator);
 					//console.log(node.getSourceCode().replace(node.operator, mutOperator));

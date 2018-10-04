@@ -2,9 +2,9 @@
   "name": "solidity-mutation",
   "version": "1.0.0",
   "description": "Mutation generation for Solidity smart contracts.",
-  "main": "main.js",
+  "main": "window.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "author": "Patrick Chapman",
   "license": "ISC",
@@ -15,5 +15,8 @@
     "solmeister": "0.0.0",
     "solparse": "^2.2.5",
     "soltar": "^2.0.6"
+  },
+  "devDependencies": {
+    "electron": "^3.0.1"
   }
 }
