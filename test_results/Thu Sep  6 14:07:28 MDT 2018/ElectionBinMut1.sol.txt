@@ -1,0 +1,6 @@
+Using network 'development'.
+
+Error parsing /home/pchapman/election/contracts/ElectionBinMut1.sol: ParsedContract.sol:39:33: ParserError: Expected primary expression.
+        require(_candidateId >= 0_candidateId < candidatesCount);
+                                ^
+[31mCompilation failed. See above.[39m

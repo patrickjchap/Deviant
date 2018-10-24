@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+	<title>Select Mutation Operators</title>
+	<link rel="stylesheet" type="text/css" href="../css/mutOp.css">
+</head>
+
+<body>
+	<div class="tabContainer">
+		<div class="buttonContainer">
+			<button onclick="showPanel(0)">Statement Level</button>
+			<button onclick="showPanel(1)">Method Level</button>
+			<button onclick="showPanel(2)">Class Level</button>
+			<button onclick="showPanel(3)">Inter-Class Level</button>
+			<button onclick="showPanel(4)">Solidity Features</button>
+		</div>
+	
+
+		<!-- Statement Level Operators -->
+		<div class="tabPanel">
+			<form>
+			<ul>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Binary Operators</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "UnaryOp">Unary Operators</label></span>
+				<label><input type = "checkbox" class = "mutCheck" value = "StringOp">String</label>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "AssignmentOp">Assignment</label><span>
+				<span><button type="submit">Save</button></li>
+			</ul>
+			</form>
+		</div>
+
+		<!-- Method Level Operators -->
+		<div class="tabPanel">
+			<form>
+			<ul>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Swap Method Calls</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Statement Order</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Statement</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Method Body</label></span>
+				<span><button type = "submit">Save</button></span>
+			</ul>
+			</form>
+		</div>
+
+		<!-- Class Level Operators -->
+		<div class="tabPanel">
+			<form>
+			<ul>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Access Modifiers</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Deletion</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Rename</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Super Keyword Insertion</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Super Keyword Deletion</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Type Cast Insertion</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Type Cast Deletion</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Cast Type Change</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overloading Method Deletion</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overloading Method Argument Change</label></span>
+				<span><button type = "submit">Save</button></span>
+			</ul>
+			</form>
+		</div>
+
+		<!-- Inter-Class Level Operators -->
+		<div class="tabPanel">
+			<form>
+			<ul>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Temporary</label></span>
+			</ul>
+			</form>
+		</div>
+
+		<!-- Solidity Features -->
+		<div class="tabPanel">
+			<form>
+			<ul>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Cast Address to Contract</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Modify Function Gas Value</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Function Modifier</label></span>
+				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Function Modifier Condition</label></span>
+				<span><button type = "submit">Save</button></span>
+			</ul>
+			</form>
+		</div>
+
+	</div>
+
+	<script>
+		var argDict =[
+			"StringOp": 's',
+			"UpdateOp": 'u',
+			"UnaryOp": 'n',
+			"BinaryOp": 'b'
+		];
+                const electron = require('electron');
+                const {ipcRenderer} = electron;
+
+                const form = document.querySelector('form');
+                form.addEventListener('submit', submitForm);
+
+                function submitForm(e){
+                        e.preventDefault();
+			var mutParam;
+			var mutOps = document.getElementsByClassName('mutCheck');
+			for(var i = 0; mutOps[i]; ++i){
+				if(mutOps[i].checked){
+					mutParam += argDict[mutOps[i].value];
+				}
+			}
+
+                        ipcRenderer.send('op:select', mutParam);
+                }
+        </script>
+
+	<script src = "../js/mutOp.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+#!/bin/bash
+
+dir=""
+fileName=""
+resDir=""
+resultsDir="$(pwd)/test_results"
+dflag=false
+fflag=false
+mflag=false
+
+while getopts ":d:f:m:r:" opt;
+do
+	case $opt in
+		d) 
+			dir="$OPTARG"
+			dflag=true
+			;;
+		f) 
+			fileName="$OPTARG"
+			fflag=true
+			;;
+		m)
+			mflag=true
+			;;
+		r)
+			resDir="$OPTARG"
+			;;
+		\?)
+			echo "Error:"
+			echo "Invalid option: -$OPTARG" >&2
+			echo "Acceptable flags include:"
+			echo "-f <fileName>"
+			echo "-d <directory>"
+			exit 1
+			;;
+		:)
+			echo "Error:"
+			echo "Option -$OPTARG must have an argument" >&2
+			exit 1
+			;;
+	esac
+done
+
+if [ "$fflag" = false ] || [ "$dflag" = false ];
+then
+	echo "Error:"
+	echo "Both -f <file name> and -d <directory> flags must be specified"
+	exit 1
+fi
+
+a=($fileName)
+if [ ${#a[@]} -gt 1 ];
+then
+	echo "Error:"
+	echo "Only one file allowed!"
+	exit 1
+fi
+
+echo "--- Running Truffle tests on $fileName ---"
+
+if [ "$mflag" = true ];
+then
+	cp "$(pwd)/sol_output/$fileName" $fileName -d "$dir/contracts/"
+fi
+
+echo "Compiling... $fileName"
+cd $dir && truffle compile ./contracts/"$fileName"
+echo "Migrating... $fileName"
+cd $dir && truffle migrate --reset >/dev/null
+echo "Writing test results to $resultsDir/$resDir/$fileName.txt"
+cd $dir && truffle test >> "$resultsDir"/"$resDir"/"$fileName.txt"
+exit 0

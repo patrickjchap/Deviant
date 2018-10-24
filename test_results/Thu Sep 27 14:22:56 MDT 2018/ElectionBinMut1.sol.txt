@@ -1,0 +1,68 @@
+Using network 'development'.
+
+Compiling ./contracts/ElectionBinMut2.sol...
+
+Compilation warnings encountered:
+
+/home/pchapman/election/contracts/ElectionBinMut2.sol:24:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Election () public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+,/home/pchapman/election/contracts/ElectionBinMut2.sol:48:9: Warning: Invoking events without "emit" prefix is deprecated.
+        votedEvent(_candidateId);
+        ^----------------------^
+
+
+[0m[0m
+[0m  Contract: Election[0m
+  [32m  ✓[0m[90m initializes with two candidates[0m[31m (93ms)[0m
+  [32m  ✓[0m[90m it initializes the candidates with the correct values[0m[31m (138ms)[0m
+  [31m  1) allows a voter to cast a vote[0m
+    > No events were emitted
+  [31m  2) throws an exception for invalid candiates[0m
+    > No events were emitted
+  [31m  3) throws an exception for double voting[0m
+  [31m  4) throws an exception for double voting[0m
+    > No events were emitted
+
+
+[92m [0m[32m 2 passing[0m[90m (2s)[0m
+[31m  4 failing[0m
+
+[0m  1) Contract: Election
+       allows a voter to cast a vote:
+[0m[31m     Error: VM Exception while processing transaction: revert[0m[90m
+      at Object.InvalidResponse (/usr/lib/node_modules/truffle/build/webpack:/~/web3/lib/web3/errors.js:38:1)
+      at /usr/lib/node_modules/truffle/build/webpack:/~/web3/lib/web3/requestmanager.js:86:1
+      at /usr/lib/node_modules/truffle/build/webpack:/packages/truffle-provider/wrapper.js:134:1
+      at XMLHttpRequest.request.onreadystatechange (/usr/lib/node_modules/truffle/build/webpack:/~/web3/lib/web3/httpprovider.js:128:1)
+      at XMLHttpRequestEventTarget.dispatchEvent (/usr/lib/node_modules/truffle/build/webpack:/~/xhr2/lib/xhr2.js:64:1)
+      at XMLHttpRequest._setReadyState (/usr/lib/node_modules/truffle/build/webpack:/~/xhr2/lib/xhr2.js:354:1)
+      at XMLHttpRequest._onHttpResponseEnd (/usr/lib/node_modules/truffle/build/webpack:/~/xhr2/lib/xhr2.js:509:1)
+      at IncomingMessage.<anonymous> (/usr/lib/node_modules/truffle/build/webpack:/~/xhr2/lib/xhr2.js:469:1)
+      at endReadableNT (_stream_readable.js:1064:12)
+      at _combinedTickCallback (internal/process/next_tick.js:138:11)
+      at process._tickCallback (internal/process/next_tick.js:180:9)
+[0m
+[0m  2) Contract: Election
+       throws an exception for invalid candiates:
+[0m[31m     AssertionError: candidate 1 did not receive any votes: expected { Object (s, e, ...) } to equal 1[0m[90m
+      at test/election.js:58:14
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
+[0m
+[0m  3) Contract: Election
+       throws an exception for double voting:
+[0m[31m     AssertionError: error message must contain revert[0m[90m
+      at test/election.js:78:7
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
+[0m
+[0m  4) Contract: Election
+       throws an exception for double voting:
+[0m[31m     AssertionError: error message must contain revert[0m[90m
+      at test/election.js:78:7
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
+[0m
+
+

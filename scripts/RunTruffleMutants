@@ -1,0 +1,37 @@
+#!/bin/bash
+
+dir=""
+fileNames=""
+resultsDir="$(pwd)/test_results"
+echo "--- Running Truffle tests on mutant solidity files ---"
+
+while getopts "d:f:" opt;
+do
+	case $opt in
+		d) 
+			dir=$OPTARG
+			;;
+		f) 
+			fileNames="$fileNames $OPTARG"
+			;;
+		\?)
+			echo "Invalid option: -$OPTARG" >&2
+			echo "Acceptable flags include:"
+			echo "-f <fileName>"
+			echo "-d <directory>"
+			exit 1
+			;;
+		:)
+			echo "Option -$OPTARG must have an argument" >&2
+			exit 1
+			;;
+	esac
+done
+
+for file in "$fileNames";
+do
+	cp $file $file -d "$dir/contracts/"
+	cd $dir && truffle compile "./contracts/$file"
+	cd $dir && truffle migrate --reset
+	cd $dir && truffle test > "$resultsDir/$file.txt"
+done

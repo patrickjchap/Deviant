@@ -1,0 +1,70 @@
+#!/bin/bash
+solArgs=""
+truffArgs=""
+file=""
+dir=""
+opArgs=""
+fflag=false
+dflag=false
+oflag=false
+
+for var in "$@"
+do
+	if [ "$fflag" = true ];
+	then
+		file="$var"
+		fflag=false
+	fi
+
+	if [ "$var" = "-f" ];
+	then
+		fflag=true
+	fi
+
+	if [ "$dflag" = true ];
+	then
+		dir="$var"
+		dflag=false
+	fi
+	
+	if [ "$var" = "-d" ];
+	then
+		dflag=true
+	fi
+
+
+	if [ "$oflag" = true ];
+	then
+		opArgs="$var"
+		oflag=false
+	fi
+
+	if [ "$var" = "-o" ];
+	then
+		oflag=true	
+	fi
+
+done
+
+resDir="$(date)"
+initFile=$file
+node main "$dir/contracts/$file" "$opArgs"
+mkdir ./test_results/"$resDir"
+./scripts/RunTruffle -d $dir -f $file -r "$resDir"
+mv "$dir/contracts/$file" "$dir/contracts/$file.tmp"
+
+if [ "$(ls -A $(pwd)/sol_output/)" ];
+then
+	for mutFile in $(pwd)/sol_output/*
+	do
+		file=$(basename $mutFile)
+		./scripts/RunTruffle -d $dir -f $file -m mutant -r "$resDir"
+		rm $dir/contracts/$file
+	done
+else
+	echo "sol_output is empty!"
+fi
+
+mv "$dir/contracts/$initFile.tmp" "$dir/contracts/$initFile"
+
+

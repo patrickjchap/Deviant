@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang = "en">
+<div id="bg-main"></div>
+<head>
+	<title>Solidity Mutation</title>
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+
+
+<body>
+	<h1>Solidity Mutation</h1>
+
+	<div id = "fileDiv">
+	<form>
+		<div class="slct">
+			<span><label>File to mutate</label></span>
+			<span><label for "mutFile" class ="btn">Select File</label></span>
+			<input type="file" id="mutFile" style="visibility:hidden"/>
+		</div>
+		<div class="slct">
+			<span><label>Project Directory</label></span>
+			<span><label for = "mutDir" class = "btn">Select Directory</label></span>
+			<input type ="file" id="mutDir" webkitdirectory multiple style="visibility:hidden"/>
+		</div>
+	
+		<label for = "run" class = "btn" id = "runBtn">Run</label>
+		<button id="run" type="submit" style="visibility:hidden">Run</button>
+	</form>
+	</div>
+
+	<script>
+		const electron = require('electron');
+		const {ipcRenderer} = electron;
+
+		const form = document.querySelector('form');
+		form.addEventListener('submit', submitForm);
+
+		function submitForm(e){
+			e.preventDefault();
+			console.log('123');
+			const mutFile = document.getElementById('mutFile').files[0].path;
+			const mutDirectory = document.getElementById('mutDir').files[0].path;
+
+			const mutParam = [mutFile, mutDirectory]
+
+			// Sending back to the applicaiton
+			ipcRenderer.send('file:select', mutParam);
+		}
+	</script>
+
+</body>
+</html>
