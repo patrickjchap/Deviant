@@ -13,16 +13,22 @@
 	<div id = "fileDiv">
 	<form>
 		<div class="slct">
-			<span><label>File to mutate</label></span>
-			<span><label for "mutFile" class ="btn">Select File</label></span>
-			<input type="file" id="mutFile" style="visibility:hidden"/>
+			<span><label>Solidity Project</label></span>
+			<span><label for="mutFile" class ="btn">Select Directory</label></span>
+			<input type="file" id="mutFile" style="visibility:hidden" webkitdirectory multiple>
 		</div>
+
 		<div class="slct">
-			<span><label>Project Directory</label></span>
-			<span><label for = "mutDir" class = "btn">Select Directory</label></span>
-			<input type ="file" id="mutDir" webkitdirectory multiple style="visibility:hidden"/>
+		
+		<script src="../js/main.js"></script>
+
+		<script> listFiles(document.getElementById("mutFile").value); </script>
+		<select id='display-files'>
+		
+		</select>
 		</div>
-	
+
+
 		<label for = "run" class = "btn" id = "runBtn">Run</label>
 		<button id="run" type="submit" style="visibility:hidden">Run</button>
 	</form>
@@ -37,7 +43,6 @@
 
 		function submitForm(e){
 			e.preventDefault();
-			console.log('123');
 			const mutFile = document.getElementById('mutFile').files[0].path;
 			const mutDirectory = document.getElementById('mutDir').files[0].path;
 
