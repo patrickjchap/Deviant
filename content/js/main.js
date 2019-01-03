@@ -3,7 +3,7 @@ const path = require('path');
 
 const dirpath = path.join(__dirname, '/path');
 
-function listFiles(directory) {
+function listFiles(directory, parentDir) {
 	fs.readdir(directory, (err, files) => {
 		'use strict';
 
@@ -15,7 +15,7 @@ function listFiles(directory) {
 				
 				listFiles(path.join(directory, file));
 
-			}else if (file.includes('.sol')){
+			}else if (file.split('.').pop() === 'sol'){
 				
 				document.getElementById('display-files').innerHTML += '<option value="' + directory + file + '">' + file +  '</option>';
 			

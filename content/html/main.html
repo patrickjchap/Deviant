@@ -15,15 +15,15 @@
 		<div class="slct">
 			<span><label>Solidity Project</label></span>
 			<span><label for="mutFile" class ="btn">Select Directory</label></span>
-			<input type="file" id="mutFile" style="visibility:hidden" webkitdirectory multiple>
+			<input type="file" id="mutFile" style="visibility:hidden" webkitdirectory multiple onchange="listFiles(document.getElementById('mutFile').files[0].path);">
 		</div>
 
 		<div class="slct">
 		
 		<script src="../js/main.js"></script>
 
-		<script> listFiles(document.getElementById("mutFile").value); </script>
-		<select id='display-files'>
+		<script> listFiles(document.getElementById("mutFile").files[0].path); </script>
+		<select size="5" id='display-files'>
 		
 		</select>
 		</div>
@@ -31,7 +31,11 @@
 
 		<label for = "run" class = "btn" id = "runBtn">Run</label>
 		<button id="run" type="submit" style="visibility:hidden">Run</button>
+
+		<label for = "generate" class="btn" id="genBtn">Generate</label>
+		<button id="generate" type="submit" style="visibility:hidden">Generate</button>
 	</form>
+
 	</div>
 
 	<script>
