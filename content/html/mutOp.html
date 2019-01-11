@@ -13,16 +13,27 @@
 			<button onclick="showPanel(3)">Inter-Class Level</button>
 			<button onclick="showPanel(4)">Solidity Features</button>
 		</div>
+
+
+		<!-- Select-all JS function -->
+		<script language="JavaScript">
+			function toggle(source, name) {
+				checkboxes = document.getElementsByName(name);
+				for(var i = 0; i < checkboxes.length; i++)
+					checkboxes[i].checked = source.checked;
+			}
+		</script>
 	
 
 		<!-- Statement Level Operators -->
 		<div class="tabPanel">
 			<form>
 			<ul>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Binary Operators</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "UnaryOp">Unary Operators</label></span>
-				<label><input type = "checkbox" class = "mutCheck" value = "StringOp">String</label>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "AssignmentOp">Assignment</label><span>
+				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
+				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "BinaryOp">Binary Operators</label></span>
+				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "UnaryOp">Unary Operators</label></span>
+				<label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "StringOp">String</label>
+				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "AssignmentOp">Assignment</label><span>
 				<span><button type="submit">Save</button></li>
 			</ul>
 			</form>
@@ -32,6 +43,7 @@
 		<div class="tabPanel">
 			<form>
 			<ul>
+				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Swap Method Calls</label></span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Statement Order</label></span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Statement</label></span>
@@ -45,6 +57,7 @@
 		<div class="tabPanel">
 			<form>
 			<ul>
+				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Access Modifiers</label></span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Deletion</label></span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Rename</label></span>
@@ -64,6 +77,7 @@
 		<div class="tabPanel">
 			<form>
 			<ul>
+				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Temporary</label></span>
 			</ul>
 			</form>
@@ -73,6 +87,7 @@
 		<div class="tabPanel">
 			<form>
 			<ul>
+				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Cast Address to Contract</label></span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Modify Function Gas Value</label></span>
 				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Function Modifier</label></span>

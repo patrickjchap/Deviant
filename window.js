@@ -52,6 +52,8 @@ function createMutOpWindow(){
 	mutOpWindow.on('close', function(){
 		mutOpWindow = null;
 	});
+
+	mutOpWindow.webContents.openDevTools();
 }
 
 const mainMenuTemp = [
