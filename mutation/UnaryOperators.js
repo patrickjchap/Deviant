@@ -1,12 +1,13 @@
 var fs = require('fs');
 var solm = require('solmeister');
 var path = require('path');
+var solparse = require('solparse');
 
 var operators = {
             "++": '--',
             "--": '++',
             "~": '',
-            "!": ','
+            "!": ',',
 			'+': '-',
 			'-': '+'
 };
@@ -35,6 +36,11 @@ exports.mutateUnaryOperator = function(file){
 
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
+			if(fileNum == 1) {
+				fs.writeFile("ast_example", node.toString(), 'ascii', function(err){
+					if(err) throw err;
+				});
+			}
 			if(node.type === 'UnaryExpression' || node.type === 'UpdateExpression') {
 				var mutOperator;
 				mutOperatorList = operators[node.operator];

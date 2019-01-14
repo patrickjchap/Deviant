@@ -15,9 +15,10 @@ function listFiles(directory, parentDir) {
 				
 				listFiles(path.join(directory, file));
 
-			}else if (file.split('.').pop() === 'sol'){
-				
-				document.getElementById('display-files').innerHTML += '<option value="' + directory + file + '">' + file +  '</option>';
+			}else if (file.split('.').pop() === 'sol' && !directory.includes("node_modules")){
+				var pattern = "/contracts/"
+
+				document.getElementById('display-files').innerHTML += '<option value="' + directory + file + '">' + directory.substring(directory.indexOf(pattern) + pattern.length) + file +  '</option>';
 			
 			}
 		}
