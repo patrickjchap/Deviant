@@ -11,6 +11,12 @@ contains a test that is failing that was previously passing on the normal progra
 version, then that mutant is marked as killed. It the mutant version manages to pass
 all tests same as the normal version, then the mutant is considered live.
 
+## Setup
+
+### Install Dependencies
+
+npm install
+
 ## Packages Used
 * solmeister
 * solparse
