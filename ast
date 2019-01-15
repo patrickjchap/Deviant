@@ -6,52 +6,105 @@
       "start_version": {
         "type": "VersionLiteral",
         "operator": "^",
-        "version": "0.4.2",
+        "version": "0.4.22",
         "start": 16,
-        "end": 22
+        "end": 23
       },
       "end_version": null,
       "start": 0,
-      "end": 23
+      "end": 24
     },
     {
       "type": "ContractStatement",
-      "name": "Election",
+      "name": "Ballot",
       "is": [],
       "body": [
         {
           "type": "StructDeclaration",
-          "name": "Candidate",
+          "name": "Voter",
           "body": [
             {
               "type": "DeclarativeExpression",
-              "name": "id",
+              "name": "weight",
               "literal": {
                 "type": "Type",
                 "literal": "uint",
                 "members": [],
                 "array_parts": [],
-                "start": 101,
-                "end": 105
+                "start": 234,
+                "end": 238
               },
               "storage_location": null,
-              "start": 101,
-              "end": 108
+              "start": 234,
+              "end": 245
             },
+            {
+              "type": "DeclarativeExpression",
+              "name": "voted",
+              "literal": {
+                "type": "Type",
+                "literal": "bool",
+                "members": [],
+                "array_parts": [],
+                "start": 294,
+                "end": 298
+              },
+              "storage_location": null,
+              "start": 294,
+              "end": 304
+            },
+            {
+              "type": "DeclarativeExpression",
+              "name": "delegate",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 353,
+                "end": 360
+              },
+              "storage_location": null,
+              "start": 353,
+              "end": 369
+            },
+            {
+              "type": "DeclarativeExpression",
+              "name": "vote",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 402,
+                "end": 406
+              },
+              "storage_location": null,
+              "start": 402,
+              "end": 411
+            }
+          ],
+          "start": 211,
+          "end": 451
+        },
+        {
+          "type": "StructDeclaration",
+          "name": "Proposal",
+          "body": [
             {
               "type": "DeclarativeExpression",
               "name": "name",
               "literal": {
                 "type": "Type",
-                "literal": "string",
+                "literal": "bytes32",
                 "members": [],
                 "array_parts": [],
-                "start": 118,
-                "end": 124
+                "start": 528,
+                "end": 535
               },
               "storage_location": null,
-              "start": 118,
-              "end": 129
+              "start": 528,
+              "end": 540
             },
             {
               "type": "DeclarativeExpression",
@@ -61,694 +114,96 @@
                 "literal": "uint",
                 "members": [],
                 "array_parts": [],
-                "start": 139,
-                "end": 143
+                "start": 583,
+                "end": 587
               },
               "storage_location": null,
-              "start": 139,
-              "end": 153
+              "start": 583,
+              "end": 597
             }
           ],
-          "start": 74,
-          "end": 160
+          "start": 502,
+          "end": 635
         },
         {
           "type": "StateVariableDeclaration",
-          "name": "cool",
+          "name": "chairperson",
           "literal": {
             "type": "Type",
-            "literal": "string",
+            "literal": "address",
             "members": [],
             "array_parts": [],
-            "start": 161,
-            "end": 167
-          },
-          "visibility": null,
-          "is_constant": false,
-          "value": {
-            "type": "Literal",
-            "value": "text",
-            "start": 175,
-            "end": 181
-          },
-          "start": 161,
-          "end": 182
-        },
-        {
-          "type": "StateVariableDeclaration",
-          "name": "hello",
-          "literal": {
-            "type": "Type",
-            "literal": "int",
-            "members": [],
-            "array_parts": [],
-            "start": 183,
-            "end": 186
-          },
-          "visibility": null,
-          "is_constant": false,
-          "value": {
-            "type": "BinaryExpression",
-            "operator": "*",
-            "left": {
-              "type": "Literal",
-              "value": 1,
-              "start": 195,
-              "end": 196
-            },
-            "right": {
-              "type": "Literal",
-              "value": 2,
-              "start": 199,
-              "end": 200
-            },
-            "start": 195,
-            "end": 200
-          },
-          "start": 183,
-          "end": 201
-        },
-        {
-          "type": "StateVariableDeclaration",
-          "name": "bye",
-          "literal": {
-            "type": "Type",
-            "literal": "int",
-            "members": [],
-            "array_parts": [],
-            "start": 202,
-            "end": 205
-          },
-          "visibility": null,
-          "is_constant": false,
-          "value": {
-            "type": "BinaryExpression",
-            "operator": "+",
-            "left": {
-              "type": "Literal",
-              "value": 1,
-              "start": 212,
-              "end": 213
-            },
-            "right": {
-              "type": "Literal",
-              "value": 2,
-              "start": 216,
-              "end": 217
-            },
-            "start": 212,
-            "end": 217
-          },
-          "start": 202,
-          "end": 218
-        },
-        {
-          "type": "StateVariableDeclaration",
-          "name": "voters",
-          "literal": {
-            "type": "Type",
-            "literal": {
-              "type": "MappingExpression",
-              "from": {
-                "type": "Type",
-                "literal": "address",
-                "members": [],
-                "array_parts": [],
-                "start": 271,
-                "end": 278
-              },
-              "to": {
-                "type": "Type",
-                "literal": "bool",
-                "members": [],
-                "array_parts": [],
-                "start": 282,
-                "end": 286
-              },
-              "start": 263,
-              "end": 287
-            },
-            "members": [],
-            "array_parts": [],
-            "start": 263,
-            "end": 287
+            "start": 641,
+            "end": 648
           },
           "visibility": "public",
           "is_constant": false,
           "value": null,
-          "start": 263,
-          "end": 302
-        },
-        {
-          "type": "StateVariableDeclaration",
-          "name": "candidates",
-          "literal": {
-            "type": "Type",
-            "literal": {
-              "type": "MappingExpression",
-              "from": {
-                "type": "Type",
-                "literal": "uint",
-                "members": [],
-                "array_parts": [],
-                "start": 362,
-                "end": 366
-              },
-              "to": {
-                "type": "Type",
-                "literal": "Candidate",
-                "members": [],
-                "array_parts": [],
-                "start": 370,
-                "end": 379
-              },
-              "start": 354,
-              "end": 380
-            },
-            "members": [],
-            "array_parts": [],
-            "start": 354,
-            "end": 380
-          },
-          "visibility": "public",
-          "is_constant": false,
-          "value": null,
-          "start": 354,
-          "end": 399
-        },
-        {
-          "type": "StateVariableDeclaration",
-          "name": "candidatesCount",
-          "literal": {
-            "type": "Type",
-            "literal": "uint",
-            "members": [],
-            "array_parts": [],
-            "start": 434,
-            "end": 438
-          },
-          "visibility": "public",
-          "is_constant": false,
-          "value": null,
-          "start": 434,
-          "end": 462
-        },
-        {
-          "type": "EventDeclaration",
-          "name": "votedEvent",
-          "params": [
-            {
-              "type": "InformalParameter",
-              "literal": {
-                "type": "Type",
-                "literal": "uint",
-                "members": [],
-                "array_parts": [],
-                "start": 514,
-                "end": 518
-              },
-              "id": "_candidateId",
-              "is_indexed": true,
-              "is_storage": false,
-              "is_memory": false,
-              "start": 514,
-              "end": 539
-            }
-          ],
-          "is_anonymous": false,
-          "start": 487,
-          "end": 546
+          "start": 641,
+          "end": 668
         },
         {
           "type": "FunctionDeclaration",
-          "name": "Election",
+          "name": "hello",
           "params": null,
           "modifiers": [
             {
               "type": "ModifierArgument",
               "name": "public",
               "params": [],
-              "start": 573,
-              "end": 579
+              "start": 689,
+              "end": 695
             }
           ],
           "returnParams": null,
           "body": {
             "type": "BlockStatement",
             "body": [
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "Identifier",
-                    "name": "addCandidate",
-                    "start": 590,
-                    "end": 602
-                  },
-                  "arguments": [
-                    {
-                      "type": "Literal",
-                      "value": "Candidate 1",
-                      "start": 603,
-                      "end": 616
-                    }
-                  ],
-                  "start": 590,
-                  "end": 617
-                },
-                "start": 590,
-                "end": 618
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "Identifier",
-                    "name": "addCandidate",
-                    "start": 627,
-                    "end": 639
-                  },
-                  "arguments": [
-                    {
-                      "type": "Literal",
-                      "value": "Candidate 2",
-                      "start": 640,
-                      "end": 653
-                    }
-                  ],
-                  "start": 627,
-                  "end": 654
-                },
-                "start": 627,
-                "end": 655
-              }
-            ],
-            "start": 580,
-            "end": 661
-          },
-          "is_abstract": false,
-          "start": 552,
-          "end": 661
-        },
-        {
-          "type": "FunctionDeclaration",
-          "name": "addCandidate",
-          "params": [
-            {
-              "type": "InformalParameter",
-              "literal": {
-                "type": "Type",
-                "literal": "string",
-                "members": [],
-                "array_parts": [],
-                "start": 690,
-                "end": 696
-              },
-              "id": "_name",
-              "is_indexed": false,
-              "is_storage": false,
-              "is_memory": false,
-              "start": 690,
-              "end": 702
-            }
-          ],
-          "modifiers": [
-            {
-              "type": "ModifierArgument",
-              "name": "private",
-              "params": [],
-              "start": 704,
-              "end": 711
-            }
-          ],
-          "returnParams": null,
-          "body": {
-            "type": "BlockStatement",
-            "body": [
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "UpdateExpression",
-                  "operator": "++",
-                  "argument": {
-                    "type": "Identifier",
-                    "name": "candidatesCount",
-                    "start": 722,
-                    "end": 737
-                  },
-                  "prefix": false,
-                  "start": 722,
-                  "end": 740
-                },
-                "start": 722,
-                "end": 741
-              },
               {
                 "type": "ExpressionStatement",
                 "expression": {
                   "type": "AssignmentExpression",
                   "operator": "=",
                   "left": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "Identifier",
-                      "name": "candidates",
-                      "start": 750,
-                      "end": 760
+                    "type": "DeclarativeExpression",
+                    "name": "hi",
+                    "literal": {
+                      "type": "Type",
+                      "literal": "string",
+                      "members": [],
+                      "array_parts": [],
+                      "start": 700,
+                      "end": 706
                     },
-                    "property": {
-                      "type": "Identifier",
-                      "name": "candidatesCount",
-                      "start": 761,
-                      "end": 776
-                    },
-                    "computed": true,
-                    "start": 750,
-                    "end": 777
-                  },
-                  "right": {
-                    "type": "CallExpression",
-                    "callee": {
-                      "type": "Identifier",
-                      "name": "Candidate",
-                      "start": 780,
-                      "end": 789
-                    },
-                    "arguments": [
-                      {
-                        "type": "Identifier",
-                        "name": "candidatesCount",
-                        "start": 790,
-                        "end": 805
-                      },
-                      {
-                        "type": "Identifier",
-                        "name": "_name",
-                        "start": 807,
-                        "end": 812
-                      },
-                      {
-                        "type": "Literal",
-                        "value": 0,
-                        "start": 814,
-                        "end": 815
-                      }
-                    ],
-                    "start": 780,
-                    "end": 816
-                  },
-                  "start": 750,
-                  "end": 816
-                },
-                "start": 750,
-                "end": 817
-              }
-            ],
-            "start": 712,
-            "end": 823
-          },
-          "is_abstract": false,
-          "start": 667,
-          "end": 823
-        },
-        {
-          "type": "FunctionDeclaration",
-          "name": "vote",
-          "params": [
-            {
-              "type": "InformalParameter",
-              "literal": {
-                "type": "Type",
-                "literal": "uint",
-                "members": [],
-                "array_parts": [],
-                "start": 844,
-                "end": 848
-              },
-              "id": "_candidateId",
-              "is_indexed": false,
-              "is_storage": false,
-              "is_memory": false,
-              "start": 844,
-              "end": 861
-            }
-          ],
-          "modifiers": [
-            {
-              "type": "ModifierArgument",
-              "name": "public",
-              "params": [],
-              "start": 863,
-              "end": 869
-            }
-          ],
-          "returnParams": null,
-          "body": {
-            "type": "BlockStatement",
-            "body": [
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "Identifier",
-                    "name": "require",
-                    "start": 930,
-                    "end": 937
-                  },
-                  "arguments": [
-                    {
-                      "type": "UnaryExpression",
-                      "operator": "!",
-                      "argument": {
-                        "type": "MemberExpression",
-                        "object": {
-                          "type": "Identifier",
-                          "name": "voters",
-                          "start": 939,
-                          "end": 945
-                        },
-                        "property": {
-                          "type": "MemberExpression",
-                          "object": {
-                            "type": "Identifier",
-                            "name": "msg",
-                            "start": 946,
-                            "end": 949
-                          },
-                          "property": {
-                            "type": "Identifier",
-                            "name": "sender",
-                            "start": 950,
-                            "end": 956
-                          },
-                          "computed": false,
-                          "start": 946,
-                          "end": 956
-                        },
-                        "computed": true,
-                        "start": 939,
-                        "end": 957
-                      },
-                      "prefix": true,
-                      "start": 938,
-                      "end": 957
-                    }
-                  ],
-                  "start": 930,
-                  "end": 958
-                },
-                "start": 930,
-                "end": 959
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "Identifier",
-                    "name": "require",
-                    "start": 1006,
-                    "end": 1013
-                  },
-                  "arguments": [
-                    {
-                      "type": "BinaryExpression",
-                      "operator": "&&",
-                      "left": {
-                        "type": "BinaryExpression",
-                        "operator": ">",
-                        "left": {
-                          "type": "Identifier",
-                          "name": "_candidateId",
-                          "start": 1014,
-                          "end": 1026
-                        },
-                        "right": {
-                          "type": "Literal",
-                          "value": 0,
-                          "start": 1029,
-                          "end": 1030
-                        },
-                        "start": 1014,
-                        "end": 1030
-                      },
-                      "right": {
-                        "type": "BinaryExpression",
-                        "operator": "<=",
-                        "left": {
-                          "type": "Identifier",
-                          "name": "_candidateId",
-                          "start": 1034,
-                          "end": 1046
-                        },
-                        "right": {
-                          "type": "Identifier",
-                          "name": "candidatesCount",
-                          "start": 1050,
-                          "end": 1065
-                        },
-                        "start": 1034,
-                        "end": 1065
-                      },
-                      "start": 1014,
-                      "end": 1065
-                    }
-                  ],
-                  "start": 1006,
-                  "end": 1066
-                },
-                "start": 1006,
-                "end": 1067
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "AssignmentExpression",
-                  "operator": "=",
-                  "left": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "Identifier",
-                      "name": "voters",
-                      "start": 1116,
-                      "end": 1122
-                    },
-                    "property": {
-                      "type": "MemberExpression",
-                      "object": {
-                        "type": "Identifier",
-                        "name": "msg",
-                        "start": 1123,
-                        "end": 1126
-                      },
-                      "property": {
-                        "type": "Identifier",
-                        "name": "sender",
-                        "start": 1127,
-                        "end": 1133
-                      },
-                      "computed": false,
-                      "start": 1123,
-                      "end": 1133
-                    },
-                    "computed": true,
-                    "start": 1116,
-                    "end": 1134
+                    "storage_location": null,
+                    "start": 700,
+                    "end": 709
                   },
                   "right": {
                     "type": "Literal",
-                    "value": true,
-                    "start": 1137,
-                    "end": 1141
+                    "value": "what is up",
+                    "start": 712,
+                    "end": 724
                   },
-                  "start": 1116,
-                  "end": 1141
+                  "start": 700,
+                  "end": 724
                 },
-                "start": 1116,
-                "end": 1142
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "UpdateExpression",
-                  "operator": "++",
-                  "argument": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "MemberExpression",
-                      "object": {
-                        "type": "Identifier",
-                        "name": "candidates",
-                        "start": 1191,
-                        "end": 1201
-                      },
-                      "property": {
-                        "type": "Identifier",
-                        "name": "_candidateId",
-                        "start": 1202,
-                        "end": 1214
-                      },
-                      "computed": true,
-                      "start": 1191,
-                      "end": 1225
-                    },
-                    "property": {
-                      "type": "Identifier",
-                      "name": "voteCount",
-                      "start": 1216,
-                      "end": 1225
-                    },
-                    "computed": false,
-                    "start": 1191,
-                    "end": 1225
-                  },
-                  "prefix": false,
-                  "start": 1191,
-                  "end": 1228
-                },
-                "start": 1191,
-                "end": 1229
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "Identifier",
-                    "name": "votedEvent",
-                    "start": 1270,
-                    "end": 1280
-                  },
-                  "arguments": [
-                    {
-                      "type": "Identifier",
-                      "name": "_candidateId",
-                      "start": 1281,
-                      "end": 1293
-                    }
-                  ],
-                  "start": 1270,
-                  "end": 1294
-                },
-                "start": 1270,
-                "end": 1295
+                "start": 700,
+                "end": 725
               }
             ],
-            "start": 870,
-            "end": 1301
+            "start": 696,
+            "end": 728
           },
           "is_abstract": false,
-          "start": 829,
-          "end": 1301
+          "start": 672,
+          "end": 728
         }
       ],
-      "start": 25,
-      "end": 1303
+      "start": 61,
+      "end": 730
     }
   ],
   "start": 0,
-  "end": 1303
+  "end": 730
 }

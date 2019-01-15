@@ -1,8 +1,8 @@
 var fs = require('fs');
-var binOp = require('./BinaryOperators.js');
-var unOp = require('./UnaryOperators.js');
+var binOp = require('./StatementLevel/BinaryOperators.js');
+var unOp = require('./StatementLevel/UnaryOperators.js');
 //var upOp = require('./UpdateOperators.js');
-var strOp = require('./StringOperators.js');
+var strOp = require('./StatementLevel/StringOperators.js');
 
 
 exports.generateMutant = function(file, args){
