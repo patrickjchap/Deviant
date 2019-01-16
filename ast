@@ -153,6 +153,20 @@
               "params": [],
               "start": 689,
               "end": 695
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 696,
+              "end": 702
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "modif",
+              "params": [],
+              "start": 703,
+              "end": 708
             }
           ],
           "returnParams": null,
@@ -172,38 +186,296 @@
                       "literal": "string",
                       "members": [],
                       "array_parts": [],
-                      "start": 700,
-                      "end": 706
+                      "start": 712,
+                      "end": 718
                     },
                     "storage_location": null,
-                    "start": 700,
-                    "end": 709
+                    "start": 712,
+                    "end": 721
                   },
                   "right": {
                     "type": "Literal",
                     "value": "what is up",
-                    "start": 712,
-                    "end": 724
+                    "start": 724,
+                    "end": 736
                   },
-                  "start": 700,
-                  "end": 724
+                  "start": 712,
+                  "end": 736
                 },
-                "start": 700,
-                "end": 725
+                "start": 712,
+                "end": 737
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "DeclarativeExpression",
+                    "name": "cool",
+                    "literal": {
+                      "type": "Type",
+                      "literal": "address",
+                      "members": [],
+                      "array_parts": [],
+                      "start": 740,
+                      "end": 747
+                    },
+                    "storage_location": null,
+                    "start": 740,
+                    "end": 752
+                  },
+                  "right": {
+                    "type": "Literal",
+                    "value": "0x10",
+                    "start": 755,
+                    "end": 759
+                  },
+                  "start": 740,
+                  "end": 759
+                },
+                "start": 740,
+                "end": 760
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "hello",
+                    "start": 763,
+                    "end": 768
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "Identifier",
+                      "name": "Ballot",
+                      "start": 771,
+                      "end": 777
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "chairperson",
+                        "start": 778,
+                        "end": 789
+                      }
+                    ],
+                    "start": 771,
+                    "end": 790
+                  },
+                  "start": 763,
+                  "end": 790
+                },
+                "start": 763,
+                "end": 791
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "byte",
+                    "start": 794,
+                    "end": 798
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "Identifier",
+                      "name": "NotBallot",
+                      "start": 801,
+                      "end": 810
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "chairperson",
+                        "start": 811,
+                        "end": 822
+                      }
+                    ],
+                    "start": 801,
+                    "end": 823
+                  },
+                  "start": 794,
+                  "end": 823
+                },
+                "start": 794,
+                "end": 824
               }
             ],
-            "start": 696,
-            "end": 728
+            "start": 708,
+            "end": 828
           },
           "is_abstract": false,
           "start": 672,
-          "end": 728
+          "end": 828
+        },
+        {
+          "type": "ModifierDeclaration",
+          "name": "modif",
+          "params": null,
+          "modifiers": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "require",
+                    "start": 852,
+                    "end": 859
+                  },
+                  "arguments": [
+                    {
+                      "type": "BinaryExpression",
+                      "operator": "==",
+                      "left": {
+                        "type": "MemberExpression",
+                        "object": {
+                          "type": "Identifier",
+                          "name": "msg",
+                          "start": 860,
+                          "end": 863
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "sender",
+                          "start": 864,
+                          "end": 870
+                        },
+                        "computed": false,
+                        "start": 860,
+                        "end": 870
+                      },
+                      "right": {
+                        "type": "Identifier",
+                        "name": "chairperson",
+                        "start": 874,
+                        "end": 885
+                      },
+                      "start": 860,
+                      "end": 885
+                    }
+                  ],
+                  "start": 852,
+                  "end": 886
+                },
+                "start": 852,
+                "end": 887
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "Identifier",
+                  "name": "_",
+                  "start": 890,
+                  "end": 891
+                },
+                "start": 890,
+                "end": 892
+              }
+            ],
+            "start": 848,
+            "end": 895
+          },
+          "start": 831,
+          "end": 895
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "bye",
+          "params": null,
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 913,
+              "end": 919
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "MemberExpression",
+                      "object": {
+                        "type": "ThisExpression",
+                        "start": 923,
+                        "end": 927
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "hello",
+                        "start": 928,
+                        "end": 933
+                      },
+                      "computed": false,
+                      "start": 923,
+                      "end": 937
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "gas",
+                      "start": 934,
+                      "end": 937
+                    },
+                    "computed": false,
+                    "start": 923,
+                    "end": 937
+                  },
+                  "arguments": [
+                    {
+                      "type": "Literal",
+                      "value": 1000,
+                      "start": 938,
+                      "end": 942
+                    }
+                  ],
+                  "start": 923,
+                  "end": 943
+                },
+                "start": 923,
+                "end": 944
+              }
+            ],
+            "start": 919,
+            "end": 947
+          },
+          "is_abstract": false,
+          "start": 898,
+          "end": 947
         }
       ],
       "start": 61,
-      "end": 730
+      "end": 949
+    },
+    {
+      "type": "ContractStatement",
+      "name": "NotBallot",
+      "is": [],
+      "body": [],
+      "start": 951,
+      "end": 974
     }
   ],
   "start": 0,
-  "end": 730
+  "end": 974
 }

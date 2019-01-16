@@ -20,8 +20,25 @@ contract Ballot {
 
     address public chairperson;
 	
-	function hello() public {
+	function hello() public modif{
 		string hi = "what is up";
+		address cool = 0x10;
+		hello = Ballot(chairperson);
+		byte = NotBallot(chairperson);
+
 	}
+
+	modifier modif() {
+		require(msg.sender == chairperson);
+		_;
+	}
+
+	function bye() public{
+		this.hello.gas(1000);
+	}
+}
+
+contract NotBallot {
+
 }
 

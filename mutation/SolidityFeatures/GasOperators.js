@@ -6,8 +6,7 @@ var parser = require('solparse');
 var path = require('path');
 
 var operators = {
-            "++": '--',
-            "--": '++',
+            'random': '0x12345'
 };
 
 let options = {
@@ -24,34 +23,26 @@ let options = {
 
 
 
-exports.mutateAddressOperator = function(file){
-//	console.log("Binary Operators Found");
+exports.mutateGasOperator = function(file){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
 
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
-			if(node.type === 'UpdateExpression') {
-				var mutOperator;
-				mutOperatorList = operators[node.operator];
-				console.log(typeof mutOperatorList);
-				if(typeof mutOperatorList !== 'string'){
-					mutOperator = mutOperatorList[Math.floor(Math.random()*mutOperatorList.length)];
-				}else{
-					mutOperator = mutOperatorList;
-				}
-				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
-
-				console.log(mutOperator);
-
-				fs.writeFile("./sol_output/" 
-				+ path.basename(file).slice(0, -4) + "UpdateMut" 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
-					if(err) throw err;
-				});
-				fileNum++
 			
+			//If contract has more than two calls to change addresses
+			//to different contracts. Swap the calls.
+			if(node.type === 'CallExpression' && node.hasOwnProperty('callee')
+			&& node.callee.hasOwnProperty('property') && node.callee.property.name == 'gas') {
+					tmpNode = node.getSourceCode().replace(node.arguments[0].value, operators['random']);
+					fs.writeFile("./sol_output/" 
+					+ path.basename(file).slice(0, -4) + "GasMut" 
+					+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+					tmpNode), 'ascii', function(err) {
+						if(err) throw err;
+					});
+					fileNum++;
 			}
 
 		});
