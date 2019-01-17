@@ -18,6 +18,8 @@ contract Ballot {
         uint voteCount; // number of accumulated votes
     }
 
+    int internal intint;
+	int private privint;
     address public chairperson;
 	
 	function hello() public modif{
@@ -35,10 +37,23 @@ contract Ballot {
 
 	function bye() public{
 		this.hello.gas(1000);
+		emit howareyou(chairperson);
 	}
+
+	function who() public payable{
+		
+	}
+
+	event howareyou(address who);
 }
 
 contract NotBallot {
 
+}
+
+contract something is NotBallot {
+	function kill() {
+		if (msg.sender == NotBallot) selfdestruct(NotBallot);
+	}
 }
 
