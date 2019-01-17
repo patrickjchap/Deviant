@@ -49,7 +49,7 @@ exports.mutateStateVarOperator = function(file, filename){
 
 				tmpNodeSC2 = node.getSourceCode().replace(node.visibility, operators[node.visibility][1]);
 				
-				fs.writeFile("./sol_output/"
+				fs.writeFile("./sol_output/" + filename + "/"
                                 + path.basename(file).slice(0, -4) + "StateVarMut"
                                 + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
                                 tmpNodeSC2), 'ascii', function(err) {

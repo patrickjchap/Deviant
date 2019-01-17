@@ -1,8 +1,9 @@
 /* Requirements */
 const electron = require('electron');
+var fs = require('fs');
 const url = require('url');
 const path = require('path');
-const exec = require('child_process').exec;
+const child = require('child_process');
 const mutation = require('./mutation/mutation');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
@@ -118,14 +119,50 @@ ipcMain.on('file:select', function(e, mutParam){
 	//});
 });
 
-ipcMain.on('run:tests', function(e, dir, filename){
+var killed = 0;
+var live = 0;
+ipcMain.on('run:tests', function(e, mutParam){
+		dir = mutParam[0];
+		filename = mutParam[1];
+
+		dir = dir.replace(filename, "");
+		
+		console.log(dir);
+		console.log(filename);
+		child.execSync('mv ' + "'" + dir + '/contracts/' + filename + "' '" + dir + '/contracts/' + filename + ".tmp'");
+		
 		fs.readdir('./sol_output/' + filename, (err, files) => {
-			file.forEach(file => {
-				exec('cp ./sol_output/' + filename + '/' + 'file ' + dir);
-				exec('mv ' + dir + '/' + filename + ' ' + dir + '/' + filename + '.tmp');
-				exec('cd ' + dir + ' && ' + 'npm test');
-			}
-		}
+			console.log(files);
+			files.forEach(file => {
+				console.log(file);
+				child.execSync('cp ./sol_output/' + filename + '/' + file + " '"+ dir + "/contracts/'");
+
+				try{
+				child.execSync('cd ' + "'"+dir+"'" + ' && ' + 'npm test',
+					function(error, stdout, stderr) {
+						console.log(stdout);
+						console.log(error);
+						console.log(stderr);
+						if(stdout.includes('failed')){
+							killed++;
+						}else{
+							live++;
+						}
+					}
+				);
+				}catch(ex){
+					killed++;
+				}
+				child.execSync('cd ' + "'"+dir + "/contracts/'" + ' && ' + 'rm ' + file);
+			});
+		});
+
+		child.execSync('mv ' + "'"+dir + '/contracts/' + filename + ".tmp' "  + "'"+dir + '/contracts/' + filename + "'", function(error, stdout, stderr){
+		
+
+			printStats();
+		});
+
 });
 
 ipcMain.on('op:select', function(e, mutParams){
@@ -135,3 +172,7 @@ ipcMain.on('op:select', function(e, mutParams){
 	mutOpWindow.webContents.send('pop-checkboxes', mutOpt);
 });
 
+function printStats() {
+	console.log('live mutants: ' + live);
+	console.log('killed mutants: ' + killed);
+}

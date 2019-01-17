@@ -42,9 +42,14 @@
 		const electron = require('electron');
 		const {ipcRenderer} = electron;
 
-		const form = document.querySelector('form');
-		form.addEventListener('submit', submitForm);
+		//const form = document.querySelector('form');
+		//form.addEventListener('submit', submitForm);
 
+		const run = document.getElementById("run");
+		run.addEventListener("click", runTests);
+
+		const gen = document.getElementById("generate");
+		gen.addEventListener("click", submitForm);
 
 		function submitForm(e){
 			e.preventDefault();
@@ -53,10 +58,19 @@
 			const mutFile = fileEle.options[fileEle.selectedIndex].value;
 			const mutFileName = fileEle.options[fileEle.selectedIndex].getAttribute("name");
 
-			const mutParam = [mutFile, mutDirectory, mutFileName]
+			var mutParam = [mutFile, mutDirectory, mutFileName]
 
 			// Sending back to the applicaiton
 			ipcRenderer.send('file:select', mutParam);
+		}
+
+		function runTests(e){
+			const mutDirectory = document.getElementById('mutDir').files[0].path;
+			const fileEle = document.getElementById('display-files');
+			const mutFileName = fileEle.options[fileEle.selectedIndex].getAttribute("name");
+
+			var mutParam = [mutDirectory, mutFileName];
+			ipcRenderer.send('run:tests', mutParam);
 		}
 	</script>
 
