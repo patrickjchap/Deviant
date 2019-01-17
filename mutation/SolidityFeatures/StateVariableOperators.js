@@ -25,7 +25,7 @@ let options = {
 
 
 
-exports.mutateStateVarOperator = function(file){
+exports.mutateStateVarOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -39,7 +39,7 @@ exports.mutateStateVarOperator = function(file){
 			if(node.type === 'StateVariableDeclaration' && node.visibility != null){
 				tmpNodeSC1 = node.getSourceCode().replace(node.visibility, operators[node.visibility][0]); 
 
-				fs.writeFile("./sol_output/" 
+				fs.writeFile("./sol_output/" + filename + "/"
 				+ path.basename(file).slice(0, -4) + "StateVarMut" 
 				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
 				tmpNodeSC1), 'ascii', function(err) {

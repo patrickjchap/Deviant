@@ -34,7 +34,7 @@ let options = {
 
 
 
-exports.mutateModifierOperator = function(file){
+exports.mutateModifierOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -56,7 +56,7 @@ exports.mutateModifierOperator = function(file){
 							}
 							tmpNode = node.getSourceCode().replace(node.modifiers[loctn].name, "");
 
-							fs.writeFile("./sol_output/" 
+							fs.writeFile("./sol_output/" + filename + "/" 
 							+ path.basename(file).slice(0, -4) + "ModifierDelMut" 
 							+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
 							tmpNode), 'ascii', function(err) {
@@ -70,7 +70,7 @@ exports.mutateModifierOperator = function(file){
 					if(!anyMod && modifier != null){
 						tmpNode = node.getSourceCode().replace(node.modifiers[loctn-1].name, node.modifiers[loctn-1].name + " " + modifier.name);
 						console.log(modifier.name);
-						fs.writeFile("./sol_output/"
+						fs.writeFile("./sol_output/" + filename + "/"
 						+ path.basename(file).slice(0, -4) + "ModifierAddMut"
 						+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),						 tmpNode), 'ascii', function(err) {
 							if(err) throw err;

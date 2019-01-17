@@ -19,7 +19,7 @@ let options = {
 
 
 
-exports.mutateEventOperator = function(file){
+exports.mutateEventOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -33,8 +33,8 @@ exports.mutateEventOperator = function(file){
 			if(node.type === 'EmitStatement'){
 
 
-				fs.writeFile("./sol_output/" 
-				+ path.basename(file).slice(0, -4) + "EventDelMut" 
+				fs.writeFile("./sol_output/" + filename + "/"
+				+ path.basename(file).slice(0, -4) + "EventDelMut"
 				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
 				""), 'ascii', function(err) {
 					if(err) throw err;

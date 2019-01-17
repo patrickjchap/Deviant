@@ -24,7 +24,7 @@ let options = {
 
 
 
-exports.mutateAddressOperator = function(file){
+exports.mutateAddressOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -41,7 +41,7 @@ exports.mutateAddressOperator = function(file){
 				if(callNode == null) {
 					callNode = node;
 				}else{
-					fs.writeFile("./sol_output/" 
+					fs.writeFile("./sol_output/" + filename + "/"  
 					+ path.basename(file).slice(0, -4) + "AddressMutCall" 
 					+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
 					callNode.getSourceCode()), 'ascii', function(err) {
@@ -58,7 +58,7 @@ exports.mutateAddressOperator = function(file){
 					tmpNodeZero = node.getSourceCode().replace(node.right.value, operators['zero']);
 					tmpNodeRand = node.getSourceCode().replace(node.right.value, operators['random']);
 
-					fs.writeFile("./sol_output/"
+					fs.writeFile("./sol_output/" + filename + "/"
                     + path.basename(file).slice(0, -4) + "AddressMutZero"
                     + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
                     tmpNodeZero), 'ascii', function(err) {
@@ -66,7 +66,7 @@ exports.mutateAddressOperator = function(file){
                     });
 					fileNum++;
 						
-		            fs.writeFile("./sol_output/"
+		            fs.writeFile("./sol_output/" + filename + "/"
                     + path.basename(file).slice(0, -4) + "AddressMutRand"
                     + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
                     tmpNodeRand), 'ascii', function(err) {

@@ -25,7 +25,7 @@ let options = {
 
 
 
-exports.mutateFunctionTypeOperator = function(file){
+exports.mutateFunctionTypeOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -38,14 +38,14 @@ exports.mutateFunctionTypeOperator = function(file){
 				tmpNodeSC1 = node.parent.getSourceCode().replace(node.name, operators[node.name][0]);
 				tmpNodeSC2 = node.parent.getSourceCode().replace(node.name, operators[node.name][1]);
 
-				fs.writeFile("./sol_output/" 
+				fs.writeFile("./sol_output/" + filename + "/" 
 				+ path.basename(file).slice(0, -4) + "FunctionTypeMut" 
 				+ fileNum.toString() + ".sol", data.toString().replace(node.parent.getSourceCode(), tmpNodeSC1), 'ascii', function(err) {
 					if(err) throw err;
 				});
 				fileNum++;
 
-				fs.writeFile("./sol_output/"
+				fs.writeFile("./sol_output/" + filename + "/"
                                 + path.basename(file).slice(0, -4) + "FunctionTypeMut"
                                 + fileNum.toString() + ".sol", data.toString().replace(node.parent.getSourceCode(), tmpNodeSC2), 'ascii', function(err) {
                                         if(err) throw err;

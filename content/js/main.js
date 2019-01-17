@@ -16,9 +16,9 @@ function listFiles(directory, parentDir) {
 				listFiles(path.join(directory, file));
 
 			}else if (file.split('.').pop() === 'sol' && !directory.includes("node_modules")){
-				var pattern = "/contracts/"
+//				var pattern = "/contracts/"
 
-				document.getElementById('display-files').innerHTML += '<option value="' + directory + file + '">' + directory.substring(directory.indexOf(pattern) + pattern.length) + file +  '</option>';
+				document.getElementById('display-files').innerHTML += '<option name = "'+file+'" value="' + directory  + '/' + file + '">' + /*directory.substring(directory.indexOf(pattern) + pattern.length) + */file +  '</option>';
 			
 			}
 		}

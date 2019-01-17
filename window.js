@@ -3,6 +3,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 const exec = require('child_process').exec;
+const mutation = require('./mutation/mutation');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
@@ -33,6 +34,27 @@ app.on('ready', function(){
 
 	mainWindow.webContents.openDevTools();
 });
+
+//Mutant View Window
+function createMutViewWindow(){
+	mutViewWindow = new BrowserWindow({
+		width: 1200,
+		height: 800,
+		title: 'Generated Mutants'
+	});
+
+	mutViewWindow.loadURL(url.format({
+		pathname: path.join(__dirname, './content/html/mutView.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
+
+	//Quitting the app when main window closed
+	mutViewWindow.on('closed', function(){
+		app.quit();
+	});
+
+}
 
 //Mutation Operator Window
 function createMutOpWindow(){
@@ -72,6 +94,7 @@ const mainMenuTemp = [
 		label: 'Mutation Operators',
 		click(){
 			createMutOpWindow();
+			mutOpWindow.webContents.send('pop-checkboxes', mutOpt);
 		}
 	}]
 }
@@ -79,20 +102,36 @@ const mainMenuTemp = [
 
 //Catching the items from main window
 ipcMain.on('file:select', function(e, mutParam){
-	var filename = mutParam[0].replace(/^.*[\\\/]/, '');
+	var file = mutParam[0];//.replace(/^.*[\\\/]/, '');
 	var dir = mutParam[1];
+	var filename = mutParam[2];
+	console.log(filename);
 
-	var runScript = exec('sh solm -f ' + filename + ' -d ' + dir + ' -o '+  mutOpt,
-	(error, stdout, stderr) => {
-		console.log(`${stdout}`);
-		console.log(`${stderr}`);
-		if (error !== null) {
-			console.log(`exec error: ${error}`);
+	mutation.generateMutant(file, filename, mutOpt);
+	//var runScript = exec('sh solm -f ' + filename + ' -d ' + dir + ' -o '+  mutOpt,
+	//(error, stdout, stderr) => {
+	//	console.log(`${stdout}`);
+	//	console.log(`${stderr}`);
+	//	if (error !== null) {
+	//		console.log(`exec error: ${error}`);
+	//	}
+	//});
+});
+
+ipcMain.on('run:tests', function(e, dir, filename){
+		fs.readdir('./sol_output/' + filename, (err, files) => {
+			file.forEach(file => {
+				exec('cp ./sol_output/' + filename + '/' + 'file ' + dir);
+				exec('mv ' + dir + '/' + filename + ' ' + dir + '/' + filename + '.tmp');
+				exec('cd ' + dir + ' && ' + 'npm test');
+			}
 		}
-	});
 });
 
 ipcMain.on('op:select', function(e, mutParams){
+	console.log("made it");
 	mutOpt = mutParams;
+	console.log(mutOpt);
+	mutOpWindow.webContents.send('pop-checkboxes', mutOpt);
 });
 

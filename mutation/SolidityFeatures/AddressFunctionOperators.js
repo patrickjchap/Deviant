@@ -24,7 +24,7 @@ let options = {
 
 
 
-exports.mutateAddressOperator = function(file){
+exports.mutateAddressOperator = function(file, filename){
 //	console.log("Binary Operators Found");
 	var ast;
 	fs.readFile(file, function(err, data) {	

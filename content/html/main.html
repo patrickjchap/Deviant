@@ -14,15 +14,15 @@
 	<form>
 		<div class="slct">
 			<span><label>Solidity Project</label></span>
-			<span><label for="mutFile" class ="btn">Select Directory</label></span>
-			<input type="file" id="mutFile" style="visibility:hidden" webkitdirectory multiple onchange="listFiles(document.getElementById('mutFile').files[0].path);">
+			<span><label for="mutDir" class ="btn">Select Directory</label></span>
+			<input type="file" id="mutDir" style="visibility:hidden" webkitdirectory multiple onchange="listFiles(document.getElementById('mutDir').files[0].path);">
 		</div>
 
 		<div class="slct">
 		
 		<script src="../js/main.js"></script>
 
-		<script> listFiles(document.getElementById("mutFile").files[0].path); </script>
+		<script> listFiles(document.getElementById("mutDir").files[0].path); </script>
 		<select size="5" id='display-files'>
 		
 		</select>
@@ -30,10 +30,10 @@
 
 
 		<label for = "run" class = "btn" id = "runBtn">Run</label>
-		<button id="run" type="submit" style="visibility:hidden">Run</button>
+		<button id="run" type="submit" value="Run" style="visibility:hidden">Run Tests</button>
 
 		<label for = "generate" class="btn" id="genBtn">Generate</label>
-		<button id="generate" type="submit" style="visibility:hidden">Generate</button>
+		<button id="generate" type="submit" value = "Generate" style="visibility:hidden">Generate</button>
 	</form>
 
 	</div>
@@ -45,12 +45,15 @@
 		const form = document.querySelector('form');
 		form.addEventListener('submit', submitForm);
 
+
 		function submitForm(e){
 			e.preventDefault();
-			const mutFile = document.getElementById('mutFile').files[0].path;
 			const mutDirectory = document.getElementById('mutDir').files[0].path;
+			const fileEle = document.getElementById('display-files')
+			const mutFile = fileEle.options[fileEle.selectedIndex].value;
+			const mutFileName = fileEle.options[fileEle.selectedIndex].getAttribute("name");
 
-			const mutParam = [mutFile, mutDirectory]
+			const mutParam = [mutFile, mutDirectory, mutFileName]
 
 			// Sending back to the applicaiton
 			ipcRenderer.send('file:select', mutParam);
