@@ -6,7 +6,7 @@
       "start_version": {
         "type": "VersionLiteral",
         "operator": "^",
-        "version": "0.4.18",
+        "version": "0.4.22",
         "start": 16,
         "end": 23
       },
@@ -15,127 +15,188 @@
       "end": 24
     },
     {
-      "type": "ImportStatement",
-      "from": "./ConvertLib.sol",
-      "symbols": [],
-      "alias": null,
-      "start": 26,
-      "end": 52
-    },
-    {
       "type": "ContractStatement",
-      "name": "MetaCoin",
+      "name": "Ballot",
       "is": [],
       "body": [
         {
-          "type": "StateVariableDeclaration",
-          "name": "balances",
-          "literal": {
-            "type": "Type",
-            "literal": {
-              "type": "MappingExpression",
-              "from": {
-                "type": "Type",
-                "literal": "address",
-                "members": [],
-                "array_parts": [],
-                "start": 346,
-                "end": 353
-              },
-              "to": {
+          "type": "StructDeclaration",
+          "name": "Voter",
+          "body": [
+            {
+              "type": "DeclarativeExpression",
+              "name": "weight",
+              "literal": {
                 "type": "Type",
                 "literal": "uint",
                 "members": [],
                 "array_parts": [],
-                "start": 357,
-                "end": 361
+                "start": 234,
+                "end": 238
               },
-              "start": 337,
-              "end": 362
+              "storage_location": null,
+              "start": 234,
+              "end": 245
             },
-            "members": [],
-            "array_parts": [],
-            "start": 337,
-            "end": 362
-          },
-          "visibility": null,
-          "is_constant": false,
-          "value": null,
-          "start": 337,
-          "end": 372
-        },
-        {
-          "type": "EventDeclaration",
-          "name": "Transfer",
-          "params": [
             {
-              "type": "InformalParameter",
+              "type": "DeclarativeExpression",
+              "name": "voted",
+              "literal": {
+                "type": "Type",
+                "literal": "bool",
+                "members": [],
+                "array_parts": [],
+                "start": 294,
+                "end": 298
+              },
+              "storage_location": null,
+              "start": 294,
+              "end": 304
+            },
+            {
+              "type": "DeclarativeExpression",
+              "name": "delegate",
               "literal": {
                 "type": "Type",
                 "literal": "address",
                 "members": [],
                 "array_parts": [],
-                "start": 390,
-                "end": 397
+                "start": 353,
+                "end": 360
               },
-              "id": "_from",
-              "is_indexed": true,
-              "is_constant": false,
               "storage_location": null,
-              "start": 390,
+              "start": 353,
+              "end": 369
+            },
+            {
+              "type": "DeclarativeExpression",
+              "name": "vote",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 402,
+                "end": 406
+              },
+              "storage_location": null,
+              "start": 402,
               "end": 411
-            },
-            {
-              "type": "InformalParameter",
-              "literal": {
-                "type": "Type",
-                "literal": "address",
-                "members": [],
-                "array_parts": [],
-                "start": 413,
-                "end": 420
-              },
-              "id": "_to",
-              "is_indexed": true,
-              "is_constant": false,
-              "storage_location": null,
-              "start": 413,
-              "end": 432
-            },
-            {
-              "type": "InformalParameter",
-              "literal": {
-                "type": "Type",
-                "literal": "uint256",
-                "members": [],
-                "array_parts": [],
-                "start": 434,
-                "end": 441
-              },
-              "id": "_value",
-              "is_indexed": false,
-              "is_constant": false,
-              "storage_location": null,
-              "start": 434,
-              "end": 448
             }
           ],
-          "is_anonymous": false,
-          "start": 375,
-          "end": 450
+          "start": 211,
+          "end": 451
         },
         {
-          "type": "ConstructorDeclaration",
+          "type": "StructDeclaration",
+          "name": "Proposal",
+          "body": [
+            {
+              "type": "DeclarativeExpression",
+              "name": "name",
+              "literal": {
+                "type": "Type",
+                "literal": "bytes32",
+                "members": [],
+                "array_parts": [],
+                "start": 528,
+                "end": 535
+              },
+              "storage_location": null,
+              "start": 528,
+              "end": 540
+            },
+            {
+              "type": "DeclarativeExpression",
+              "name": "voteCount",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 583,
+                "end": 587
+              },
+              "storage_location": null,
+              "start": 583,
+              "end": 597
+            }
+          ],
+          "start": 502,
+          "end": 635
+        },
+        {
+          "type": "StateVariableDeclaration",
+          "name": "intint",
+          "literal": {
+            "type": "Type",
+            "literal": "int",
+            "members": [],
+            "array_parts": [],
+            "start": 641,
+            "end": 644
+          },
+          "visibility": "internal",
+          "is_constant": false,
+          "value": null,
+          "start": 641,
+          "end": 661
+        },
+        {
+          "type": "StateVariableDeclaration",
+          "name": "privint",
+          "literal": {
+            "type": "Type",
+            "literal": "int",
+            "members": [],
+            "array_parts": [],
+            "start": 663,
+            "end": 666
+          },
+          "visibility": "private",
+          "is_constant": false,
+          "value": null,
+          "start": 663,
+          "end": 683
+        },
+        {
+          "type": "StateVariableDeclaration",
+          "name": "chairperson",
+          "literal": {
+            "type": "Type",
+            "literal": "address",
+            "members": [],
+            "array_parts": [],
+            "start": 688,
+            "end": 695
+          },
+          "visibility": "public",
+          "is_constant": false,
+          "value": null,
+          "start": 688,
+          "end": 715
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "hello",
           "params": null,
           "modifiers": [
             {
               "type": "ModifierArgument",
               "name": "public",
               "params": [],
-              "start": 467,
-              "end": 473
+              "start": 736,
+              "end": 742
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "modif",
+              "params": [],
+              "start": 743,
+              "end": 748
             }
           ],
+          "returnParams": null,
           "body": {
             "type": "BlockStatement",
             "body": [
@@ -145,269 +206,321 @@
                   "type": "AssignmentExpression",
                   "operator": "=",
                   "left": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "Identifier",
-                      "name": "balances",
-                      "start": 478,
-                      "end": 486
+                    "type": "DeclarativeExpression",
+                    "name": "hi",
+                    "literal": {
+                      "type": "Type",
+                      "literal": "string",
+                      "members": [],
+                      "array_parts": [],
+                      "start": 752,
+                      "end": 758
                     },
-                    "property": {
-                      "type": "MemberExpression",
-                      "object": {
-                        "type": "Identifier",
-                        "name": "tx",
-                        "start": 487,
-                        "end": 489
-                      },
-                      "property": {
-                        "type": "Identifier",
-                        "name": "origin",
-                        "start": 490,
-                        "end": 496
-                      },
-                      "computed": false,
-                      "start": 487,
-                      "end": 496
-                    },
-                    "computed": true,
-                    "start": 478,
-                    "end": 497
+                    "storage_location": null,
+                    "start": 752,
+                    "end": 761
                   },
                   "right": {
                     "type": "Literal",
-                    "value": 10000,
-                    "start": 500,
-                    "end": 505
+                    "value": "what is up",
+                    "start": 764,
+                    "end": 776
                   },
-                  "start": 478,
-                  "end": 505
+                  "start": 752,
+                  "end": 776
                 },
-                "start": 478,
-                "end": 506
+                "start": 752,
+                "end": 777
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "DeclarativeExpression",
+                  "name": "goodbyeforever",
+                  "literal": {
+                    "type": "Type",
+                    "literal": "int",
+                    "members": [],
+                    "array_parts": [],
+                    "start": 780,
+                    "end": 783
+                  },
+                  "storage_location": "memory",
+                  "start": 780,
+                  "end": 805
+                },
+                "start": 780,
+                "end": 806
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "DeclarativeExpression",
+                  "name": "helloforever",
+                  "literal": {
+                    "type": "Type",
+                    "literal": "int",
+                    "members": [],
+                    "array_parts": [],
+                    "start": 809,
+                    "end": 812
+                  },
+                  "storage_location": "memory",
+                  "start": 809,
+                  "end": 832
+                },
+                "start": 809,
+                "end": 833
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "DeclarativeExpression",
+                    "name": "cool",
+                    "literal": {
+                      "type": "Type",
+                      "literal": "address",
+                      "members": [],
+                      "array_parts": [],
+                      "start": 836,
+                      "end": 843
+                    },
+                    "storage_location": null,
+                    "start": 836,
+                    "end": 848
+                  },
+                  "right": {
+                    "type": "Literal",
+                    "value": "0x10",
+                    "start": 851,
+                    "end": 855
+                  },
+                  "start": 836,
+                  "end": 855
+                },
+                "start": 836,
+                "end": 856
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "hello",
+                    "start": 859,
+                    "end": 864
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "Identifier",
+                      "name": "Ballot",
+                      "start": 867,
+                      "end": 873
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "chairperson",
+                        "start": 874,
+                        "end": 885
+                      }
+                    ],
+                    "start": 867,
+                    "end": 886
+                  },
+                  "start": 859,
+                  "end": 886
+                },
+                "start": 859,
+                "end": 887
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "byte",
+                    "start": 890,
+                    "end": 894
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "Identifier",
+                      "name": "NotBallot",
+                      "start": 897,
+                      "end": 906
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "chairperson",
+                        "start": 907,
+                        "end": 918
+                      }
+                    ],
+                    "start": 897,
+                    "end": 919
+                  },
+                  "start": 890,
+                  "end": 919
+                },
+                "start": 890,
+                "end": 920
               }
             ],
-            "start": 474,
-            "end": 509
+            "start": 748,
+            "end": 924
           },
-          "start": 453,
-          "end": 509
+          "is_abstract": false,
+          "start": 719,
+          "end": 924
+        },
+        {
+          "type": "ModifierDeclaration",
+          "name": "modif",
+          "params": null,
+          "modifiers": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "require",
+                    "start": 948,
+                    "end": 955
+                  },
+                  "arguments": [
+                    {
+                      "type": "BinaryExpression",
+                      "operator": "==",
+                      "left": {
+                        "type": "MemberExpression",
+                        "object": {
+                          "type": "Identifier",
+                          "name": "msg",
+                          "start": 956,
+                          "end": 959
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "sender",
+                          "start": 960,
+                          "end": 966
+                        },
+                        "computed": false,
+                        "start": 956,
+                        "end": 966
+                      },
+                      "right": {
+                        "type": "Identifier",
+                        "name": "chairperson",
+                        "start": 970,
+                        "end": 981
+                      },
+                      "start": 956,
+                      "end": 981
+                    }
+                  ],
+                  "start": 948,
+                  "end": 982
+                },
+                "start": 948,
+                "end": 983
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "Identifier",
+                  "name": "_",
+                  "start": 986,
+                  "end": 987
+                },
+                "start": 986,
+                "end": 988
+              }
+            ],
+            "start": 944,
+            "end": 991
+          },
+          "start": 927,
+          "end": 991
         },
         {
           "type": "FunctionDeclaration",
-          "name": "sendCoin",
-          "params": [
-            {
-              "type": "InformalParameter",
-              "literal": {
-                "type": "Type",
-                "literal": "address",
-                "members": [],
-                "array_parts": [],
-                "start": 530,
-                "end": 537
-              },
-              "id": "receiver",
-              "is_indexed": false,
-              "is_constant": false,
-              "storage_location": null,
-              "start": 530,
-              "end": 546
-            },
-            {
-              "type": "InformalParameter",
-              "literal": {
-                "type": "Type",
-                "literal": "uint",
-                "members": [],
-                "array_parts": [],
-                "start": 548,
-                "end": 552
-              },
-              "id": "amount",
-              "is_indexed": false,
-              "is_constant": false,
-              "storage_location": null,
-              "start": 548,
-              "end": 559
-            }
-          ],
+          "name": "bye",
+          "params": null,
           "modifiers": [
             {
               "type": "ModifierArgument",
               "name": "public",
               "params": [],
-              "start": 561,
-              "end": 567
+              "start": 1009,
+              "end": 1015
             }
           ],
-          "returnParams": {
-            "type": "ReturnParams",
-            "params": [
-              {
-                "type": "InformalParameter",
-                "literal": {
-                  "type": "Type",
-                  "literal": "bool",
-                  "members": [],
-                  "array_parts": [],
-                  "start": 576,
-                  "end": 580
-                },
-                "id": "sufficient",
-                "is_indexed": false,
-                "is_constant": false,
-                "storage_location": null,
-                "start": 576,
-                "end": 591
-              }
-            ],
-            "start": 568,
-            "end": 592
-          },
+          "returnParams": null,
           "body": {
             "type": "BlockStatement",
             "body": [
               {
-                "type": "IfStatement",
-                "test": {
-                  "type": "BinaryExpression",
-                  "operator": "<",
-                  "left": {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
                     "type": "MemberExpression",
                     "object": {
-                      "type": "Identifier",
-                      "name": "balances",
-                      "start": 601,
-                      "end": 609
-                    },
-                    "property": {
                       "type": "MemberExpression",
                       "object": {
-                        "type": "Identifier",
-                        "name": "msg",
-                        "start": 610,
-                        "end": 613
+                        "type": "ThisExpression",
+                        "start": 1019,
+                        "end": 1023
                       },
                       "property": {
                         "type": "Identifier",
-                        "name": "sender",
-                        "start": 614,
-                        "end": 620
+                        "name": "hello",
+                        "start": 1024,
+                        "end": 1029
                       },
                       "computed": false,
-                      "start": 610,
-                      "end": 620
-                    },
-                    "computed": true,
-                    "start": 601,
-                    "end": 621
-                  },
-                  "right": {
-                    "type": "Identifier",
-                    "name": "amount",
-                    "start": 624,
-                    "end": 630
-                  },
-                  "start": 601,
-                  "end": 630
-                },
-                "consequent": {
-                  "type": "ReturnStatement",
-                  "argument": {
-                    "type": "Literal",
-                    "value": false,
-                    "start": 639,
-                    "end": 644
-                  },
-                  "start": 632,
-                  "end": 645
-                },
-                "alternate": null,
-                "start": 597,
-                "end": 645
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "AssignmentExpression",
-                  "operator": "-=",
-                  "left": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "Identifier",
-                      "name": "balances",
-                      "start": 648,
-                      "end": 656
-                    },
-                    "property": {
-                      "type": "MemberExpression",
-                      "object": {
-                        "type": "Identifier",
-                        "name": "msg",
-                        "start": 657,
-                        "end": 660
-                      },
-                      "property": {
-                        "type": "Identifier",
-                        "name": "sender",
-                        "start": 661,
-                        "end": 667
-                      },
-                      "computed": false,
-                      "start": 657,
-                      "end": 667
-                    },
-                    "computed": true,
-                    "start": 648,
-                    "end": 668
-                  },
-                  "right": {
-                    "type": "Identifier",
-                    "name": "amount",
-                    "start": 672,
-                    "end": 678
-                  },
-                  "start": 648,
-                  "end": 678
-                },
-                "start": 648,
-                "end": 679
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "AssignmentExpression",
-                  "operator": "+=",
-                  "left": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "Identifier",
-                      "name": "balances",
-                      "start": 682,
-                      "end": 690
+                      "start": 1019,
+                      "end": 1033
                     },
                     "property": {
                       "type": "Identifier",
-                      "name": "receiver",
-                      "start": 691,
-                      "end": 699
+                      "name": "gas",
+                      "start": 1030,
+                      "end": 1033
                     },
-                    "computed": true,
-                    "start": 682,
-                    "end": 700
+                    "computed": false,
+                    "start": 1019,
+                    "end": 1033
                   },
-                  "right": {
-                    "type": "Identifier",
-                    "name": "amount",
-                    "start": 704,
-                    "end": 710
-                  },
-                  "start": 682,
-                  "end": 710
+                  "arguments": [
+                    {
+                      "type": "Literal",
+                      "value": 1000,
+                      "start": 1034,
+                      "end": 1038
+                    }
+                  ],
+                  "start": 1019,
+                  "end": 1039
                 },
-                "start": 682,
-                "end": 711
+                "start": 1019,
+                "end": 1040
               },
               {
                 "type": "EmitStatement",
@@ -415,70 +528,66 @@
                   "type": "CallExpression",
                   "callee": {
                     "type": "Identifier",
-                    "name": "Transfer",
-                    "start": 719,
-                    "end": 727
+                    "name": "howareyou",
+                    "start": 1048,
+                    "end": 1057
                   },
                   "arguments": [
                     {
-                      "type": "MemberExpression",
-                      "object": {
-                        "type": "Identifier",
-                        "name": "msg",
-                        "start": 728,
-                        "end": 731
-                      },
-                      "property": {
-                        "type": "Identifier",
-                        "name": "sender",
-                        "start": 732,
-                        "end": 738
-                      },
-                      "computed": false,
-                      "start": 728,
-                      "end": 738
-                    },
-                    {
                       "type": "Identifier",
-                      "name": "receiver",
-                      "start": 740,
-                      "end": 748
-                    },
-                    {
-                      "type": "Identifier",
-                      "name": "amount",
-                      "start": 750,
-                      "end": 756
+                      "name": "chairperson",
+                      "start": 1058,
+                      "end": 1069
                     }
                   ],
-                  "start": 719,
-                  "end": 757
+                  "start": 1048,
+                  "end": 1070
                 },
-                "start": 714,
-                "end": 758
-              },
-              {
-                "type": "ReturnStatement",
-                "argument": {
-                  "type": "Literal",
-                  "value": true,
-                  "start": 768,
-                  "end": 772
-                },
-                "start": 761,
-                "end": 773
+                "start": 1043,
+                "end": 1071
               }
             ],
-            "start": 593,
-            "end": 776
+            "start": 1015,
+            "end": 1074
           },
           "is_abstract": false,
-          "start": 512,
-          "end": 776
+          "start": 994,
+          "end": 1074
         },
         {
           "type": "FunctionDeclaration",
-          "name": "getBalanceInEth",
+          "name": "who",
+          "params": null,
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 1092,
+              "end": 1098
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "payable",
+              "params": [],
+              "start": 1099,
+              "end": 1106
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [],
+            "start": 1106,
+            "end": 1113
+          },
+          "is_abstract": false,
+          "start": 1077,
+          "end": 1113
+        },
+        {
+          "type": "EventDeclaration",
+          "name": "howareyou",
           "params": [
             {
               "type": "InformalParameter",
@@ -487,224 +596,239 @@
                 "literal": "address",
                 "members": [],
                 "array_parts": [],
-                "start": 804,
-                "end": 811
+                "start": 1132,
+                "end": 1139
               },
-              "id": "addr",
+              "id": "who",
               "is_indexed": false,
               "is_constant": false,
               "storage_location": null,
-              "start": 804,
-              "end": 816
+              "start": 1132,
+              "end": 1143
             }
           ],
-          "modifiers": [
-            {
-              "type": "ModifierArgument",
-              "name": "public",
-              "params": [],
-              "start": 818,
-              "end": 824
-            },
-            {
-              "type": "ModifierArgument",
-              "name": "view",
-              "params": [],
-              "start": 825,
-              "end": 829
-            }
-          ],
-          "returnParams": {
-            "type": "ReturnParams",
-            "params": [
-              {
-                "type": "InformalParameter",
-                "literal": {
-                  "type": "Type",
-                  "literal": "uint",
-                  "members": [],
-                  "array_parts": [],
-                  "start": 838,
-                  "end": 842
-                },
-                "id": null,
-                "is_indexed": false,
-                "is_constant": false,
-                "storage_location": null,
-                "start": 838,
-                "end": 842
-              }
-            ],
-            "start": 830,
-            "end": 843
+          "is_anonymous": false,
+          "start": 1116,
+          "end": 1145
+        }
+      ],
+      "start": 61,
+      "end": 1147
+    },
+    {
+      "type": "ContractStatement",
+      "name": "NotBallot",
+      "is": [],
+      "body": [],
+      "start": 1149,
+      "end": 1172
+    },
+    {
+      "type": "ContractStatement",
+      "name": "something",
+      "is": [
+        {
+          "type": "ModifierName",
+          "name": "NotBallot",
+          "params": [],
+          "start": 1196,
+          "end": 1206
+        }
+      ],
+      "body": [
+        {
+          "type": "StateVariableDeclaration",
+          "name": "rand_addr",
+          "literal": {
+            "type": "Type",
+            "literal": "address",
+            "members": [],
+            "array_parts": [],
+            "start": 1209,
+            "end": 1216
           },
+          "visibility": null,
+          "is_constant": false,
+          "value": {
+            "type": "Literal",
+            "value": "0x123",
+            "start": 1229,
+            "end": 1234
+          },
+          "start": 1209,
+          "end": 1235
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "kill",
+          "params": null,
+          "modifiers": null,
+          "returnParams": null,
           "body": {
             "type": "BlockStatement",
             "body": [
               {
-                "type": "ReturnStatement",
-                "argument": {
+                "type": "IfStatement",
+                "test": {
+                  "type": "BinaryExpression",
+                  "operator": "==",
+                  "left": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "Identifier",
+                      "name": "msg",
+                      "start": 1262,
+                      "end": 1265
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "sender",
+                      "start": 1266,
+                      "end": 1272
+                    },
+                    "computed": false,
+                    "start": 1262,
+                    "end": 1272
+                  },
+                  "right": {
+                    "type": "Identifier",
+                    "name": "NotBallot",
+                    "start": 1276,
+                    "end": 1285
+                  },
+                  "start": 1262,
+                  "end": 1285
+                },
+                "consequent": {
+                  "type": "ExpressionStatement",
+                  "expression": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "Identifier",
+                      "name": "selfdestruct",
+                      "start": 1287,
+                      "end": 1299
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "NotBallot",
+                        "start": 1300,
+                        "end": 1309
+                      }
+                    ],
+                    "start": 1287,
+                    "end": 1310
+                  },
+                  "start": 1287,
+                  "end": 1311
+                },
+                "alternate": null,
+                "start": 1258,
+                "end": 1311
+              }
+            ],
+            "start": 1254,
+            "end": 1314
+          },
+          "is_abstract": false,
+          "start": 1238,
+          "end": 1314
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "random",
+          "params": null,
+          "modifiers": null,
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
                   "type": "CallExpression",
                   "callee": {
                     "type": "MemberExpression",
                     "object": {
                       "type": "Identifier",
-                      "name": "ConvertLib",
-                      "start": 854,
-                      "end": 864
+                      "name": "rand_addr",
+                      "start": 1339,
+                      "end": 1348
                     },
                     "property": {
                       "type": "Identifier",
-                      "name": "convert",
-                      "start": 865,
-                      "end": 872
+                      "name": "send",
+                      "start": 1349,
+                      "end": 1353
                     },
                     "computed": false,
-                    "start": 854,
-                    "end": 872
+                    "start": 1339,
+                    "end": 1353
                   },
                   "arguments": [
                     {
-                      "type": "CallExpression",
-                      "callee": {
-                        "type": "Identifier",
-                        "name": "getBalance",
-                        "start": 873,
-                        "end": 883
-                      },
-                      "arguments": [
-                        {
-                          "type": "Identifier",
-                          "name": "addr",
-                          "start": 884,
-                          "end": 888
-                        }
-                      ],
-                      "start": 873,
-                      "end": 889
-                    },
-                    {
                       "type": "Literal",
-                      "value": 2,
-                      "start": 890,
-                      "end": 891
+                      "value": 1,
+                      "start": 1354,
+                      "end": 1355
                     }
                   ],
-                  "start": 854,
-                  "end": 892
+                  "start": 1339,
+                  "end": 1356
                 },
-                "start": 847,
-                "end": 893
-              }
-            ],
-            "start": 843,
-            "end": 896
-          },
-          "is_abstract": false,
-          "start": 779,
-          "end": 896
-        },
-        {
-          "type": "FunctionDeclaration",
-          "name": "getBalance",
-          "params": [
-            {
-              "type": "InformalParameter",
-              "literal": {
-                "type": "Type",
-                "literal": "address",
-                "members": [],
-                "array_parts": [],
-                "start": 919,
-                "end": 926
+                "start": 1339,
+                "end": 1357
               },
-              "id": "addr",
-              "is_indexed": false,
-              "is_constant": false,
-              "storage_location": null,
-              "start": 919,
-              "end": 931
-            }
-          ],
-          "modifiers": [
-            {
-              "type": "ModifierArgument",
-              "name": "public",
-              "params": [],
-              "start": 933,
-              "end": 939
-            },
-            {
-              "type": "ModifierArgument",
-              "name": "view",
-              "params": [],
-              "start": 940,
-              "end": 944
-            }
-          ],
-          "returnParams": {
-            "type": "ReturnParams",
-            "params": [
               {
-                "type": "InformalParameter",
-                "literal": {
-                  "type": "Type",
-                  "literal": "uint",
-                  "members": [],
-                  "array_parts": [],
-                  "start": 953,
-                  "end": 957
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "Identifier",
+                      "name": "rand_addr",
+                      "start": 1360,
+                      "end": 1369
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "transfer",
+                      "start": 1370,
+                      "end": 1378
+                    },
+                    "computed": false,
+                    "start": 1360,
+                    "end": 1378
+                  },
+                  "arguments": [
+                    {
+                      "type": "Literal",
+                      "value": 1,
+                      "start": 1379,
+                      "end": 1380
+                    }
+                  ],
+                  "start": 1360,
+                  "end": 1381
                 },
-                "id": null,
-                "is_indexed": false,
-                "is_constant": false,
-                "storage_location": null,
-                "start": 953,
-                "end": 957
+                "start": 1360,
+                "end": 1382
               }
             ],
-            "start": 945,
-            "end": 958
-          },
-          "body": {
-            "type": "BlockStatement",
-            "body": [
-              {
-                "type": "ReturnStatement",
-                "argument": {
-                  "type": "MemberExpression",
-                  "object": {
-                    "type": "Identifier",
-                    "name": "balances",
-                    "start": 970,
-                    "end": 978
-                  },
-                  "property": {
-                    "type": "Identifier",
-                    "name": "addr",
-                    "start": 979,
-                    "end": 983
-                  },
-                  "computed": true,
-                  "start": 970,
-                  "end": 984
-                },
-                "start": 963,
-                "end": 985
-              }
-            ],
-            "start": 959,
-            "end": 988
+            "start": 1335,
+            "end": 1385
           },
           "is_abstract": false,
-          "start": 899,
-          "end": 988
+          "start": 1317,
+          "end": 1385
         }
       ],
-      "start": 316,
-      "end": 990
+      "start": 1174,
+      "end": 1387
     }
   ],
   "start": 0,
-  "end": 990
+  "end": 1387
 }

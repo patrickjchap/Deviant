@@ -5,10 +5,6 @@ var solm = require('solmeister');
 var parser = require('solparse');
 var path = require('path');
 
-var operators = {
-            "storage": 'memory',
-            "memory": 'storage',
-};
 
 let options = {
 	format: {
@@ -24,7 +20,7 @@ let options = {
 
 
 
-exports.mutateDataLocationOperator = function(file, filename){
+exports.mutateSelfdestructOperator = function(file, filename){
 //	console.log("Binary Operators Found");
 	var ast;
 	fs.readFile(file, function(err, data) {	
@@ -32,15 +28,15 @@ exports.mutateDataLocationOperator = function(file, filename){
 
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
-			if(node.hasOwnProperty('storage_location') && node.storage_location != null) {
-				var mutOperator;
-				mutOperator = operators[node.storage_location];
-				tmpNode = node.getSourceCode().replace(node.storage_location, mutOperator);
-
-
+			if(node.type === 'ExpressionStatement' &&
+				node.expression.type === 'CallExpression' &&
+				node.expression.callee.name === 'selfdestruct') {
+				
+				var dummyStatement = 'int dummy_mutant_sub;';
+	
 				fs.writeFile("./sol_output/" + filename + "/" 
-				+ path.basename(file).slice(0, -4) + "DataLoc" + mutOperator + 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
+				+ path.basename(file).slice(0, -4) + "Selfdestruct" 
+				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), dummyStatement), 'ascii', function(err) {
 					if(err) throw err;
 				});
 				fileNum++

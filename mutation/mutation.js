@@ -10,6 +10,10 @@ var eventOp = require('./SolidityFeatures/EventOperators.js');
 var stateVarOp = require('./SolidityFeatures/StateVariableOperators.js');
 var functionVisOp = require('./SolidityFeatures/FunctionVisibilityOperators.js');
 var functionTypeOp = require('./SolidityFeatures/FunctionTypeOperators.js');
+var dataLocOp = require('./SolidityFeatures/ModifiableDataOperators.js');
+var selfdestructOp = require('./SolidityFeatures/SelfdestructOperators.js');
+var addressFunctionOp = require('./SolidityFeatures/AddressFunctionOperators.js');
+var abstractContractOp = require('./SolidityFeatures/AbstractContractOperators.js');
 
 exports.generateMutant = function(file, filename, args){
 	if(!fs.existsSync('./sol_output/' + filename)){
@@ -27,4 +31,8 @@ exports.generateMutant = function(file, filename, args){
 	if(args.includes('v')){stateVarOp.mutateStateVarOperator(file, filename)};
 	if(args.includes('f')){functionVisOp.mutateFunctionVisibilityOperator(file, filename)};
 	if(args.includes('t')){functionTypeOp.mutateFunctionTypeOperator(file, filename)};
+	if(args.includes('d')){dataLocOp.mutateDataLocationOperator(file, filename)};
+	if(args.includes('r')){selfdestructOp.mutateSelfdestructOperator(file, filename)};
+	if(args.includes('z')){addressFunctionOp.mutateAddressFunctionOperator(file, filename)};
+	if(args.includes('c')){abstractContractOp.mutateAbstractContractOperator(file, filename)};
 }

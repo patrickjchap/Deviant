@@ -1,4 +1,4 @@
-/* Requirements */
+Requirements */
 const electron = require('electron');
 var fs = require('fs');
 const url = require('url');

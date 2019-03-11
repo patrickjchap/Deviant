@@ -6,8 +6,8 @@ var parser = require('solparse');
 var path = require('path');
 
 var operators = {
-            "storage": 'memory',
-            "memory": 'storage',
+            "send": 'transfer',
+            "transfer": 'send',
 };
 
 let options = {
@@ -24,7 +24,7 @@ let options = {
 
 
 
-exports.mutateDataLocationOperator = function(file, filename){
+exports.mutateAbstractContractOperator = function(file, filename){
 //	console.log("Binary Operators Found");
 	var ast;
 	fs.readFile(file, function(err, data) {	
@@ -32,15 +32,14 @@ exports.mutateDataLocationOperator = function(file, filename){
 
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
-			if(node.hasOwnProperty('storage_location') && node.storage_location != null) {
-				var mutOperator;
-				mutOperator = operators[node.storage_location];
-				tmpNode = node.getSourceCode().replace(node.storage_location, mutOperator);
+			if(node.hasOwnProperty('parent') && node.parent != null 
+			&& node.parent.hasOwnProperty('type')
+			&& node.parent.type === 'FunctionDeclaration'
+		    && node.type === 'BlockStatement') {
 
-
-				fs.writeFile("./sol_output/" + filename + "/" 
-				+ path.basename(file).slice(0, -4) + "DataLoc" + mutOperator + 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
+				fs.writeFile("./sol_output/" + filename + '/'
+				+ path.basename(file).slice(0, -4) + "AbstractContract" 
+				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), ";"), 'ascii', function(err) {
 					if(err) throw err;
 				});
 				fileNum++

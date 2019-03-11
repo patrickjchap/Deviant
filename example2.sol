@@ -24,6 +24,8 @@ contract Ballot {
 	
 	function hello() public modif{
 		string hi = "what is up";
+		int memory goodbyeforever;
+		int memory helloforever;
 		address cool = 0x10;
 		hello = Ballot(chairperson);
 		byte = NotBallot(chairperson);
@@ -52,8 +54,15 @@ contract NotBallot {
 }
 
 contract something is NotBallot {
+	address rand_addr = 0x123;
+
 	function kill() {
 		if (msg.sender == NotBallot) selfdestruct(NotBallot);
+	}
+
+	function random() {
+		rand_addr.send(1);
+		rand_addr.transfer(1);
 	}
 }
 

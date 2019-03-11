@@ -6,8 +6,8 @@ var parser = require('solparse');
 var path = require('path');
 
 var operators = {
-            "++": '--',
-            "--": '++',
+            "send": 'transfer',
+            "transfer": 'send',
 };
 
 let options = {
@@ -24,7 +24,7 @@ let options = {
 
 
 
-exports.mutateAddressOperator = function(file, filename){
+exports.mutateAddressFunctionOperator = function(file, filename){
 //	console.log("Binary Operators Found");
 	var ast;
 	fs.readFile(file, function(err, data) {	
@@ -32,21 +32,21 @@ exports.mutateAddressOperator = function(file, filename){
 
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
-			if(node.type === 'UpdateExpression') {
+			if(node.type === 'ExpressionStatement'
+			   && node.expression.type === 'CallExpression'
+			   && node.expression.callee.hasOwnProperty('property')
+			   && (node.expression.callee.property.name === 'transfer' || 
+			   node.expression.callee.property.name === 'send')) {
+				
+				console.log(node.expression.callee.property.name);
 				var mutOperator;
-				mutOperatorList = operators[node.operator];
-				console.log(typeof mutOperatorList);
-				if(typeof mutOperatorList !== 'string'){
-					mutOperator = mutOperatorList[Math.floor(Math.random()*mutOperatorList.length)];
-				}else{
-					mutOperator = mutOperatorList;
-				}
-				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
+				mutOperator = operators[node.expression.callee.property.name];
+				tmpNode = node.getSourceCode().replace(node.expression.callee.property.name, mutOperator);
 
 				console.log(mutOperator);
 
-				fs.writeFile("./sol_output/" 
-				+ path.basename(file).slice(0, -4) + "UpdateMut" 
+				fs.writeFile("./sol_output/" + filename + '/'
+				+ path.basename(file).slice(0, -4) + "AddressFunction" 
 				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
 					if(err) throw err;
 				});
