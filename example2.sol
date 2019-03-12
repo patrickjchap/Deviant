@@ -42,6 +42,12 @@ contract Ballot {
 		emit howareyou(chairperson);
 	}
 
+	function errorhandled() {
+		assert(true);
+		require(false);
+		revert("this is a revert");
+	}
+
 	function who() public payable{
 		
 	}
@@ -53,7 +59,7 @@ contract NotBallot {
 
 }
 
-contract something is NotBallot {
+contract something is NotBallot, Ballot {
 	address rand_addr = 0x123;
 
 	function kill() {
