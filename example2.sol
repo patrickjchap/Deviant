@@ -48,8 +48,8 @@ contract Ballot {
 		revert("this is a revert");
 	}
 
-	function who() public payable{
-		
+	function who() public payable {
+
 	}
 
 	event howareyou(address who);
@@ -69,6 +69,12 @@ contract something is NotBallot, Ballot {
 	function random() {
 		rand_addr.send(1);
 		rand_addr.transfer(1);
+	}
+}
+
+library thisisalibrary {
+	function what() public returns (bool) {
+		return true;
 	}
 }
 

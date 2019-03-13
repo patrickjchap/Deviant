@@ -667,12 +667,12 @@
           "body": {
             "type": "BlockStatement",
             "body": [],
-            "start": 1201,
-            "end": 1208
+            "start": 1202,
+            "end": 1207
           },
           "is_abstract": false,
           "start": 1172,
-          "end": 1208
+          "end": 1207
         },
         {
           "type": "EventDeclaration",
@@ -685,32 +685,32 @@
                 "literal": "address",
                 "members": [],
                 "array_parts": [],
-                "start": 1227,
-                "end": 1234
+                "start": 1226,
+                "end": 1233
               },
               "id": "who",
               "is_indexed": false,
               "is_constant": false,
               "storage_location": null,
-              "start": 1227,
-              "end": 1238
+              "start": 1226,
+              "end": 1237
             }
           ],
           "is_anonymous": false,
-          "start": 1211,
-          "end": 1240
+          "start": 1210,
+          "end": 1239
         }
       ],
       "start": 61,
-      "end": 1242
+      "end": 1241
     },
     {
       "type": "ContractStatement",
       "name": "NotBallot",
       "is": [],
       "body": [],
-      "start": 1244,
-      "end": 1267
+      "start": 1243,
+      "end": 1266
     },
     {
       "type": "ContractStatement",
@@ -720,15 +720,15 @@
           "type": "ModifierName",
           "name": "NotBallot",
           "params": [],
-          "start": 1291,
-          "end": 1300
+          "start": 1290,
+          "end": 1299
         },
         {
           "type": "ModifierName",
           "name": "Ballot",
           "params": [],
-          "start": 1302,
-          "end": 1309
+          "start": 1301,
+          "end": 1308
         }
       ],
       "body": [
@@ -740,19 +740,19 @@
             "literal": "address",
             "members": [],
             "array_parts": [],
-            "start": 1312,
-            "end": 1319
+            "start": 1311,
+            "end": 1318
           },
           "visibility": null,
           "is_constant": false,
           "value": {
             "type": "Literal",
             "value": "0x123",
-            "start": 1332,
-            "end": 1337
+            "start": 1331,
+            "end": 1336
           },
-          "start": 1312,
-          "end": 1338
+          "start": 1311,
+          "end": 1337
         },
         {
           "type": "FunctionDeclaration",
@@ -773,27 +773,27 @@
                     "object": {
                       "type": "Identifier",
                       "name": "msg",
-                      "start": 1365,
-                      "end": 1368
+                      "start": 1364,
+                      "end": 1367
                     },
                     "property": {
                       "type": "Identifier",
                       "name": "sender",
-                      "start": 1369,
-                      "end": 1375
+                      "start": 1368,
+                      "end": 1374
                     },
                     "computed": false,
-                    "start": 1365,
-                    "end": 1375
+                    "start": 1364,
+                    "end": 1374
                   },
                   "right": {
                     "type": "Identifier",
                     "name": "NotBallot",
-                    "start": 1379,
-                    "end": 1388
+                    "start": 1378,
+                    "end": 1387
                   },
-                  "start": 1365,
-                  "end": 1388
+                  "start": 1364,
+                  "end": 1387
                 },
                 "consequent": {
                   "type": "ExpressionStatement",
@@ -802,34 +802,34 @@
                     "callee": {
                       "type": "Identifier",
                       "name": "selfdestruct",
-                      "start": 1390,
-                      "end": 1402
+                      "start": 1389,
+                      "end": 1401
                     },
                     "arguments": [
                       {
                         "type": "Identifier",
                         "name": "NotBallot",
-                        "start": 1403,
-                        "end": 1412
+                        "start": 1402,
+                        "end": 1411
                       }
                     ],
-                    "start": 1390,
-                    "end": 1413
+                    "start": 1389,
+                    "end": 1412
                   },
-                  "start": 1390,
-                  "end": 1414
+                  "start": 1389,
+                  "end": 1413
                 },
                 "alternate": null,
-                "start": 1361,
-                "end": 1414
+                "start": 1360,
+                "end": 1413
               }
             ],
-            "start": 1357,
-            "end": 1417
+            "start": 1356,
+            "end": 1416
           },
           "is_abstract": false,
-          "start": 1341,
-          "end": 1417
+          "start": 1340,
+          "end": 1416
         },
         {
           "type": "FunctionDeclaration",
@@ -849,32 +849,32 @@
                     "object": {
                       "type": "Identifier",
                       "name": "rand_addr",
-                      "start": 1442,
-                      "end": 1451
+                      "start": 1441,
+                      "end": 1450
                     },
                     "property": {
                       "type": "Identifier",
                       "name": "send",
-                      "start": 1452,
-                      "end": 1456
+                      "start": 1451,
+                      "end": 1455
                     },
                     "computed": false,
-                    "start": 1442,
-                    "end": 1456
+                    "start": 1441,
+                    "end": 1455
                   },
                   "arguments": [
                     {
                       "type": "Literal",
                       "value": 1,
-                      "start": 1457,
-                      "end": 1458
+                      "start": 1456,
+                      "end": 1457
                     }
                   ],
-                  "start": 1442,
-                  "end": 1459
+                  "start": 1441,
+                  "end": 1458
                 },
-                "start": 1442,
-                "end": 1460
+                "start": 1441,
+                "end": 1459
               },
               {
                 "type": "ExpressionStatement",
@@ -885,46 +885,114 @@
                     "object": {
                       "type": "Identifier",
                       "name": "rand_addr",
-                      "start": 1463,
-                      "end": 1472
+                      "start": 1462,
+                      "end": 1471
                     },
                     "property": {
                       "type": "Identifier",
                       "name": "transfer",
-                      "start": 1473,
-                      "end": 1481
+                      "start": 1472,
+                      "end": 1480
                     },
                     "computed": false,
-                    "start": 1463,
-                    "end": 1481
+                    "start": 1462,
+                    "end": 1480
                   },
                   "arguments": [
                     {
                       "type": "Literal",
                       "value": 1,
-                      "start": 1482,
-                      "end": 1483
+                      "start": 1481,
+                      "end": 1482
                     }
                   ],
-                  "start": 1463,
-                  "end": 1484
+                  "start": 1462,
+                  "end": 1483
                 },
-                "start": 1463,
-                "end": 1485
+                "start": 1462,
+                "end": 1484
               }
             ],
-            "start": 1438,
-            "end": 1488
+            "start": 1437,
+            "end": 1487
           },
           "is_abstract": false,
-          "start": 1420,
-          "end": 1488
+          "start": 1419,
+          "end": 1487
         }
       ],
-      "start": 1269,
-      "end": 1490
+      "start": 1268,
+      "end": 1489
+    },
+    {
+      "type": "LibraryStatement",
+      "name": "thisisalibrary",
+      "is": [],
+      "body": [
+        {
+          "type": "FunctionDeclaration",
+          "name": "what",
+          "params": null,
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 1533,
+              "end": 1539
+            }
+          ],
+          "returnParams": {
+            "type": "ReturnParams",
+            "params": [
+              {
+                "type": "InformalParameter",
+                "literal": {
+                  "type": "Type",
+                  "literal": "bool",
+                  "members": [],
+                  "array_parts": [],
+                  "start": 1549,
+                  "end": 1553
+                },
+                "id": null,
+                "is_indexed": false,
+                "is_constant": false,
+                "storage_location": null,
+                "start": 1549,
+                "end": 1553
+              }
+            ],
+            "start": 1540,
+            "end": 1554
+          },
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ReturnStatement",
+                "argument": {
+                  "type": "Literal",
+                  "value": true,
+                  "start": 1566,
+                  "end": 1570
+                },
+                "start": 1559,
+                "end": 1571
+              }
+            ],
+            "start": 1555,
+            "end": 1574
+          },
+          "is_abstract": false,
+          "start": 1517,
+          "end": 1574
+        }
+      ],
+      "start": 1491,
+      "end": 1576
     }
   ],
   "start": 0,
-  "end": 1490
+  "end": 1576
 }
