@@ -51,7 +51,22 @@ exports.mutateAddressFunctionOperator = function(file, filename){
 					if(err) throw err;
 				});
 				fileNum++
-			
+		
+
+				if(typeof node.expression.arguments[0] != 'undefined'
+				&& node.expression.arguments[0].type == 'Literal'){
+
+					tmpNode = node.getSourceCode().replace(node.expression.arguments[0].value, '0')
+
+					fs.writeFile("./sol_output/" + filename + '/'
+						+ path.basename(file).slice(0, -4) + "AddressFunction"
+						+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
+							if(err) throw err;
+					});
+					fileNum++
+
+					
+				}
 			}
 
 		});
