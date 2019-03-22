@@ -35,7 +35,10 @@ exports.mutateAddressOperator = function(file, filename){
 			
 			//If contract has more than two calls to change addresses
 			//to different contracts. Swap the calls.
-			if(node.type === 'CallExpression' && node.callee.type == "Identifier") {
+			if(node.type === 'CallExpression' && node.callee.type == "Identifier"
+			&& node.hasOwnProperty('property') &&
+			(node.property.name == 'transfer' || node.property.name == 'call' ||
+			node.property.name == 'send')) {
 				
 				//Check to see if node with call expression has already been found
 				if(callNode == null) {
@@ -54,7 +57,6 @@ exports.mutateAddressOperator = function(file, filename){
 			}else if(node.type == "AssignmentExpression"){
 				console.log(node.left);
 				if(node.left.literal != null && node.left.literal.literal == "address"){
-					console.log("hello");
 					tmpNodeZero = node.getSourceCode().replace(node.right.value, operators['zero']);
 					tmpNodeRand = node.getSourceCode().replace(node.right.value, operators['random']);
 

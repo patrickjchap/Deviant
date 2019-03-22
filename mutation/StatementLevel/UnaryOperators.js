@@ -26,7 +26,7 @@ let options = {
 
 
 
-exports.mutateUnaryOperator = function(file){
+exports.mutateUnaryOperator = function(file, filename){
 //	console.log("Binary Operators Found");
 	var ast;
 	fs.readFile(file, function(err, data) {	
@@ -54,7 +54,7 @@ exports.mutateUnaryOperator = function(file){
 
 				console.log(mutOperator);
 
-				fs.writeFile("./sol_output/" 
+				fs.writeFile("./sol_output/" +  filename + '/'
 				+ path.basename(file).slice(0, -4) + "UnaryMut" 
 				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
 					if(err) throw err;

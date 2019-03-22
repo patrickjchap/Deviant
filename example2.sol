@@ -69,6 +69,7 @@ contract something is NotBallot, Ballot {
 	function random() {
 		rand_addr.send(1);
 		rand_addr.transfer(1);
+		rand_addr.call();
 	}
 }
 

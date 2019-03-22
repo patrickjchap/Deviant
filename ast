@@ -6,7 +6,7 @@
       "start_version": {
         "type": "VersionLiteral",
         "operator": "^",
-        "version": "0.4.22",
+        "version": "0.4.24",
         "start": 16,
         "end": 23
       },
@@ -15,185 +15,495 @@
       "end": 24
     },
     {
+      "type": "ImportStatement",
+      "from": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 26,
+      "end": 89
+    },
+    {
+      "type": "ImportStatement",
+      "from": "openzeppelin-solidity/contracts/math/SafeMath.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 90,
+      "end": 149
+    },
+    {
+      "type": "ImportStatement",
+      "from": "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 150,
+      "end": 213
+    },
+    {
+      "type": "ImportStatement",
+      "from": "./impact/ImpactRegistry.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 215,
+      "end": 252
+    },
+    {
+      "type": "ImportStatement",
+      "from": "../ContractProvider.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 253,
+      "end": 286
+    },
+    {
       "type": "ContractStatement",
-      "name": "Ballot",
-      "is": [],
+      "name": "Project",
+      "is": [
+        {
+          "type": "ModifierName",
+          "name": "Ownable",
+          "params": [],
+          "start": 308,
+          "end": 316
+        }
+      ],
       "body": [
         {
-          "type": "StructDeclaration",
-          "name": "Voter",
-          "body": [
-            {
-              "type": "DeclarativeExpression",
-              "name": "weight",
-              "literal": {
-                "type": "Type",
-                "literal": "uint",
-                "members": [],
-                "array_parts": [],
-                "start": 234,
-                "end": 238
-              },
-              "storage_location": null,
-              "start": 234,
-              "end": 245
-            },
-            {
-              "type": "DeclarativeExpression",
-              "name": "voted",
-              "literal": {
-                "type": "Type",
-                "literal": "bool",
-                "members": [],
-                "array_parts": [],
-                "start": 294,
-                "end": 298
-              },
-              "storage_location": null,
-              "start": 294,
-              "end": 304
-            },
-            {
-              "type": "DeclarativeExpression",
-              "name": "delegate",
-              "literal": {
-                "type": "Type",
-                "literal": "address",
-                "members": [],
-                "array_parts": [],
-                "start": 353,
-                "end": 360
-              },
-              "storage_location": null,
-              "start": 353,
-              "end": 369
-            },
-            {
-              "type": "DeclarativeExpression",
-              "name": "vote",
-              "literal": {
-                "type": "Type",
-                "literal": "uint",
-                "members": [],
-                "array_parts": [],
-                "start": 402,
-                "end": 406
-              },
-              "storage_location": null,
-              "start": 402,
-              "end": 411
-            }
-          ],
-          "start": 211,
-          "end": 451
-        },
-        {
-          "type": "StructDeclaration",
-          "name": "Proposal",
-          "body": [
-            {
-              "type": "DeclarativeExpression",
-              "name": "name",
-              "literal": {
-                "type": "Type",
-                "literal": "bytes32",
-                "members": [],
-                "array_parts": [],
-                "start": 528,
-                "end": 535
-              },
-              "storage_location": null,
-              "start": 528,
-              "end": 540
-            },
-            {
-              "type": "DeclarativeExpression",
-              "name": "voteCount",
-              "literal": {
-                "type": "Type",
-                "literal": "uint",
-                "members": [],
-                "array_parts": [],
-                "start": 583,
-                "end": 587
-              },
-              "storage_location": null,
-              "start": 583,
-              "end": 597
-            }
-          ],
-          "start": 502,
-          "end": 635
-        },
-        {
-          "type": "StateVariableDeclaration",
-          "name": "intint",
-          "literal": {
+          "type": "UsingStatement",
+          "library": "SafeMath",
+          "for": {
             "type": "Type",
-            "literal": "int",
+            "literal": "uint256",
             "members": [],
             "array_parts": [],
-            "start": 641,
-            "end": 644
+            "start": 341,
+            "end": 348
           },
-          "visibility": "internal",
-          "is_constant": false,
-          "value": null,
-          "start": 641,
-          "end": 661
+          "start": 322,
+          "end": 349
         },
         {
           "type": "StateVariableDeclaration",
-          "name": "privint",
+          "name": "name",
           "literal": {
             "type": "Type",
-            "literal": "int",
+            "literal": "string",
             "members": [],
             "array_parts": [],
-            "start": 663,
-            "end": 666
+            "start": 355,
+            "end": 361
           },
-          "visibility": "private",
+          "visibility": "public",
           "is_constant": false,
           "value": null,
-          "start": 663,
-          "end": 683
+          "start": 355,
+          "end": 374
         },
         {
           "type": "StateVariableDeclaration",
-          "name": "chairperson",
+          "name": "validatorAddress",
           "literal": {
             "type": "Type",
             "literal": "address",
             "members": [],
             "array_parts": [],
-            "start": 688,
-            "end": 695
+            "start": 379,
+            "end": 386
           },
           "visibility": "public",
           "is_constant": false,
           "value": null,
-          "start": 688,
-          "end": 715
+          "start": 379,
+          "end": 411
         },
         {
-          "type": "FunctionDeclaration",
-          "name": "hello",
-          "params": null,
+          "type": "StateVariableDeclaration",
+          "name": "beneficiaryAddress",
+          "literal": {
+            "type": "Type",
+            "literal": "address",
+            "members": [],
+            "array_parts": [],
+            "start": 416,
+            "end": 423
+          },
+          "visibility": "public",
+          "is_constant": false,
+          "value": null,
+          "start": 416,
+          "end": 450
+        },
+        {
+          "type": "StateVariableDeclaration",
+          "name": "IMPACT_REGISTRY_ADDRESS",
+          "literal": {
+            "type": "Type",
+            "literal": "address",
+            "members": [],
+            "array_parts": [],
+            "start": 455,
+            "end": 462
+          },
+          "visibility": "public",
+          "is_constant": false,
+          "value": null,
+          "start": 455,
+          "end": 494
+        },
+        {
+          "type": "StateVariableDeclaration",
+          "name": "upfrontPaymentPercentage",
+          "literal": {
+            "type": "Type",
+            "literal": "uint8",
+            "members": [],
+            "array_parts": [],
+            "start": 565,
+            "end": 570
+          },
+          "visibility": "public",
+          "is_constant": false,
+          "value": null,
+          "start": 565,
+          "end": 603
+        },
+        {
+          "type": "StateVariableDeclaration",
+          "name": "accountIndex",
+          "literal": {
+            "type": "Type",
+            "literal": "address",
+            "members": [],
+            "array_parts": [
+              null
+            ],
+            "start": 675,
+            "end": 684
+          },
+          "visibility": null,
+          "is_constant": false,
+          "value": null,
+          "start": 675,
+          "end": 698
+        },
+        {
+          "type": "StateVariableDeclaration",
+          "name": "total",
+          "literal": {
+            "type": "Type",
+            "literal": "uint",
+            "members": [],
+            "array_parts": [],
+            "start": 751,
+            "end": 755
+          },
+          "visibility": "public",
+          "is_constant": false,
+          "value": null,
+          "start": 751,
+          "end": 769
+        },
+        {
+          "type": "StateVariableDeclaration",
+          "name": "token",
+          "literal": {
+            "type": "Type",
+            "literal": "ERC20",
+            "members": [],
+            "array_parts": [],
+            "start": 840,
+            "end": 845
+          },
+          "visibility": "private",
+          "is_constant": false,
+          "value": null,
+          "start": 840,
+          "end": 860
+        },
+        {
+          "type": "EventDeclaration",
+          "name": "OutcomeEvent",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "string",
+                "members": [],
+                "array_parts": [],
+                "start": 969,
+                "end": 975
+              },
+              "id": "id",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 969,
+              "end": 978
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 980,
+                "end": 984
+              },
+              "id": "value",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 980,
+              "end": 990
+            }
+          ],
+          "is_anonymous": false,
+          "start": 950,
+          "end": 992
+        },
+        {
+          "type": "EventDeclaration",
+          "name": "DonationEvent",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 1017,
+                "end": 1024
+              },
+              "id": "from",
+              "is_indexed": true,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1017,
+              "end": 1037
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 1039,
+                "end": 1043
+              },
+              "id": "value",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1039,
+              "end": 1049
+            }
+          ],
+          "is_anonymous": false,
+          "start": 997,
+          "end": 1051
+        },
+        {
+          "type": "ConstructorDeclaration",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "string",
+                "members": [],
+                "array_parts": [],
+                "start": 1069,
+                "end": 1075
+              },
+              "id": "_name",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1069,
+              "end": 1081
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint8",
+                "members": [],
+                "array_parts": [],
+                "start": 1083,
+                "end": 1088
+              },
+              "id": "_upfrontPaymentPercentage",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1083,
+              "end": 1114
+            }
+          ],
           "modifiers": [
             {
               "type": "ModifierArgument",
               "name": "public",
               "params": [],
-              "start": 736,
-              "end": 742
+              "start": 1116,
+              "end": 1122
+            }
+          ],
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "require",
+                    "start": 1133,
+                    "end": 1140
+                  },
+                  "arguments": [
+                    {
+                      "type": "BinaryExpression",
+                      "operator": "&&",
+                      "left": {
+                        "type": "BinaryExpression",
+                        "operator": ">=",
+                        "left": {
+                          "type": "Identifier",
+                          "name": "_upfrontPaymentPercentage",
+                          "start": 1141,
+                          "end": 1166
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "value": 0,
+                          "start": 1170,
+                          "end": 1171
+                        },
+                        "start": 1141,
+                        "end": 1171
+                      },
+                      "right": {
+                        "type": "BinaryExpression",
+                        "operator": "<",
+                        "left": {
+                          "type": "Identifier",
+                          "name": "_upfrontPaymentPercentage",
+                          "start": 1175,
+                          "end": 1200
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "value": 100,
+                          "start": 1203,
+                          "end": 1206
+                        },
+                        "start": 1175,
+                        "end": 1206
+                      },
+                      "start": 1141,
+                      "end": 1206
+                    }
+                  ],
+                  "start": 1133,
+                  "end": 1207
+                },
+                "start": 1133,
+                "end": 1208
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "name",
+                    "start": 1217,
+                    "end": 1221
+                  },
+                  "right": {
+                    "type": "Identifier",
+                    "name": "_name",
+                    "start": 1224,
+                    "end": 1229
+                  },
+                  "start": 1217,
+                  "end": 1229
+                },
+                "start": 1217,
+                "end": 1230
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "upfrontPaymentPercentage",
+                    "start": 1239,
+                    "end": 1263
+                  },
+                  "right": {
+                    "type": "Identifier",
+                    "name": "_upfrontPaymentPercentage",
+                    "start": 1266,
+                    "end": 1291
+                  },
+                  "start": 1239,
+                  "end": 1291
+                },
+                "start": 1239,
+                "end": 1292
+              }
+            ],
+            "start": 1123,
+            "end": 1298
+          },
+          "start": 1057,
+          "end": 1298
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "setValidator",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 1326,
+                "end": 1333
+              },
+              "id": "_validatorAddress",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1326,
+              "end": 1351
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 1353,
+              "end": 1359
             },
             {
               "type": "ModifierArgument",
-              "name": "modif",
+              "name": "onlyOwner",
               "params": [],
-              "start": 743,
-              "end": 748
+              "start": 1360,
+              "end": 1369
             }
           ],
           "returnParams": null,
@@ -206,189 +516,306 @@
                   "type": "AssignmentExpression",
                   "operator": "=",
                   "left": {
-                    "type": "DeclarativeExpression",
-                    "name": "hi",
-                    "literal": {
-                      "type": "Type",
-                      "literal": "string",
-                      "members": [],
-                      "array_parts": [],
-                      "start": 752,
-                      "end": 758
-                    },
-                    "storage_location": null,
-                    "start": 752,
-                    "end": 761
-                  },
-                  "right": {
-                    "type": "Literal",
-                    "value": "what is up",
-                    "start": 764,
-                    "end": 776
-                  },
-                  "start": 752,
-                  "end": 776
-                },
-                "start": 752,
-                "end": 777
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "DeclarativeExpression",
-                  "name": "goodbyeforever",
-                  "literal": {
-                    "type": "Type",
-                    "literal": "int",
-                    "members": [],
-                    "array_parts": [],
-                    "start": 780,
-                    "end": 783
-                  },
-                  "storage_location": "memory",
-                  "start": 780,
-                  "end": 805
-                },
-                "start": 780,
-                "end": 806
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "DeclarativeExpression",
-                  "name": "helloforever",
-                  "literal": {
-                    "type": "Type",
-                    "literal": "int",
-                    "members": [],
-                    "array_parts": [],
-                    "start": 809,
-                    "end": 812
-                  },
-                  "storage_location": "memory",
-                  "start": 809,
-                  "end": 832
-                },
-                "start": 809,
-                "end": 833
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "AssignmentExpression",
-                  "operator": "=",
-                  "left": {
-                    "type": "DeclarativeExpression",
-                    "name": "cool",
-                    "literal": {
-                      "type": "Type",
-                      "literal": "address",
-                      "members": [],
-                      "array_parts": [],
-                      "start": 836,
-                      "end": 843
-                    },
-                    "storage_location": null,
-                    "start": 836,
-                    "end": 848
-                  },
-                  "right": {
-                    "type": "Literal",
-                    "value": "0x10",
-                    "start": 851,
-                    "end": 855
-                  },
-                  "start": 836,
-                  "end": 855
-                },
-                "start": 836,
-                "end": 856
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "AssignmentExpression",
-                  "operator": "=",
-                  "left": {
                     "type": "Identifier",
-                    "name": "hello",
-                    "start": 859,
-                    "end": 864
+                    "name": "validatorAddress",
+                    "start": 1380,
+                    "end": 1396
                   },
                   "right": {
-                    "type": "CallExpression",
-                    "callee": {
-                      "type": "Identifier",
-                      "name": "Ballot",
-                      "start": 867,
-                      "end": 873
-                    },
-                    "arguments": [
-                      {
-                        "type": "Identifier",
-                        "name": "chairperson",
-                        "start": 874,
-                        "end": 885
-                      }
-                    ],
-                    "start": 867,
-                    "end": 886
-                  },
-                  "start": 859,
-                  "end": 886
-                },
-                "start": 859,
-                "end": 887
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "AssignmentExpression",
-                  "operator": "=",
-                  "left": {
                     "type": "Identifier",
-                    "name": "byte",
-                    "start": 890,
-                    "end": 894
+                    "name": "_validatorAddress",
+                    "start": 1399,
+                    "end": 1416
                   },
-                  "right": {
-                    "type": "CallExpression",
-                    "callee": {
-                      "type": "Identifier",
-                      "name": "NotBallot",
-                      "start": 897,
-                      "end": 906
-                    },
-                    "arguments": [
-                      {
-                        "type": "Identifier",
-                        "name": "chairperson",
-                        "start": 907,
-                        "end": 918
-                      }
-                    ],
-                    "start": 897,
-                    "end": 919
-                  },
-                  "start": 890,
-                  "end": 919
+                  "start": 1380,
+                  "end": 1416
                 },
-                "start": 890,
-                "end": 920
+                "start": 1380,
+                "end": 1417
               }
             ],
-            "start": 748,
-            "end": 924
+            "start": 1370,
+            "end": 1423
           },
           "is_abstract": false,
-          "start": 719,
-          "end": 924
+          "start": 1304,
+          "end": 1423
         },
         {
-          "type": "ModifierDeclaration",
-          "name": "modif",
-          "params": null,
-          "modifiers": null,
+          "type": "FunctionDeclaration",
+          "name": "setBeneficiary",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 1453,
+                "end": 1460
+              },
+              "id": "_beneficiaryAddress",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1453,
+              "end": 1480
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 1482,
+              "end": 1488
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 1489,
+              "end": 1498
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "beneficiaryAddress",
+                    "start": 1509,
+                    "end": 1527
+                  },
+                  "right": {
+                    "type": "Identifier",
+                    "name": "_beneficiaryAddress",
+                    "start": 1530,
+                    "end": 1549
+                  },
+                  "start": 1509,
+                  "end": 1549
+                },
+                "start": 1509,
+                "end": 1550
+              }
+            ],
+            "start": 1499,
+            "end": 1556
+          },
+          "is_abstract": false,
+          "start": 1429,
+          "end": 1556
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "setImpactRegistry",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 1589,
+                "end": 1596
+              },
+              "id": "impactRegistryAddress",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1589,
+              "end": 1618
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 1620,
+              "end": 1626
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 1627,
+              "end": 1636
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "IMPACT_REGISTRY_ADDRESS",
+                    "start": 1647,
+                    "end": 1670
+                  },
+                  "right": {
+                    "type": "Identifier",
+                    "name": "impactRegistryAddress",
+                    "start": 1673,
+                    "end": 1694
+                  },
+                  "start": 1647,
+                  "end": 1694
+                },
+                "start": 1647,
+                "end": 1695
+              }
+            ],
+            "start": 1637,
+            "end": 1701
+          },
+          "is_abstract": false,
+          "start": 1562,
+          "end": 1701
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "setToken",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "ERC20",
+                "members": [],
+                "array_parts": [],
+                "start": 1725,
+                "end": 1730
+              },
+              "id": "_token",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1725,
+              "end": 1737
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 1739,
+              "end": 1745
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 1746,
+              "end": 1755
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "token",
+                    "start": 1766,
+                    "end": 1771
+                  },
+                  "right": {
+                    "type": "Identifier",
+                    "name": "_token",
+                    "start": 1774,
+                    "end": 1780
+                  },
+                  "start": 1766,
+                  "end": 1780
+                },
+                "start": 1766,
+                "end": 1781
+              }
+            ],
+            "start": 1756,
+            "end": 1787
+          },
+          "is_abstract": false,
+          "start": 1707,
+          "end": 1787
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "notify",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 1809,
+                "end": 1816
+              },
+              "id": "_from",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1809,
+              "end": 1822
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 1824,
+                "end": 1828
+              },
+              "id": "_amount",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1824,
+              "end": 1836
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 1838,
+              "end": 1844
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 1845,
+              "end": 1854
+            }
+          ],
+          "returnParams": null,
           "body": {
             "type": "BlockStatement",
             "body": [
@@ -399,8 +826,770 @@
                   "callee": {
                     "type": "Identifier",
                     "name": "require",
-                    "start": 948,
-                    "end": 955
+                    "start": 1865,
+                    "end": 1872
+                  },
+                  "arguments": [
+                    {
+                      "type": "BinaryExpression",
+                      "operator": "!=",
+                      "left": {
+                        "type": "Identifier",
+                        "name": "_from",
+                        "start": 1873,
+                        "end": 1878
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "value": "0x0",
+                        "start": 1882,
+                        "end": 1885
+                      },
+                      "start": 1873,
+                      "end": 1885
+                    }
+                  ],
+                  "start": 1865,
+                  "end": 1886
+                },
+                "start": 1865,
+                "end": 1887
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "require",
+                    "start": 1896,
+                    "end": 1903
+                  },
+                  "arguments": [
+                    {
+                      "type": "BinaryExpression",
+                      "operator": ">",
+                      "left": {
+                        "type": "Identifier",
+                        "name": "_amount",
+                        "start": 1904,
+                        "end": 1911
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "value": 0,
+                        "start": 1914,
+                        "end": 1915
+                      },
+                      "start": 1904,
+                      "end": 1915
+                    }
+                  ],
+                  "start": 1896,
+                  "end": 1916
+                },
+                "start": 1896,
+                "end": 1917
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "registerDonation",
+                    "start": 1926,
+                    "end": 1942
+                  },
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "_from",
+                      "start": 1943,
+                      "end": 1948
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_amount",
+                      "start": 1950,
+                      "end": 1957
+                    }
+                  ],
+                  "start": 1926,
+                  "end": 1958
+                },
+                "start": 1926,
+                "end": 1959
+              }
+            ],
+            "start": 1855,
+            "end": 1965
+          },
+          "is_abstract": false,
+          "start": 1793,
+          "end": 1965
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "registerDonation",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 1997,
+                "end": 2004
+              },
+              "id": "_from",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 1997,
+              "end": 2010
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 2012,
+                "end": 2016
+              },
+              "id": "_amount",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 2012,
+              "end": 2024
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "internal",
+              "params": [],
+              "start": 2026,
+              "end": 2034
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "SequenceExpression",
+                    "expressions": [
+                      {
+                        "type": "DeclarativeExpression",
+                        "name": "upfront",
+                        "literal": {
+                          "type": "Type",
+                          "literal": "uint256",
+                          "members": [],
+                          "array_parts": [],
+                          "start": 2046,
+                          "end": 2053
+                        },
+                        "storage_location": null,
+                        "start": 2046,
+                        "end": 2061
+                      },
+                      {
+                        "type": "DeclarativeExpression",
+                        "name": "remainder",
+                        "literal": {
+                          "type": "Type",
+                          "literal": "uint256",
+                          "members": [],
+                          "array_parts": [],
+                          "start": 2063,
+                          "end": 2070
+                        },
+                        "storage_location": null,
+                        "start": 2063,
+                        "end": 2080
+                      }
+                    ],
+                    "start": 2045,
+                    "end": 2081
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "Identifier",
+                      "name": "calculateUpfrontSplit",
+                      "start": 2084,
+                      "end": 2105
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "_amount",
+                        "start": 2106,
+                        "end": 2113
+                      }
+                    ],
+                    "start": 2084,
+                    "end": 2114
+                  },
+                  "start": 2045,
+                  "end": 2114
+                },
+                "start": 2045,
+                "end": 2115
+              },
+              {
+                "type": "IfStatement",
+                "test": {
+                  "type": "BinaryExpression",
+                  "operator": ">",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "upfront",
+                    "start": 2129,
+                    "end": 2136
+                  },
+                  "right": {
+                    "type": "Literal",
+                    "value": 0,
+                    "start": 2139,
+                    "end": 2140
+                  },
+                  "start": 2129,
+                  "end": 2140
+                },
+                "consequent": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "name": "beneficiaryAddress",
+                            "start": 2176,
+                            "end": 2194
+                          },
+                          {
+                            "type": "Identifier",
+                            "name": "upfront",
+                            "start": 2196,
+                            "end": 2203
+                          }
+                        ],
+                        "start": 2156,
+                        "end": 2204,
+                        "callee": {
+                          "type": "MemberExpression",
+                          "property": {
+                            "type": "Identifier",
+                            "name": "transfer",
+                            "start": 2167,
+                            "end": 2175
+                          },
+                          "computed": false,
+                          "start": 2156,
+                          "end": 2175,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "Identifier",
+                              "name": "getToken",
+                              "start": 2156,
+                              "end": 2164
+                            },
+                            "arguments": [],
+                            "start": 2156,
+                            "end": 2166
+                          }
+                        }
+                      },
+                      "start": 2156,
+                      "end": 2205
+                    }
+                  ],
+                  "start": 2142,
+                  "end": 2215
+                },
+                "alternate": null,
+                "start": 2125,
+                "end": 2215
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "total",
+                    "start": 2225,
+                    "end": 2230
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "MemberExpression",
+                      "object": {
+                        "type": "Identifier",
+                        "name": "total",
+                        "start": 2233,
+                        "end": 2238
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "add",
+                        "start": 2239,
+                        "end": 2242
+                      },
+                      "computed": false,
+                      "start": 2233,
+                      "end": 2242
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "remainder",
+                        "start": 2243,
+                        "end": 2252
+                      }
+                    ],
+                    "start": 2233,
+                    "end": 2253
+                  },
+                  "start": 2225,
+                  "end": 2253
+                },
+                "start": 2225,
+                "end": 2254
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "_from",
+                      "start": 2320,
+                      "end": 2325
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "remainder",
+                      "start": 2327,
+                      "end": 2336
+                    }
+                  ],
+                  "start": 2263,
+                  "end": 2337,
+                  "callee": {
+                    "type": "MemberExpression",
+                    "property": {
+                      "type": "Identifier",
+                      "name": "registerDonation",
+                      "start": 2303,
+                      "end": 2319
+                    },
+                    "computed": false,
+                    "start": 2263,
+                    "end": 2319,
+                    "object": {
+                      "type": "CallExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "ImpactRegistry",
+                        "start": 2263,
+                        "end": 2277
+                      },
+                      "arguments": [
+                        {
+                          "type": "Identifier",
+                          "name": "IMPACT_REGISTRY_ADDRESS",
+                          "start": 2278,
+                          "end": 2301
+                        }
+                      ],
+                      "start": 2263,
+                      "end": 2302
+                    }
+                  }
+                },
+                "start": 2263,
+                "end": 2338
+              },
+              {
+                "type": "EmitStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "DonationEvent",
+                    "start": 2353,
+                    "end": 2366
+                  },
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "_from",
+                      "start": 2367,
+                      "end": 2372
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_amount",
+                      "start": 2374,
+                      "end": 2381
+                    }
+                  ],
+                  "start": 2353,
+                  "end": 2382
+                },
+                "start": 2348,
+                "end": 2383
+              }
+            ],
+            "start": 2035,
+            "end": 2389
+          },
+          "is_abstract": false,
+          "start": 1971,
+          "end": 2389
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "donateFromWallet",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 2421,
+                "end": 2425
+              },
+              "id": "_amount",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 2421,
+              "end": 2433
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 2435,
+              "end": 2441
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "arguments": [
+                    {
+                      "type": "MemberExpression",
+                      "object": {
+                        "type": "Identifier",
+                        "name": "msg",
+                        "start": 2476,
+                        "end": 2479
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "sender",
+                        "start": 2480,
+                        "end": 2486
+                      },
+                      "computed": false,
+                      "start": 2476,
+                      "end": 2486
+                    },
+                    {
+                      "type": "CallExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "address",
+                        "start": 2488,
+                        "end": 2495
+                      },
+                      "arguments": [
+                        {
+                          "type": "ThisExpression",
+                          "start": 2496,
+                          "end": 2500
+                        }
+                      ],
+                      "start": 2488,
+                      "end": 2501
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_amount",
+                      "start": 2503,
+                      "end": 2510
+                    }
+                  ],
+                  "start": 2452,
+                  "end": 2511,
+                  "callee": {
+                    "type": "MemberExpression",
+                    "property": {
+                      "type": "Identifier",
+                      "name": "transferFrom",
+                      "start": 2463,
+                      "end": 2475
+                    },
+                    "computed": false,
+                    "start": 2452,
+                    "end": 2475,
+                    "object": {
+                      "type": "CallExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "getToken",
+                        "start": 2452,
+                        "end": 2460
+                      },
+                      "arguments": [],
+                      "start": 2452,
+                      "end": 2462
+                    }
+                  }
+                },
+                "start": 2452,
+                "end": 2512
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "registerDonation",
+                    "start": 2521,
+                    "end": 2537
+                  },
+                  "arguments": [
+                    {
+                      "type": "MemberExpression",
+                      "object": {
+                        "type": "Identifier",
+                        "name": "msg",
+                        "start": 2538,
+                        "end": 2541
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "sender",
+                        "start": 2542,
+                        "end": 2548
+                      },
+                      "computed": false,
+                      "start": 2538,
+                      "end": 2548
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_amount",
+                      "start": 2550,
+                      "end": 2557
+                    }
+                  ],
+                  "start": 2521,
+                  "end": 2558
+                },
+                "start": 2521,
+                "end": 2559
+              }
+            ],
+            "start": 2442,
+            "end": 2565
+          },
+          "is_abstract": false,
+          "start": 2395,
+          "end": 2565
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "fund",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 2585,
+                "end": 2589
+              },
+              "id": "_value",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 2585,
+              "end": 2596
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 2598,
+              "end": 2604
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 2605,
+              "end": 2614
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "total",
+                    "start": 2625,
+                    "end": 2630
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "MemberExpression",
+                      "object": {
+                        "type": "Identifier",
+                        "name": "total",
+                        "start": 2633,
+                        "end": 2638
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "add",
+                        "start": 2639,
+                        "end": 2642
+                      },
+                      "computed": false,
+                      "start": 2633,
+                      "end": 2642
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "_value",
+                        "start": 2643,
+                        "end": 2649
+                      }
+                    ],
+                    "start": 2633,
+                    "end": 2650
+                  },
+                  "start": 2625,
+                  "end": 2650
+                },
+                "start": 2625,
+                "end": 2651
+              }
+            ],
+            "start": 2615,
+            "end": 2657
+          },
+          "is_abstract": false,
+          "start": 2571,
+          "end": 2657
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "validateOutcome",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "string",
+                "members": [],
+                "array_parts": [],
+                "start": 2688,
+                "end": 2694
+              },
+              "id": "_name",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 2688,
+              "end": 2700
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 2702,
+                "end": 2706
+              },
+              "id": "_value",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 2702,
+              "end": 2713
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 2715,
+              "end": 2721
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "require",
+                    "start": 2732,
+                    "end": 2739
                   },
                   "arguments": [
                     {
@@ -411,181 +1600,34 @@
                         "object": {
                           "type": "Identifier",
                           "name": "msg",
-                          "start": 956,
-                          "end": 959
+                          "start": 2741,
+                          "end": 2744
                         },
                         "property": {
                           "type": "Identifier",
                           "name": "sender",
-                          "start": 960,
-                          "end": 966
+                          "start": 2745,
+                          "end": 2751
                         },
                         "computed": false,
-                        "start": 956,
-                        "end": 966
+                        "start": 2741,
+                        "end": 2751
                       },
                       "right": {
                         "type": "Identifier",
-                        "name": "chairperson",
-                        "start": 970,
-                        "end": 981
+                        "name": "validatorAddress",
+                        "start": 2755,
+                        "end": 2771
                       },
-                      "start": 956,
-                      "end": 981
+                      "start": 2741,
+                      "end": 2771
                     }
                   ],
-                  "start": 948,
-                  "end": 982
+                  "start": 2732,
+                  "end": 2772
                 },
-                "start": 948,
-                "end": 983
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "Identifier",
-                  "name": "_",
-                  "start": 986,
-                  "end": 987
-                },
-                "start": 986,
-                "end": 988
-              }
-            ],
-            "start": 944,
-            "end": 991
-          },
-          "start": 927,
-          "end": 991
-        },
-        {
-          "type": "FunctionDeclaration",
-          "name": "bye",
-          "params": null,
-          "modifiers": [
-            {
-              "type": "ModifierArgument",
-              "name": "public",
-              "params": [],
-              "start": 1009,
-              "end": 1015
-            }
-          ],
-          "returnParams": null,
-          "body": {
-            "type": "BlockStatement",
-            "body": [
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "MemberExpression",
-                      "object": {
-                        "type": "ThisExpression",
-                        "start": 1019,
-                        "end": 1023
-                      },
-                      "property": {
-                        "type": "Identifier",
-                        "name": "hello",
-                        "start": 1024,
-                        "end": 1029
-                      },
-                      "computed": false,
-                      "start": 1019,
-                      "end": 1033
-                    },
-                    "property": {
-                      "type": "Identifier",
-                      "name": "gas",
-                      "start": 1030,
-                      "end": 1033
-                    },
-                    "computed": false,
-                    "start": 1019,
-                    "end": 1033
-                  },
-                  "arguments": [
-                    {
-                      "type": "Literal",
-                      "value": 1000,
-                      "start": 1034,
-                      "end": 1038
-                    }
-                  ],
-                  "start": 1019,
-                  "end": 1039
-                },
-                "start": 1019,
-                "end": 1040
-              },
-              {
-                "type": "EmitStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "Identifier",
-                    "name": "howareyou",
-                    "start": 1048,
-                    "end": 1057
-                  },
-                  "arguments": [
-                    {
-                      "type": "Identifier",
-                      "name": "chairperson",
-                      "start": 1058,
-                      "end": 1069
-                    }
-                  ],
-                  "start": 1048,
-                  "end": 1070
-                },
-                "start": 1043,
-                "end": 1071
-              }
-            ],
-            "start": 1015,
-            "end": 1074
-          },
-          "is_abstract": false,
-          "start": 994,
-          "end": 1074
-        },
-        {
-          "type": "FunctionDeclaration",
-          "name": "errorhandled",
-          "params": null,
-          "modifiers": null,
-          "returnParams": null,
-          "body": {
-            "type": "BlockStatement",
-            "body": [
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "Identifier",
-                    "name": "assert",
-                    "start": 1105,
-                    "end": 1111
-                  },
-                  "arguments": [
-                    {
-                      "type": "Literal",
-                      "value": true,
-                      "start": 1112,
-                      "end": 1116
-                    }
-                  ],
-                  "start": 1105,
-                  "end": 1117
-                },
-                "start": 1105,
-                "end": 1118
+                "start": 2732,
+                "end": 2773
               },
               {
                 "type": "ExpressionStatement",
@@ -594,89 +1636,227 @@
                   "callee": {
                     "type": "Identifier",
                     "name": "require",
-                    "start": 1121,
-                    "end": 1128
+                    "start": 2782,
+                    "end": 2789
                   },
                   "arguments": [
                     {
-                      "type": "Literal",
-                      "value": false,
-                      "start": 1129,
-                      "end": 1134
+                      "type": "BinaryExpression",
+                      "operator": "<=",
+                      "left": {
+                        "type": "Identifier",
+                        "name": "_value",
+                        "start": 2791,
+                        "end": 2797
+                      },
+                      "right": {
+                        "type": "Identifier",
+                        "name": "total",
+                        "start": 2801,
+                        "end": 2806
+                      },
+                      "start": 2791,
+                      "end": 2806
                     }
                   ],
-                  "start": 1121,
-                  "end": 1135
+                  "start": 2782,
+                  "end": 2807
                 },
-                "start": 1121,
-                "end": 1136
+                "start": 2782,
+                "end": 2808
               },
               {
                 "type": "ExpressionStatement",
                 "expression": {
                   "type": "CallExpression",
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "beneficiaryAddress",
+                      "start": 2838,
+                      "end": 2856
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_value",
+                      "start": 2858,
+                      "end": 2864
+                    }
+                  ],
+                  "start": 2818,
+                  "end": 2865,
+                  "callee": {
+                    "type": "MemberExpression",
+                    "property": {
+                      "type": "Identifier",
+                      "name": "transfer",
+                      "start": 2829,
+                      "end": 2837
+                    },
+                    "computed": false,
+                    "start": 2818,
+                    "end": 2837,
+                    "object": {
+                      "type": "CallExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "getToken",
+                        "start": 2818,
+                        "end": 2826
+                      },
+                      "arguments": [],
+                      "start": 2818,
+                      "end": 2828
+                    }
+                  }
+                },
+                "start": 2818,
+                "end": 2866
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "total",
+                    "start": 2875,
+                    "end": 2880
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "MemberExpression",
+                      "object": {
+                        "type": "Identifier",
+                        "name": "total",
+                        "start": 2883,
+                        "end": 2888
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "sub",
+                        "start": 2889,
+                        "end": 2892
+                      },
+                      "computed": false,
+                      "start": 2883,
+                      "end": 2892
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "_value",
+                        "start": 2893,
+                        "end": 2899
+                      }
+                    ],
+                    "start": 2883,
+                    "end": 2900
+                  },
+                  "start": 2875,
+                  "end": 2900
+                },
+                "start": 2875,
+                "end": 2901
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "_name",
+                      "start": 2967,
+                      "end": 2972
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_value",
+                      "start": 2974,
+                      "end": 2980
+                    }
+                  ],
+                  "start": 2911,
+                  "end": 2981,
+                  "callee": {
+                    "type": "MemberExpression",
+                    "property": {
+                      "type": "Identifier",
+                      "name": "registerOutcome",
+                      "start": 2951,
+                      "end": 2966
+                    },
+                    "computed": false,
+                    "start": 2911,
+                    "end": 2966,
+                    "object": {
+                      "type": "CallExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "ImpactRegistry",
+                        "start": 2911,
+                        "end": 2925
+                      },
+                      "arguments": [
+                        {
+                          "type": "Identifier",
+                          "name": "IMPACT_REGISTRY_ADDRESS",
+                          "start": 2926,
+                          "end": 2949
+                        }
+                      ],
+                      "start": 2911,
+                      "end": 2950
+                    }
+                  }
+                },
+                "start": 2911,
+                "end": 2982
+              },
+              {
+                "type": "EmitStatement",
+                "expression": {
+                  "type": "CallExpression",
                   "callee": {
                     "type": "Identifier",
-                    "name": "revert",
-                    "start": 1139,
-                    "end": 1145
+                    "name": "OutcomeEvent",
+                    "start": 2997,
+                    "end": 3009
                   },
                   "arguments": [
                     {
-                      "type": "Literal",
-                      "value": "this is a revert",
-                      "start": 1146,
-                      "end": 1164
+                      "type": "Identifier",
+                      "name": "_name",
+                      "start": 3010,
+                      "end": 3015
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_value",
+                      "start": 3017,
+                      "end": 3023
                     }
                   ],
-                  "start": 1139,
-                  "end": 1165
+                  "start": 2997,
+                  "end": 3024
                 },
-                "start": 1139,
-                "end": 1166
+                "start": 2992,
+                "end": 3025
               }
             ],
-            "start": 1101,
-            "end": 1169
+            "start": 2722,
+            "end": 3031
           },
           "is_abstract": false,
-          "start": 1077,
-          "end": 1169
+          "start": 2663,
+          "end": 3031
         },
         {
           "type": "FunctionDeclaration",
-          "name": "who",
-          "params": null,
-          "modifiers": [
-            {
-              "type": "ModifierArgument",
-              "name": "public",
-              "params": [],
-              "start": 1187,
-              "end": 1193
-            },
-            {
-              "type": "ModifierArgument",
-              "name": "payable",
-              "params": [],
-              "start": 1194,
-              "end": 1201
-            }
-          ],
-          "returnParams": null,
-          "body": {
-            "type": "BlockStatement",
-            "body": [],
-            "start": 1202,
-            "end": 1207
-          },
-          "is_abstract": false,
-          "start": 1172,
-          "end": 1207
-        },
-        {
-          "type": "EventDeclaration",
-          "name": "howareyou",
+          "name": "payBack",
           "params": [
             {
               "type": "InformalParameter",
@@ -685,261 +1865,302 @@
                 "literal": "address",
                 "members": [],
                 "array_parts": [],
-                "start": 1226,
-                "end": 1233
+                "start": 3054,
+                "end": 3061
               },
-              "id": "who",
+              "id": "account",
               "is_indexed": false,
               "is_constant": false,
               "storage_location": null,
-              "start": 1226,
-              "end": 1237
+              "start": 3054,
+              "end": 3069
             }
           ],
-          "is_anonymous": false,
-          "start": 1210,
-          "end": 1239
-        }
-      ],
-      "start": 61,
-      "end": 1241
-    },
-    {
-      "type": "ContractStatement",
-      "name": "NotBallot",
-      "is": [],
-      "body": [],
-      "start": 1243,
-      "end": 1266
-    },
-    {
-      "type": "ContractStatement",
-      "name": "something",
-      "is": [
-        {
-          "type": "ModifierName",
-          "name": "NotBallot",
-          "params": [],
-          "start": 1290,
-          "end": 1299
-        },
-        {
-          "type": "ModifierName",
-          "name": "Ballot",
-          "params": [],
-          "start": 1301,
-          "end": 1308
-        }
-      ],
-      "body": [
-        {
-          "type": "StateVariableDeclaration",
-          "name": "rand_addr",
-          "literal": {
-            "type": "Type",
-            "literal": "address",
-            "members": [],
-            "array_parts": [],
-            "start": 1311,
-            "end": 1318
-          },
-          "visibility": null,
-          "is_constant": false,
-          "value": {
-            "type": "Literal",
-            "value": "0x123",
-            "start": 1331,
-            "end": 1336
-          },
-          "start": 1311,
-          "end": 1337
-        },
-        {
-          "type": "FunctionDeclaration",
-          "name": "kill",
-          "params": null,
-          "modifiers": null,
-          "returnParams": null,
-          "body": {
-            "type": "BlockStatement",
-            "body": [
-              {
-                "type": "IfStatement",
-                "test": {
-                  "type": "BinaryExpression",
-                  "operator": "==",
-                  "left": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "Identifier",
-                      "name": "msg",
-                      "start": 1364,
-                      "end": 1367
-                    },
-                    "property": {
-                      "type": "Identifier",
-                      "name": "sender",
-                      "start": 1368,
-                      "end": 1374
-                    },
-                    "computed": false,
-                    "start": 1364,
-                    "end": 1374
-                  },
-                  "right": {
-                    "type": "Identifier",
-                    "name": "NotBallot",
-                    "start": 1378,
-                    "end": 1387
-                  },
-                  "start": 1364,
-                  "end": 1387
-                },
-                "consequent": {
-                  "type": "ExpressionStatement",
-                  "expression": {
-                    "type": "CallExpression",
-                    "callee": {
-                      "type": "Identifier",
-                      "name": "selfdestruct",
-                      "start": 1389,
-                      "end": 1401
-                    },
-                    "arguments": [
-                      {
-                        "type": "Identifier",
-                        "name": "NotBallot",
-                        "start": 1402,
-                        "end": 1411
-                      }
-                    ],
-                    "start": 1389,
-                    "end": 1412
-                  },
-                  "start": 1389,
-                  "end": 1413
-                },
-                "alternate": null,
-                "start": 1360,
-                "end": 1413
-              }
-            ],
-            "start": 1356,
-            "end": 1416
-          },
-          "is_abstract": false,
-          "start": 1340,
-          "end": 1416
-        },
-        {
-          "type": "FunctionDeclaration",
-          "name": "random",
-          "params": null,
-          "modifiers": null,
-          "returnParams": null,
-          "body": {
-            "type": "BlockStatement",
-            "body": [
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "Identifier",
-                      "name": "rand_addr",
-                      "start": 1441,
-                      "end": 1450
-                    },
-                    "property": {
-                      "type": "Identifier",
-                      "name": "send",
-                      "start": 1451,
-                      "end": 1455
-                    },
-                    "computed": false,
-                    "start": 1441,
-                    "end": 1455
-                  },
-                  "arguments": [
-                    {
-                      "type": "Literal",
-                      "value": 1,
-                      "start": 1456,
-                      "end": 1457
-                    }
-                  ],
-                  "start": 1441,
-                  "end": 1458
-                },
-                "start": 1441,
-                "end": 1459
-              },
-              {
-                "type": "ExpressionStatement",
-                "expression": {
-                  "type": "CallExpression",
-                  "callee": {
-                    "type": "MemberExpression",
-                    "object": {
-                      "type": "Identifier",
-                      "name": "rand_addr",
-                      "start": 1462,
-                      "end": 1471
-                    },
-                    "property": {
-                      "type": "Identifier",
-                      "name": "transfer",
-                      "start": 1472,
-                      "end": 1480
-                    },
-                    "computed": false,
-                    "start": 1462,
-                    "end": 1480
-                  },
-                  "arguments": [
-                    {
-                      "type": "Literal",
-                      "value": 1,
-                      "start": 1481,
-                      "end": 1482
-                    }
-                  ],
-                  "start": 1462,
-                  "end": 1483
-                },
-                "start": 1462,
-                "end": 1484
-              }
-            ],
-            "start": 1437,
-            "end": 1487
-          },
-          "is_abstract": false,
-          "start": 1419,
-          "end": 1487
-        }
-      ],
-      "start": 1268,
-      "end": 1489
-    },
-    {
-      "type": "LibraryStatement",
-      "name": "thisisalibrary",
-      "is": [],
-      "body": [
-        {
-          "type": "FunctionDeclaration",
-          "name": "what",
-          "params": null,
           "modifiers": [
             {
               "type": "ModifierArgument",
               "name": "public",
               "params": [],
-              "start": 1533,
-              "end": 1539
+              "start": 3071,
+              "end": 3077
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 3078,
+              "end": 3087
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "DeclarativeExpression",
+                    "name": "balance",
+                    "literal": {
+                      "type": "Type",
+                      "literal": "uint",
+                      "members": [],
+                      "array_parts": [],
+                      "start": 3098,
+                      "end": 3102
+                    },
+                    "storage_location": null,
+                    "start": 3098,
+                    "end": 3110
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "Identifier",
+                      "name": "getBalance",
+                      "start": 3113,
+                      "end": 3123
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "account",
+                        "start": 3124,
+                        "end": 3131
+                      }
+                    ],
+                    "start": 3113,
+                    "end": 3132
+                  },
+                  "start": 3098,
+                  "end": 3132
+                },
+                "start": 3098,
+                "end": 3133
+              },
+              {
+                "type": "IfStatement",
+                "test": {
+                  "type": "BinaryExpression",
+                  "operator": ">",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "balance",
+                    "start": 3146,
+                    "end": 3153
+                  },
+                  "right": {
+                    "type": "Literal",
+                    "value": 0,
+                    "start": 3156,
+                    "end": 3157
+                  },
+                  "start": 3146,
+                  "end": 3157
+                },
+                "consequent": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "name": "account",
+                            "start": 3193,
+                            "end": 3200
+                          },
+                          {
+                            "type": "Identifier",
+                            "name": "balance",
+                            "start": 3202,
+                            "end": 3209
+                          }
+                        ],
+                        "start": 3173,
+                        "end": 3210,
+                        "callee": {
+                          "type": "MemberExpression",
+                          "property": {
+                            "type": "Identifier",
+                            "name": "transfer",
+                            "start": 3184,
+                            "end": 3192
+                          },
+                          "computed": false,
+                          "start": 3173,
+                          "end": 3192,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "Identifier",
+                              "name": "getToken",
+                              "start": 3173,
+                              "end": 3181
+                            },
+                            "arguments": [],
+                            "start": 3173,
+                            "end": 3183
+                          }
+                        }
+                      },
+                      "start": 3173,
+                      "end": 3211
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "Identifier",
+                          "name": "total",
+                          "start": 3224,
+                          "end": 3229
+                        },
+                        "right": {
+                          "type": "CallExpression",
+                          "callee": {
+                            "type": "MemberExpression",
+                            "object": {
+                              "type": "Identifier",
+                              "name": "total",
+                              "start": 3232,
+                              "end": 3237
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "sub",
+                              "start": 3238,
+                              "end": 3241
+                            },
+                            "computed": false,
+                            "start": 3232,
+                            "end": 3241
+                          },
+                          "arguments": [
+                            {
+                              "type": "Identifier",
+                              "name": "balance",
+                              "start": 3242,
+                              "end": 3249
+                            }
+                          ],
+                          "start": 3232,
+                          "end": 3250
+                        },
+                        "start": 3224,
+                        "end": 3250
+                      },
+                      "start": 3224,
+                      "end": 3251
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "name": "account",
+                            "start": 3312,
+                            "end": 3319
+                          }
+                        ],
+                        "start": 3264,
+                        "end": 3320,
+                        "callee": {
+                          "type": "MemberExpression",
+                          "property": {
+                            "type": "Identifier",
+                            "name": "payBack",
+                            "start": 3304,
+                            "end": 3311
+                          },
+                          "computed": false,
+                          "start": 3264,
+                          "end": 3311,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "Identifier",
+                              "name": "ImpactRegistry",
+                              "start": 3264,
+                              "end": 3278
+                            },
+                            "arguments": [
+                              {
+                                "type": "Identifier",
+                                "name": "IMPACT_REGISTRY_ADDRESS",
+                                "start": 3279,
+                                "end": 3302
+                              }
+                            ],
+                            "start": 3264,
+                            "end": 3303
+                          }
+                        }
+                      },
+                      "start": 3264,
+                      "end": 3321
+                    }
+                  ],
+                  "start": 3159,
+                  "end": 3331
+                },
+                "alternate": null,
+                "start": 3142,
+                "end": 3331
+              }
+            ],
+            "start": 3088,
+            "end": 3337
+          },
+          "is_abstract": false,
+          "start": 3037,
+          "end": 3337
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "getBalance",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 3363,
+                "end": 3370
+              },
+              "id": "donor",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 3363,
+              "end": 3376
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 3378,
+              "end": 3384
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "view",
+              "params": [],
+              "start": 3385,
+              "end": 3389
             }
           ],
           "returnParams": {
@@ -949,22 +2170,22 @@
                 "type": "InformalParameter",
                 "literal": {
                   "type": "Type",
-                  "literal": "bool",
+                  "literal": "uint",
                   "members": [],
                   "array_parts": [],
-                  "start": 1549,
-                  "end": 1553
+                  "start": 3398,
+                  "end": 3402
                 },
                 "id": null,
                 "is_indexed": false,
                 "is_constant": false,
                 "storage_location": null,
-                "start": 1549,
-                "end": 1553
+                "start": 3398,
+                "end": 3402
               }
             ],
-            "start": 1540,
-            "end": 1554
+            "start": 3390,
+            "end": 3403
           },
           "body": {
             "type": "BlockStatement",
@@ -972,27 +2193,723 @@
               {
                 "type": "ReturnStatement",
                 "argument": {
-                  "type": "Literal",
-                  "value": true,
-                  "start": 1566,
-                  "end": 1570
+                  "type": "CallExpression",
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "donor",
+                      "start": 3472,
+                      "end": 3477
+                    }
+                  ],
+                  "start": 3421,
+                  "end": 3478,
+                  "callee": {
+                    "type": "MemberExpression",
+                    "property": {
+                      "type": "Identifier",
+                      "name": "getBalance",
+                      "start": 3461,
+                      "end": 3471
+                    },
+                    "computed": false,
+                    "start": 3421,
+                    "end": 3471,
+                    "object": {
+                      "type": "CallExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "ImpactRegistry",
+                        "start": 3421,
+                        "end": 3435
+                      },
+                      "arguments": [
+                        {
+                          "type": "Identifier",
+                          "name": "IMPACT_REGISTRY_ADDRESS",
+                          "start": 3436,
+                          "end": 3459
+                        }
+                      ],
+                      "start": 3421,
+                      "end": 3460
+                    }
+                  }
                 },
-                "start": 1559,
-                "end": 1571
+                "start": 3414,
+                "end": 3479
               }
             ],
-            "start": 1555,
-            "end": 1574
+            "start": 3404,
+            "end": 3485
           },
           "is_abstract": false,
-          "start": 1517,
-          "end": 1574
+          "start": 3343,
+          "end": 3485
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "escape",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 3590,
+                "end": 3597
+              },
+              "id": "escapeAddress",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 3590,
+              "end": 3611
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 3613,
+              "end": 3619
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 3620,
+              "end": 3629
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "escapeAddress",
+                      "start": 3660,
+                      "end": 3673
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "total",
+                      "start": 3675,
+                      "end": 3680
+                    }
+                  ],
+                  "start": 3640,
+                  "end": 3681,
+                  "callee": {
+                    "type": "MemberExpression",
+                    "property": {
+                      "type": "Identifier",
+                      "name": "transfer",
+                      "start": 3651,
+                      "end": 3659
+                    },
+                    "computed": false,
+                    "start": 3640,
+                    "end": 3659,
+                    "object": {
+                      "type": "CallExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "getToken",
+                        "start": 3640,
+                        "end": 3648
+                      },
+                      "arguments": [],
+                      "start": 3640,
+                      "end": 3650
+                    }
+                  }
+                },
+                "start": 3640,
+                "end": 3682
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "total",
+                    "start": 3691,
+                    "end": 3696
+                  },
+                  "right": {
+                    "type": "Literal",
+                    "value": 0,
+                    "start": 3699,
+                    "end": 3700
+                  },
+                  "start": 3691,
+                  "end": 3700
+                },
+                "start": 3691,
+                "end": 3701
+              }
+            ],
+            "start": 3630,
+            "end": 3707
+          },
+          "is_abstract": false,
+          "start": 3574,
+          "end": 3707
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "reclaimAlternativeTokens",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "ERC20",
+                "members": [],
+                "array_parts": [],
+                "start": 3951,
+                "end": 3956
+              },
+              "id": "_alternativeToken",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 3951,
+              "end": 3974
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "address",
+                "members": [],
+                "array_parts": [],
+                "start": 3976,
+                "end": 3983
+              },
+              "id": "_targetAddress",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 3976,
+              "end": 3998
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint256",
+                "members": [],
+                "array_parts": [],
+                "start": 4000,
+                "end": 4007
+              },
+              "id": "_value",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 4000,
+              "end": 4014
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 4016,
+              "end": 4022
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 4023,
+              "end": 4032
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "require",
+                    "start": 4043,
+                    "end": 4050
+                  },
+                  "arguments": [
+                    {
+                      "type": "BinaryExpression",
+                      "operator": "!=",
+                      "left": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "address",
+                          "start": 4051,
+                          "end": 4058
+                        },
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "name": "_alternativeToken",
+                            "start": 4059,
+                            "end": 4076
+                          }
+                        ],
+                        "start": 4051,
+                        "end": 4077
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "value": "0x0",
+                        "start": 4081,
+                        "end": 4084
+                      },
+                      "start": 4051,
+                      "end": 4084
+                    },
+                    {
+                      "type": "Literal",
+                      "value": "Undefined ERC20 tokens",
+                      "start": 4086,
+                      "end": 4110
+                    }
+                  ],
+                  "start": 4043,
+                  "end": 4111
+                },
+                "start": 4043,
+                "end": 4112
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "require",
+                    "start": 4121,
+                    "end": 4128
+                  },
+                  "arguments": [
+                    {
+                      "type": "BinaryExpression",
+                      "operator": ">=",
+                      "left": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "object": {
+                            "type": "Identifier",
+                            "name": "_alternativeToken",
+                            "start": 4129,
+                            "end": 4146
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "balanceOf",
+                            "start": 4147,
+                            "end": 4156
+                          },
+                          "computed": false,
+                          "start": 4129,
+                          "end": 4156
+                        },
+                        "arguments": [
+                          {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "Identifier",
+                              "name": "address",
+                              "start": 4157,
+                              "end": 4164
+                            },
+                            "arguments": [
+                              {
+                                "type": "ThisExpression",
+                                "start": 4165,
+                                "end": 4169
+                              }
+                            ],
+                            "start": 4157,
+                            "end": 4170
+                          }
+                        ],
+                        "start": 4129,
+                        "end": 4171
+                      },
+                      "right": {
+                        "type": "Identifier",
+                        "name": "_value",
+                        "start": 4175,
+                        "end": 4181
+                      },
+                      "start": 4129,
+                      "end": 4181
+                    },
+                    {
+                      "type": "Literal",
+                      "value": "Insufficient funds deposited on the contract",
+                      "start": 4183,
+                      "end": 4229
+                    }
+                  ],
+                  "start": 4121,
+                  "end": 4230
+                },
+                "start": 4121,
+                "end": 4231
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "Identifier",
+                      "name": "_alternativeToken",
+                      "start": 4240,
+                      "end": 4257
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "transfer",
+                      "start": 4258,
+                      "end": 4266
+                    },
+                    "computed": false,
+                    "start": 4240,
+                    "end": 4266
+                  },
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "_targetAddress",
+                      "start": 4267,
+                      "end": 4281
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_value",
+                      "start": 4283,
+                      "end": 4289
+                    }
+                  ],
+                  "start": 4240,
+                  "end": 4290
+                },
+                "start": 4240,
+                "end": 4291
+              }
+            ],
+            "start": 4033,
+            "end": 4297
+          },
+          "is_abstract": false,
+          "start": 3917,
+          "end": 4297
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "getToken",
+          "params": null,
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 4323,
+              "end": 4329
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "view",
+              "params": [],
+              "start": 4330,
+              "end": 4334
+            }
+          ],
+          "returnParams": {
+            "type": "ReturnParams",
+            "params": [
+              {
+                "type": "InformalParameter",
+                "literal": {
+                  "type": "Type",
+                  "literal": "ERC20",
+                  "members": [],
+                  "array_parts": [],
+                  "start": 4343,
+                  "end": 4348
+                },
+                "id": null,
+                "is_indexed": false,
+                "is_constant": false,
+                "storage_location": null,
+                "start": 4343,
+                "end": 4348
+              }
+            ],
+            "start": 4335,
+            "end": 4349
+          },
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ReturnStatement",
+                "argument": {
+                  "type": "Identifier",
+                  "name": "token",
+                  "start": 4367,
+                  "end": 4372
+                },
+                "start": 4360,
+                "end": 4373
+              }
+            ],
+            "start": 4350,
+            "end": 4379
+          },
+          "is_abstract": false,
+          "start": 4303,
+          "end": 4379
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "calculateUpfrontSplit",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint256",
+                "members": [],
+                "array_parts": [],
+                "start": 4416,
+                "end": 4423
+              },
+              "id": "_amount",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 4416,
+              "end": 4431
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "private",
+              "params": [],
+              "start": 4433,
+              "end": 4440
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "view",
+              "params": [],
+              "start": 4441,
+              "end": 4445
+            }
+          ],
+          "returnParams": {
+            "type": "ReturnParams",
+            "params": [
+              {
+                "type": "InformalParameter",
+                "literal": {
+                  "type": "Type",
+                  "literal": "uint256",
+                  "members": [],
+                  "array_parts": [],
+                  "start": 4454,
+                  "end": 4461
+                },
+                "id": "upfront",
+                "is_indexed": false,
+                "is_constant": false,
+                "storage_location": null,
+                "start": 4454,
+                "end": 4469
+              },
+              {
+                "type": "InformalParameter",
+                "literal": {
+                  "type": "Type",
+                  "literal": "uint256",
+                  "members": [],
+                  "array_parts": [],
+                  "start": 4471,
+                  "end": 4478
+                },
+                "id": "remainder",
+                "is_indexed": false,
+                "is_constant": false,
+                "storage_location": null,
+                "start": 4471,
+                "end": 4488
+              }
+            ],
+            "start": 4446,
+            "end": 4489
+          },
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "upfront",
+                    "start": 4500,
+                    "end": 4507
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "arguments": [
+                      {
+                        "type": "Literal",
+                        "value": 100,
+                        "start": 4552,
+                        "end": 4555
+                      }
+                    ],
+                    "start": 4510,
+                    "end": 4556,
+                    "callee": {
+                      "type": "MemberExpression",
+                      "property": {
+                        "type": "Identifier",
+                        "name": "div",
+                        "start": 4548,
+                        "end": 4551
+                      },
+                      "computed": false,
+                      "start": 4510,
+                      "end": 4551,
+                      "object": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "object": {
+                            "type": "Identifier",
+                            "name": "_amount",
+                            "start": 4510,
+                            "end": 4517
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "mul",
+                            "start": 4518,
+                            "end": 4521
+                          },
+                          "computed": false,
+                          "start": 4510,
+                          "end": 4521
+                        },
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "name": "upfrontPaymentPercentage",
+                            "start": 4522,
+                            "end": 4546
+                          }
+                        ],
+                        "start": 4510,
+                        "end": 4547
+                      }
+                    }
+                  },
+                  "start": 4500,
+                  "end": 4556
+                },
+                "start": 4500,
+                "end": 4557
+              },
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "AssignmentExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "remainder",
+                    "start": 4566,
+                    "end": 4575
+                  },
+                  "right": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "MemberExpression",
+                      "object": {
+                        "type": "Identifier",
+                        "name": "_amount",
+                        "start": 4578,
+                        "end": 4585
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "sub",
+                        "start": 4586,
+                        "end": 4589
+                      },
+                      "computed": false,
+                      "start": 4578,
+                      "end": 4589
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "name": "upfront",
+                        "start": 4590,
+                        "end": 4597
+                      }
+                    ],
+                    "start": 4578,
+                    "end": 4598
+                  },
+                  "start": 4566,
+                  "end": 4598
+                },
+                "start": 4566,
+                "end": 4599
+              }
+            ],
+            "start": 4490,
+            "end": 4605
+          },
+          "is_abstract": false,
+          "start": 4385,
+          "end": 4605
         }
       ],
-      "start": 1491,
-      "end": 1576
+      "start": 288,
+      "end": 4607
     }
   ],
   "start": 0,
-  "end": 1576
+  "end": 4607
 }

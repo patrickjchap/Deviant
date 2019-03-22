@@ -1,0 +1,23 @@
+AliceTokenEventDelMut1.sol	 live 
+AliceTokenEventDelMut2.sol	 live 
+AliceTokenFunctionVisMut1.sol	 killed 
+AliceTokenFunctionVisMut2.sol	 killed 
+AliceTokenFunctionVisMut3.sol	 live 
+AliceTokenFunctionVisMut4.sol	 live 
+AliceTokenFunctionVisMut5.sol	 live 
+AliceTokenFunctionVisMut6.sol	 live 
+AliceTokenModifierAddMut3.sol	 live 
+AliceTokenModifierDelMut1.sol	 live 
+AliceTokenModifierDelMut2.sol	 live 
+AliceTokenStateVarMut1.sol	 live 
+AliceTokenStateVarMut2.sol	 live 
+AliceTokenStateVarMut3.sol	 live 
+AliceTokenStateVarMut4.sol	 live 
+AliceTokenStateVarMut5.sol	 live 
+AliceTokenStateVarMut6.sol	 live 
+AliceTokenStateVarMut7.sol	 live 
+AliceTokenStateVarMut8.sol	 live 
+Live: 17
+Killed: 2
+Total: 19
+Mutation Score: 0.10526315789473684
