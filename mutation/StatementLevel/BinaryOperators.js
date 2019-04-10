@@ -6,23 +6,23 @@ var parser = require('solparse');
 var amp = "&";
 var pipe = "|";
 var operators = {
-            "+": '-',
-            "-": '+',
-            "*": '/',
-            "/": '*',
-            "%": '*',
-            "<": ['<=', '>='],
-            "<=": ['<', '>'],
-            ">": ['>=', '<='],
-            ">=": ['>', '<'],
-            "==": '!=',
-            "!=": '==',
+            "+": ['-', '*', '/', '%'],
+            "-": ['+', '*', '/', '%'],
+            "*": ['+','-','/','%'],
+            "/": ['+','-','*','%'],
+            "%": ['+','-','*','/'],
+            "<": ['>', '<=' , '>=', '==', '!='],
+            "<=": ['>', '<' , '>=', '==', '!='],
+            ">": ['<', '<=' , '>=', '==', '!='],
+            ">=": ['>', '<=', '<', '==', '!='],
+            "==": ['>', '<=' , '>=', '<', '!='],
+            "!=": ['>', '<=' , '>=', '==', '<'],
             "===": "!==",
             "!==": "===",
 	    '&&': '||',
 	    '||': '&&',
-	    '&': '|',
-	    '|': '&',
+	    '&': ['|', '^'],
+	    '|': ['&', '^'],
 	    "^": ['|', "&"],
 	    "<<": ">>",
 	    ">>": "<<"
@@ -80,39 +80,32 @@ exports.mutateBinaryOperator = function(file, filename){
 				var mutOperator;
 				mutOperatorList = operators[node.operator];
 				if(typeof mutOperatorList !== 'string'){
-					mutOperator = mutOperatorList[Math.floor(Math.random()*mutOperatorList.length)];
+					for (i = 0; i < mutOperatorList.length; i++) {
+						mutOperator = mutOperatorList[i];
+						tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
+
+						fs.writeFile("./sol_output/" + filename + "/"
+						+ path.basename(file).slice(0, -4) + "BinMut"
+						+ fileNum.toString() + ".sol", 
+						data.toString().replace(node.getSourceCode(),
+						tmpNode), 'ascii', function(err) {
+							if(err) throw err;
+						});
+						fileNum++
+					}
 				}else{
 					mutOperator = mutOperatorList;
+					tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
+
+					fs.writeFile("./sol_output/" + filename + "/"
+                        + path.basename(file).slice(0, -4) + "BinMut"
+                        + fileNum.toString() + ".sol",
+                        data.toString().replace(node.getSourceCode(),
+                        tmpNode), 'ascii', function(err) {
+                            if(err) throw err;
+                    });
+                    fileNum++
 				}
-				//if(node.operator != "&&"){
-				//if(node.operator == "<="){ 
-				//	console.log(node);
-				//	console.log("---------------------------------------");
-				//	console.log(node.parent);
-				//}
-				//
-				//node.transform(node.getSourceCode().replace(node.operator, mutOperator));
-				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
-
-				//node2 = node;
-				//while(typeof node2.parent !== "undefined"){
-				//	node2 = node2.parent;
-				//}
-
-				console.log(mutOperator);
-
-				fs.writeFile("./sol_output/" + filename + "/" 
-				+ path.basename(file).slice(0, -4) + "BinMut" 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
-					if(err) throw err;
-				});
-				fileNum++
-			
-					//console.log(node.operator)
-					//console.log(mutOperator);
-					//console.log(node.getSourceCode().replace(node.operator, mutOperator));
-
-				//}
 			}
 
 		});

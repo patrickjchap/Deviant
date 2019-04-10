@@ -39,7 +39,8 @@ exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, 
 			
 			
 		}catch(err){
-			console.log(err.stdout.toString());	
+			console.log(err);
+			if(err.hasOwnProperty('stdout')) console.log(err.stdout.toString());	
 			if(err.stdout.toString().includes('failing')){
 				killed++;
                 total_mutants++;

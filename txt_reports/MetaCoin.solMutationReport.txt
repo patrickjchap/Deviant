@@ -1,0 +1,13 @@
+MetaCoinEventDelMut1.sol	 live 
+MetaCoinFunctionTypeMut2.sol	 live 
+MetaCoinFunctionTypeMut4.sol	 live 
+MetaCoinFunctionVisMut4.sol	 killed 
+MetaCoinFunctionVisMut5.sol	 killed 
+MetaCoinFunctionVisMut6.sol	 live 
+MetaCoinFunctionVisMut7.sol	 killed 
+MetaCoinFunctionVisMut8.sol	 killed 
+MetaCoinFunctionVisMut9.sol	 live 
+Live: 5
+Killed: 4
+Total: 9
+Mutation Score: 0.4444444444444444

@@ -4,10 +4,10 @@ var path = require('path');
 var solparse = require('solparse');
 
 var operators = {
-            "++": '--',
-            "--": '++',
+            "++": ['--', ''],
+            "--": ['++', ''],
             "~": '',
-            "!": ',',
+            "!": '',
 			'+': '-',
 			'-': '+'
 };
@@ -45,21 +45,36 @@ exports.mutateUnaryOperator = function(file, filename){
 				var mutOperator;
 				mutOperatorList = operators[node.operator];
 				if(typeof mutOperatorList !== 'string'){
-					mutOperator = mutOperatorList[Math.floor(Math.random()*mutOperatorList.length)];
+					for(i = 0; i < mutOperatorList.length; i++) {
+						tmpNode = node.getSourceCode().replace(node.operator, mutOperatorList[i]);
+						
+
+						fs.writeFile("./sol_output/" +  filename + '/'
+						+ path.basename(file).slice(0, -4) + "UnaryMut"
+						+ fileNum.toString() + ".sol", data.toString().
+						replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
+							if(err) throw err;
+						});
+						fileNum++
+
+					}
 				}else{
 					mutOperator = mutOperatorList;
+				
+					tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
+
+
+					console.log(mutOperator);
+
+					fs.writeFile("./sol_output/" +  filename + '/'
+					+ path.basename(file).slice(0, -4) + "UnaryMut" 
+					+ fileNum.toString() + ".sol", data.toString().
+					replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
+						if(err) throw err;
+					});
+					fileNum++
+
 				}
-				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
-
-
-				console.log(mutOperator);
-
-				fs.writeFile("./sol_output/" +  filename + '/'
-				+ path.basename(file).slice(0, -4) + "UnaryMut" 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
-					if(err) throw err;
-				});
-				fileNum++
 			
 			}
 

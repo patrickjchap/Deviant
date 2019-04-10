@@ -1,0 +1,10 @@
+KernelConstantsStateVarMut1.sol	 live 
+KernelConstantsStateVarMut11.sol	 live 
+KernelConstantsStateVarMut3.sol	 live 
+KernelConstantsStateVarMut5.sol	 live 
+KernelConstantsStateVarMut7.sol	 live 
+KernelConstantsStateVarMut9.sol	 live 
+Live: 6
+Killed: 0
+Total: 6
+Mutation Score: 0

@@ -1,3 +1,35 @@
+AliceTokenAssignmentMut1.sol	 live 
+AliceTokenAssignmentMut10.sol	 live 
+AliceTokenAssignmentMut11.sol	 killed 
+AliceTokenAssignmentMut12.sol	 killed 
+AliceTokenAssignmentMut13.sol	 live 
+AliceTokenAssignmentMut14.sol	 killed 
+AliceTokenAssignmentMut15.sol	 killed 
+AliceTokenAssignmentMut16.sol	 live 
+AliceTokenAssignmentMut17.sol	 live 
+AliceTokenAssignmentMut18.sol	 live 
+AliceTokenAssignmentMut19.sol	 live 
+AliceTokenAssignmentMut2.sol	 live 
+AliceTokenAssignmentMut20.sol	 live 
+AliceTokenAssignmentMut21.sol	 live 
+AliceTokenAssignmentMut22.sol	 live 
+AliceTokenAssignmentMut23.sol	 live 
+AliceTokenAssignmentMut24.sol	 live 
+AliceTokenAssignmentMut25.sol	 live 
+AliceTokenAssignmentMut26.sol	 live 
+AliceTokenAssignmentMut27.sol	 live 
+AliceTokenAssignmentMut28.sol	 live 
+AliceTokenAssignmentMut29.sol	 live 
+AliceTokenAssignmentMut3.sol	 killed 
+AliceTokenAssignmentMut30.sol	 live 
+AliceTokenAssignmentMut31.sol	 live 
+AliceTokenAssignmentMut32.sol	 live 
+AliceTokenAssignmentMut4.sol	 live 
+AliceTokenAssignmentMut5.sol	 live 
+AliceTokenAssignmentMut6.sol	 live 
+AliceTokenAssignmentMut7.sol	 live 
+AliceTokenAssignmentMut8.sol	 live 
+AliceTokenAssignmentMut9.sol	 killed 
 AliceTokenEventDelMut1.sol	 live 
 AliceTokenEventDelMut2.sol	 live 
 AliceTokenFunctionVisMut1.sol	 killed 
@@ -17,7 +49,7 @@ AliceTokenStateVarMut5.sol	 live
 AliceTokenStateVarMut6.sol	 live 
 AliceTokenStateVarMut7.sol	 live 
 AliceTokenStateVarMut8.sol	 live 
-Live: 17
-Killed: 2
-Total: 19
-Mutation Score: 0.10526315789473684
+Live: 43
+Killed: 8
+Total: 51
+Mutation Score: 0.1568627450980392

@@ -1,0 +1,18 @@
+CallsScriptErrorHandle2.sol	 killed 
+CallsScriptErrorHandle4.sol	 killed 
+CallsScriptErrorHandle6.sol	 killed 
+CallsScriptEventDelMut1.sol	 live 
+CallsScriptFunctionVisMut4.sol	 live 
+CallsScriptModifierDelMut1.sol	 killed 
+CallsScriptStateVarMut1.sol	 live 
+CallsScriptStateVarMut2.sol	 live 
+CallsScriptStateVarMut3.sol	 live 
+CallsScriptStateVarMut4.sol	 live 
+CallsScriptStateVarMut5.sol	 live 
+CallsScriptStateVarMut6.sol	 live 
+CallsScriptStateVarMut7.sol	 live 
+CallsScriptStateVarMut8.sol	 live 
+Live: 10
+Killed: 4
+Total: 14
+Mutation Score: 0.2857142857142857
