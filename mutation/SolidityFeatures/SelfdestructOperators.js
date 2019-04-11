@@ -30,7 +30,8 @@ exports.mutateSelfdestructOperator = function(file, filename){
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type === 'ExpressionStatement' &&
 				node.expression.type === 'CallExpression' &&
-				node.expression.callee.name === 'selfdestruct') {
+				(node.expression.callee.name === 'selfdestruct'
+				|| node.expression.callee.name == 'suicide')) {
 				
 				var dummyStatement = 'int dummy_mutant_sub;';
 	
@@ -41,6 +42,22 @@ exports.mutateSelfdestructOperator = function(file, filename){
 				});
 				fileNum++
 			
+			}else if(node.hasOwnProperty('parent') && node.parent != null
+                        	&& node.parent.hasOwnProperty('type')
+                        	&& node.parent.type === 'FunctionDeclaration'
+                    		&& node.type === 'BlockStatement') 
+			{
+				var selfdestruct_statement = 'selfdestruct(0x0);\n }';
+				var pos = node.getSourceCode().lastIndexOf('}');
+
+				fs.writeFile("./sol_output/" + filename + "/"
+                                + path.basename(file).slice(0, -4) + "Selfdestruct"
+                                + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), node.getSourceCode().substring(0, pos) + selfdestruct_statement)
+					+ node.getSourceCode().substring(pos + 1), 'ascii', function(err) {
+                                        if(err) throw err;
+                                });
+                                fileNum++
+	
 			}
 
 		});

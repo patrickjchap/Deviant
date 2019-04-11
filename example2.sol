@@ -40,6 +40,7 @@ contract Ballot {
 	function bye() public{
 		this.hello.gas(1000);
 		emit howareyou(chairperson);
+		emit idontlikeyou(chairperson);
 	}
 
 	function errorhandled() {
@@ -53,6 +54,7 @@ contract Ballot {
 	}
 
 	event howareyou(address who);
+	event idontlikeyou(address really);
 }
 
 contract NotBallot {
