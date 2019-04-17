@@ -1,8 +1,10 @@
+ConvertLibBinMut1.sol	 killed 
+ConvertLibBinMut2.sol	 killed 
+ConvertLibBinMut3.sol	 killed 
+ConvertLibBinMut4.sol	 killed 
 ConvertLibFunctionTypeMut2.sol	 live 
-ConvertLibFunctionVisMut1.sol	 live 
-ConvertLibFunctionVisMut3.sol	 live 
 ConvertLibLibrary1.sol	 live 
-Live: 4
-Killed: 0
-Total: 4
-Mutation Score: 0
+Live: 2
+Killed: 4
+Total: 6
+Mutation Score: 0.6666666666666666

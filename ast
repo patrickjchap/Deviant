@@ -1,0 +1,321 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "PragmaStatement",
+      "start_version": {
+        "type": "VersionLiteral",
+        "operator": "^",
+        "version": "0.4.24",
+        "start": 16,
+        "end": 23
+      },
+      "end_version": null,
+      "start": 0,
+      "end": 24
+    },
+    {
+      "type": "ImportStatement",
+      "from": "openzeppelin-solidity/contracts/math/SafeMath.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 26,
+      "end": 85
+    },
+    {
+      "type": "ImportStatement",
+      "from": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 86,
+      "end": 149
+    },
+    {
+      "type": "ImportStatement",
+      "from": "./ImpactRegistry.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 150,
+      "end": 180
+    },
+    {
+      "type": "ImportStatement",
+      "from": "./ImpactLinker.sol",
+      "symbols": [],
+      "alias": null,
+      "start": 181,
+      "end": 209
+    },
+    {
+      "type": "ContractStatement",
+      "name": "OffChainImpactLinker",
+      "is": [
+        {
+          "type": "ModifierName",
+          "name": "ImpactLinker",
+          "params": [],
+          "start": 245,
+          "end": 258
+        }
+      ],
+      "body": [
+        {
+          "type": "ConstructorDeclaration",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "ImpactRegistry",
+                "members": [],
+                "array_parts": [],
+                "start": 277,
+                "end": 291
+              },
+              "id": "_impactRegistry",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 277,
+              "end": 307
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "ImpactLinker",
+              "params": [
+                {
+                  "type": "Identifier",
+                  "name": "_impactRegistry",
+                  "start": 326,
+                  "end": 341
+                }
+              ],
+              "start": 313,
+              "end": 342
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "public",
+              "params": [],
+              "start": 343,
+              "end": 349
+            }
+          ],
+          "body": {
+            "type": "BlockStatement",
+            "body": [],
+            "start": 350,
+            "end": 357
+          },
+          "start": 265,
+          "end": 357
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "linkDirectly",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "string",
+                "members": [],
+                "array_parts": [],
+                "start": 384,
+                "end": 390
+              },
+              "id": "_impactId",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 384,
+              "end": 400
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 402,
+                "end": 406
+              },
+              "id": "_accountIndex",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 402,
+              "end": 420
+            },
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "uint",
+                "members": [],
+                "array_parts": [],
+                "start": 422,
+                "end": 426
+              },
+              "id": "_impactVal",
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 422,
+              "end": 437
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "external",
+              "params": [],
+              "start": 439,
+              "end": 447
+            },
+            {
+              "type": "ModifierArgument",
+              "name": "onlyOwner",
+              "params": [],
+              "start": 448,
+              "end": 457
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "Identifier",
+                      "name": "registry",
+                      "start": 465,
+                      "end": 473
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "registerImpact",
+                      "start": 474,
+                      "end": 488
+                    },
+                    "computed": false,
+                    "start": 465,
+                    "end": 488
+                  },
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "_impactId",
+                      "start": 489,
+                      "end": 498
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_accountIndex",
+                      "start": 500,
+                      "end": 513
+                    },
+                    {
+                      "type": "Identifier",
+                      "name": "_impactVal",
+                      "start": 515,
+                      "end": 525
+                    }
+                  ],
+                  "start": 465,
+                  "end": 526
+                },
+                "start": 465,
+                "end": 527
+              }
+            ],
+            "start": 458,
+            "end": 532
+          },
+          "is_abstract": false,
+          "start": 362,
+          "end": 532
+        },
+        {
+          "type": "FunctionDeclaration",
+          "name": "linkImpact",
+          "params": [
+            {
+              "type": "InformalParameter",
+              "literal": {
+                "type": "Type",
+                "literal": "string",
+                "members": [],
+                "array_parts": [],
+                "start": 558,
+                "end": 564
+              },
+              "id": null,
+              "is_indexed": false,
+              "is_constant": false,
+              "storage_location": null,
+              "start": 558,
+              "end": 577
+            }
+          ],
+          "modifiers": [
+            {
+              "type": "ModifierArgument",
+              "name": "external",
+              "params": [],
+              "start": 579,
+              "end": 587
+            }
+          ],
+          "returnParams": null,
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ExpressionStatement",
+                "expression": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "assert",
+                    "start": 598,
+                    "end": 604
+                  },
+                  "arguments": [
+                    {
+                      "type": "Literal",
+                      "value": false,
+                      "start": 605,
+                      "end": 610
+                    }
+                  ],
+                  "start": 598,
+                  "end": 611
+                },
+                "start": 598,
+                "end": 612
+              }
+            ],
+            "start": 588,
+            "end": 618
+          },
+          "is_abstract": false,
+          "start": 538,
+          "end": 618
+        }
+      ],
+      "start": 212,
+      "end": 622
+    }
+  ],
+  "start": 0,
+  "end": 622
+}

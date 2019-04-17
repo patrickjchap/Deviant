@@ -3,18 +3,23 @@
 <div id="bg-main"></div>
 <head>
 	<title>Solidity Mutation</title>
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<!--<link rel="stylesheet" type="text/css" href="../css/main.css">-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 
 
 <body>
-	<h1>Solidity Mutation</h1>
+	<div class="jumbotron text-center">
+		<h1>Deviant</h1>
+		<p>A Solidity mutation testing tool</p>
+	</div>
 
-	<div id = "fileDiv">
+	<div class = "row">
 	<form>
 		<div class="slct">
 			<span><label>Solidity Project</label></span>
-			<span><label for="mutDir" class ="btn">Select Directory</label></span>
+			<span><label for="mutDir" class ="btn-light">Select Directory</label></span>
 			<input type="file" id="mutDir" style="visibility:hidden" webkitdirectory multiple onchange="listFiles(document.getElementById('mutDir').files[0].path);">
 		</div>
 
@@ -29,10 +34,10 @@
 		</div>
 
 
-		<label for = "run" class = "btn" id = "runBtn">Run</label>
+		<label for = "run" class = "btn-light" id = "runBtn">Run</label>
 		<button id="run" type="submit" value="Run" style="visibility:hidden">Run Tests</button>
 
-		<label for = "generate" class="btn" id="genBtn">Generate</label>
+		<label for = "generate" class="btn-light" id="genBtn">Generate</label>
 		<button id="generate" type="submit" value = "Generate" style="visibility:hidden">Generate</button>
 	</form>
 

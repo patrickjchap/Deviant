@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <head>
 	<title>Select Mutation Operators</title>
-	<link rel="stylesheet" type="text/css" href="../css/mutOp.css">
+	<!--<link rel="stylesheet" type="text/css" href="../css/mutOp.css">-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-	<div class="tabContainer">
-		<div class="buttonContainer">
-			<button onclick="showPanel(0)">Statement Level</button>
-			<button onclick="showPanel(1)">Function Level</button>
-			<button onclick="showPanel(2)">Contract Level</button>
-			<button onclick="showPanel(3)">Inter-Contract Level</button>
-			<button onclick="showPanel(4)">Solidity Features</button>
-		</div>
+	<script src="../js/req.js"></script>
+
+	<div class="container mt-3">
+		<ul class = "nav nav-tabs">
+			<li class = "nav-item">
+				<a class = "nav-link active" data-toggle="tab" href="#statementLvl">Statement/Expression-Level</a>
+			</li>
+			<li class = "nav-item">
+				<a class = "nav-link" data-toggle="tab" href="#functionLvl">Function-Level</a>
+			</li>
+			<li class = "nav-item">
+				<a class = "nav-link" data-toggle="tab" href="#intramoduleLvl">Intra-Module-Level</a>
+			</li>
+			<li class = "nav-item">
+				<a class = "nav-link" data-toggle="tab" href="#intermoduleLvl">Inter-Module-Level</a>
+			</li>
+			<li class = "nav-item">
+				<a class = "nav-link" data-toggle="tab" href="#solidityLvl">Solidity-Feature-Level</a>
+			</li>
+		</ul>
 
 
 		<!-- Select-all JS function -->
@@ -23,81 +37,90 @@
 					checkboxes[i].checked = source.checked;
 			}
 		</script>
+
+
+		<div class = "tab-content">
+			<!-- Statement/Expression Level Operators -->
+			<div id="statementLvl" class = "container tab-pane active">
+				<div class = "row">
+				<h3> Statement/Expression Level </h3>
+				<ul>
+					<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
+					<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "BinaryOp">Binary Operators</label></span>
+					<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "UnaryOp">Unary Operators</label></span>
+					<label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "StringOp">String</label>
+					<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "AssignmentOp">Assignment</label><span>
+					<span><button type="submit">Save</button></li>
+				</ul>
+				</div>
+			</div>
+
+			<!-- Function Level Operators -->
+			<div id="functionLvl" class = "container tab-pane">
+				<h3> Function Level </h3>
+				<ul>
+					<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Swap Method Calls</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Statement Order</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Statement</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Method Body</label></span>
+					<span><button type = "submit">Save</button></span>
+				</ul>
+			</div>
+
+			<!-- Intra-Module Level Operators -->
+			<div id="intramoduleLvl" class = "container tab-pane">
+				
+				<h3> Intra-Module Level </h3>
+				<ul>
+					<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Access Modifiers</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Deletion</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Rename</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Super Keyword Insertion</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Super Keyword Deletion</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Type Cast Insertion</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Type Cast Deletion</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Cast Type Change</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overloading Method Deletion</label></span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overloading Method Argument Change</label></span>
+					<span><button type = "submit">Save</button></span>
+				</ul>
+			</div>
 	
-<form>
-		<!-- Statement Level Operators -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "BinaryOp">Binary Operators</label></span>
-				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "UnaryOp">Unary Operators</label></span>
-				<label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "StringOp">String</label>
-				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "AssignmentOp">Assignment</label><span>
-				<span><button type="submit">Save</button></li>
-			</ul>
+			<!-- Inter-Class Level Operators -->
+			<div id="intermoduleLvl" class = "container tab-pane">
+				<h3> Inter-Module Level </h3>
+				<ul>
+					<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
+					<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Temporary</label></span>
+				</ul>
+			</div>
+		
+			<!-- Solidity Features -->
+			<div id="solidityLvl" class = "container tab-pane">
+				<ul>
+					<span><label><input type = "checkbox" onClick= "toggle(this, 'solFeat')" /> Select All </label> </span>
+					<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "a">Address Operators</label></span>
+					<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "g">Gas Operators</label></span>
+					<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "m">Modifier Operators</label></span>
+					<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "e">Event Operators</label></span>
+					<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "v">State Variable Operators</label></span>
+					<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "f">Function Visibility Operators</label></span>
+					<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "t">Function Type Operators</label></span>
+					<span><button type = "submit">Save</button></span>
+				</ul>
+			</div>
+	
 		</div>
-
-		<!-- Method Level Operators -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Swap Method Calls</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Statement Order</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Statement</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Method Body</label></span>
-				<span><button type = "submit">Save</button></span>
-			</ul>
-		</div>
-
-		<!-- Class Level Operators -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Access Modifiers</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Deletion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Rename</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Super Keyword Insertion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Super Keyword Deletion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Type Cast Insertion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Type Cast Deletion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Cast Type Change</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overloading Method Deletion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overloading Method Argument Change</label></span>
-				<span><button type = "submit">Save</button></span>
-			</ul>
-		</div>
-
-		<!-- Inter-Class Level Operators -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Temporary</label></span>
-			</ul>
-		</div>
-
-		<!-- Solidity Features -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'solFeat')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "a">Address Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "g">Gas Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "m">Modifier Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "e">Event Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "v">State Variable Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "f">Function Visibility Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "t">Function Type Operators</label></span>
-				<span><button type = "submit">Save</button></span>
-			</ul>
-		</div>
-</form>
 	</div>
-
+		
 	<script>
-			const electron = require('electron');
-			const {ipcRenderer} = electron;
+		const electron = require('electron');
+		const {ipcRenderer} = electron;
 
-            const form = document.querySelector('form');
-            form.addEventListener('submit', submitForm);
+        const form = document.querySelector('form');
+        //form.addEventListener('submit', submitForm);
 
 			//populating checkboxes with saved data
 			ipcRenderer.on('pop-checkboxes', function(e, data) {
@@ -126,6 +149,5 @@
             }
         </script>
 
-	<script src = "../js/mutOp.js"></script>
 </body>
 </html>

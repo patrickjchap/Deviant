@@ -1,4 +1,4 @@
-Requirements */
+/*Requirements */
 const electron = require('electron');
 var fs = require('fs');
 const url = require('url');
@@ -60,7 +60,7 @@ function createMutViewWindow(){
 //Mutation Operator Window
 function createMutOpWindow(){
 	mutOpWindow = new BrowserWindow({
-		width: 600,
+		width: 1000,
 		height: 800,
 		title: 'Select Mutation Operators'
 	});
@@ -76,7 +76,7 @@ function createMutOpWindow(){
 		mutOpWindow = null;
 	});
 
-	mutOpWindow.webContents.openDevTools();
+	//mutOpWindow.webContents.openDevTools();
 }
 
 const mainMenuTemp = [
