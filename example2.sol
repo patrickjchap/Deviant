@@ -1,3 +1,4 @@
+import "./example3.sol";
 pragma solidity ^0.4.22;
 
 /// @title Voting with delegation.
@@ -72,6 +73,11 @@ contract something is NotBallot, Ballot {
 		rand_addr.send(1);
 		rand_addr.transfer(1);
 		rand_addr.call();
+	}
+
+	function bye() public {
+		super.bye();
+		random();
 	}
 }
 

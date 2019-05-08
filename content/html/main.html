@@ -2,46 +2,53 @@
 <html lang = "en">
 <div id="bg-main"></div>
 <head>
-	<title>Solidity Mutation</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<!--<link rel="stylesheet" type="text/css" href="../css/main.css">-->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel = "stylesheet" href = "../css/main.css">
 </head>
 
 
 <body>
-	<div class="jumbotron text-center">
+<div class="container-fluid p-2 bg-dark text-white" style = "min-height:100%">
+	<script src="../js/req.js"></script>
+	
+	<ul class = "nav nav-tabs nav-justified">
+        <li class = "nav-item">
+		    <a class = "nav-link active" href = "main.html">Home</a>
+		</li>
+        <li class = "nav-item">
+            <a class = "nav-link" href = "mutOp.html">Mutation Operators</a>
+		</li>
+        <li class = "nav-item">
+            <a class = "nav-link" href = "report.html">Report</a>
+         </li>
+	</ul>
+
+
+	<div class="jumbotron bg-secondary text-center">
 		<h1>Deviant</h1>
 		<p>A Solidity mutation testing tool</p>
 	</div>
 
-	<div class = "row">
+<div class = "container mt-3">
 	<form>
-		<div class="slct">
-			<span><label>Solidity Project</label></span>
-			<span><label for="mutDir" class ="btn-light">Select Directory</label></span>
-			<input type="file" id="mutDir" style="visibility:hidden" webkitdirectory multiple onchange="listFiles(document.getElementById('mutDir').files[0].path);">
+		<div class="form-group">
+			<label for="mutDir">Select project directory</label>
+			<input type="file" id="mutDir" class = "form-control-file" webkitdirectory multiple onchange="listFiles(document.getElementById('mutDir').files[0].path);">
 		</div>
 
-		<div class="slct">
-		
-		<script src="../js/main.js"></script>
-
-		<script> listFiles(document.getElementById("mutDir").files[0].path); </script>
-		<select size="5" id='display-files'>
-		
-		</select>
+		<div class="form-group">
+            <label for="mutDir">Select files for mutation</label>
+			<script src="../js/main.js"></script>
+			<select class = "custom-select" size="5" id='display-files' multiple></select>
 		</div>
 
+		<button id="run" type="submit" class = "btn btn-primary btn-md" value="Run">Run Tests</button>
 
-		<label for = "run" class = "btn-light" id = "runBtn">Run</label>
-		<button id="run" type="submit" value="Run" style="visibility:hidden">Run Tests</button>
-
-		<label for = "generate" class="btn-light" id="genBtn">Generate</label>
-		<button id="generate" type="submit" value = "Generate" style="visibility:hidden">Generate</button>
+		<button id="generate" type="submit" class = "btn btn-primary btn-md" value = "Generate">Generate</button>
 	</form>
 
-	</div>
+</div>
 
 	<script>
 		const electron = require('electron');
@@ -56,6 +63,23 @@
 		const gen = document.getElementById("generate");
 		gen.addEventListener("click", submitForm);
 
+		$(window).onunload = function(e) {
+			e.preventDefault();
+            const mutDirectory = document.getElementById('mutDir').files[0].path;
+            const fileEle = document.getElementById('display-files')
+            const mutFile = fileEle.options[fileEle.selectedIndex].value;
+            const mutFileName = fileEle.options[fileEle.selectedIndex].getAttribute("name");
+
+            var mutParam = [mutFile, mutDirectory, mutFileName]
+
+            // Sending back to the applicaiton
+            ipcRenderer.send('file:select', mutParam);
+		}
+
+		$(window).onload = function(e) {
+
+		}
+		
 		function submitForm(e){
 			e.preventDefault();
 			const mutDirectory = document.getElementById('mutDir').files[0].path;
@@ -77,7 +101,22 @@
 			var mutParam = [mutDirectory, mutFileName];
 			ipcRenderer.send('run:tests', mutParam);
 		}
-	</script>
 
+		window.onmousedown = function (e) {
+			var el = e.target;
+			if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
+				e.preventDefault();
+
+				// toggle selection
+				if (el.hasAttribute('selected')) el.removeAttribute('selected');
+				else el.setAttribute('selected', '');
+
+				// hack to correct buggy behavior
+				var select = el.parentNode.cloneNode(true);
+				el.parentNode.parentNode.replaceChild(select, el.parentNode);
+		}
+}
+	</script>
+</div>
 </body>
 </html>

@@ -17,6 +17,9 @@ app.on('ready', function(){
 	mainWindow = new BrowserWindow({
 		width: 1000,
 		height: 667,
+		resizable: true,
+		"max-height": 2160,
+		"max-width": 3840,
 		title: 'Solidity Mutation'
 	});
 	mainWindow.loadURL(url.format({
@@ -75,6 +78,11 @@ function createMutOpWindow(){
 	mutOpWindow.on('close', function(){
 		mutOpWindow = null;
 	});
+	
+	mutOpWindow.on('open', function() {
+		console.log(mutOpt);
+		mutOpWindow.webContents.send('pop-checkboxes', mutOpt);
+	});
 
 	//mutOpWindow.webContents.openDevTools();
 }
@@ -100,6 +108,10 @@ const mainMenuTemp = [
 	}]
 }
 ];
+
+ipcMain.on('save:files', function(e, param) {
+	
+});
 
 //Catching the items from main window
 ipcMain.on('file:select', function(e, mutParam){
@@ -165,11 +177,16 @@ ipcMain.on('run:tests', function(e, mutParam){
 
 });
 
+ipcMain.on('load:mutops', function(e) {
+	console.log(mutOpt);
+	mainWindow.webContents.send('pop-checkboxes', mutOpt);
+});
+
 ipcMain.on('op:select', function(e, mutParams){
 	console.log("made it");
 	mutOpt = mutParams;
 	console.log(mutOpt);
-	mutOpWindow.webContents.send('pop-checkboxes', mutOpt);
+	//mutOpWindow.webContents.send('pop-checkboxes', mutOpt);
 });
 
 function printStats() {
