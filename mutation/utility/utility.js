@@ -38,7 +38,7 @@ exports.collectImportedContracts = function(file) {
 
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type == 'ImportStatement') {importList.push(node.from)};
-		}
+		});
 	});
 	return importList;
 }
@@ -54,8 +54,8 @@ exports.collectInheritedContracts = function(file) {
 					inheritedList.push(node.is[i].name);
 				}
 			}
-		}	
-	}
+		});	
+	});
 	return inheritedList;
 }
 
@@ -68,4 +68,18 @@ exports.matchInheritedImportedContracts = function (inheritedList, importList) {
 		}
 	}
 	return matchList;
+}
+
+exports.getContractType = function(file) {
+	fs.readFile(file, function(err, data) {
+		if(err) throw err;
+
+		let mutCode = solm.edit(data.toString(), function(node) {
+			if(node.type == 'LibraryStatement') {return 'Library';}
+			if(node.type == 'ContractStatement') {return 'Contract';}
+			if(node.type == 'InterfaceStatement') {return 'Interface';}
+
+		});
+		return 'None';
+	});
 }

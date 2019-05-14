@@ -30,6 +30,7 @@ contract Ballot {
 		address cool = 0x10;
 		hello = Ballot(chairperson);
 		byte = NotBallot(chairperson);
+        byte = hex"01";
 
 	}
 
