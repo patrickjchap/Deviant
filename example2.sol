@@ -31,8 +31,18 @@ contract Ballot {
 		hello = Ballot(chairperson);
 		byte = NotBallot(chairperson);
         byte = hex"01";
+        goodbyeforever = 1;
+        goodbyeforever++;
+        ++goodbyeforever;
 
 	}
+
+    function byteExample() public {
+        byte thisIsAByte;
+        bytes1 thisIsAnotherByte;
+        bytes32 thisIs32Bytes;
+        bytes thisIsADynamicByteArray;
+    }
 
 	modifier modif() {
 		require(msg.sender == chairperson);

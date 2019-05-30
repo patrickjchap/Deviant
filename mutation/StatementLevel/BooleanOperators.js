@@ -37,13 +37,15 @@ exports.mutateBooleanOperator = function(file){
                 mutOperator = operators[node.value];
 				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
 
-				fs.writeFile("./sol_output/" 
-				+ path.basename(file).slice(0, -4) + "BooleanMut" 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
-					if(err) throw err;
-				});
-				fileNum++
-			
+                fs.writeFile("./sol_output/" + filename + "/"
+                    + path.basename(file).slice(0, -4) + "BooleanMut"
+                    + fileNum.toString() + ".sol",
+                    data.toString().replace(node.getSourceCode(),
+                    tmpNode), 'ascii', function(err) {
+                        if(err) throw err;
+                    }
+                );
+                fileNum++
 			}
 
 		});
