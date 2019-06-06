@@ -70,7 +70,11 @@ contract Ballot {
 }
 
 contract NotBallot {
+    int stateVarInt;
+    
+    function doNothing() {
 
+    }
 }
 
 contract something is NotBallot, Ballot {
@@ -79,7 +83,14 @@ contract something is NotBallot, Ballot {
 	function kill() {
 		if (msg.sender == NotBallot) selfdestruct(NotBallot);
 	}
-
+        
+    function testCasting() {
+        something somethingRef;
+        NotBallot notBallotRef = somethingRef;
+        notBallotRef.doNothing();
+        something(notBallotRef).doNothing();
+    }    
+    
 	function random() {
 		rand_addr.send(1);
 		rand_addr.transfer(1);
@@ -89,7 +100,15 @@ contract something is NotBallot, Ballot {
 	function bye() public {
 		super.bye();
 		random();
+        super.stateVarInt + 3;
+        stateVarInt + 2;
+        super.stateVarInt = 3;
+        stateVarInt = 2;
 	}
+
+    function doNothing() {
+
+    }
 }
 
 library thisisalibrary {

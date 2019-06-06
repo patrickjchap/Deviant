@@ -46,7 +46,7 @@ exports.mutateAddressFunctionOperator = function(file, filename){
 				console.log(mutOperator);
 
 				fs.writeFile("./sol_output/" + filename + '/'
-				+ path.basename(file).slice(0, -4) + "AddressFunction" 
+				+ path.basename(file).slice(0, -4) + "AddressFunctionSwap" 
 				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
 					if(err) throw err;
 				});
@@ -59,7 +59,7 @@ exports.mutateAddressFunctionOperator = function(file, filename){
 					tmpNode = node.getSourceCode().replace(node.expression.arguments[0].value, '0')
 
 					fs.writeFile("./sol_output/" + filename + '/'
-						+ path.basename(file).slice(0, -4) + "AddressFunction"
+						+ path.basename(file).slice(0, -4) + "AddressFunctionLiteral"
 						+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
 							if(err) throw err;
 					});

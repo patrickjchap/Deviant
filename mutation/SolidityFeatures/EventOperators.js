@@ -52,29 +52,20 @@ exports.mutateEventOperator = function(file, filename){
 		//Second round swaps event invocations
 		mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type === 'EmitStatement'){
-
-
-                                for(i = 0; i < events.length; i ++) {
+                for(i = 0; i < events.length; i ++) {
 					if(node.getSourceCode().valueOf() != events[i].valueOf()) {
-
-					
-						fs.writeFile("./sol_output/" + filename + "/"
-                                		+ path.basename(file).slice(0, -4) + "EventSwapMut"
-                                		+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
-                               	 		events[i]), 'ascii', function(err) {
-                                        		if(err) throw err;
-                                		});
-                                		
+	                    fs.writeFile("./sol_output/" + filename + "/"
+                            + path.basename(file).slice(0, -4) + "EventSwapMut"
+                            + fileNum.toString() + ".sol", data.toString().replace(
+                            node.getSourceCode(),events[i]), 'ascii', function(err) {
+                                    if(err) throw err;
+                            }
+                        );                          		
 						fileNum++;
 					}
 				}
-
-         
-                        } 
-
+            } 
 		});
-
-		})
-
-	}
+	})
+}
 

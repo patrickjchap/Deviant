@@ -36,10 +36,12 @@ exports.mutateSelfdestructOperator = function(file, filename){
 				var dummyStatement = 'int dummy_mutant_sub;';
 	
 				fs.writeFile("./sol_output/" + filename + "/" 
-				+ path.basename(file).slice(0, -4) + "Selfdestruct" 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), dummyStatement), 'ascii', function(err) {
-					if(err) throw err;
-				});
+				    + path.basename(file).slice(0, -4) + "SelfdestructDelete" 
+				    + fileNum.toString() + ".sol", data.toString().replace(
+                    node.getSourceCode(), dummyStatement), 'ascii', function(err) {
+					    if(err) throw err;
+				    }
+                );
 				fileNum++
 			
 			}else if(node.hasOwnProperty('parent') && node.parent != null
@@ -51,15 +53,16 @@ exports.mutateSelfdestructOperator = function(file, filename){
 				var pos = node.getSourceCode().lastIndexOf('}');
 
 				fs.writeFile("./sol_output/" + filename + "/"
-                                + path.basename(file).slice(0, -4) + "Selfdestruct"
-                                + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), node.getSourceCode().substring(0, pos) + selfdestruct_statement)
-					+ node.getSourceCode().substring(pos + 1), 'ascii', function(err) {
-                                        if(err) throw err;
-                                });
-                                fileNum++
-	
+                    + path.basename(file).slice(0, -4) + "SelfdestructInsert"
+                    + fileNum.toString() + ".sol", data.toString().replace(
+                    node.getSourceCode(), node.getSourceCode().substring(0, pos) +
+                    selfdestruct_statement)+ 
+                    node.getSourceCode().substring(pos + 1), 'ascii', function(err) {
+                        if(err) throw err;
+                    }
+                );
+                fileNum++
 			}
-
 		});
 		
 	})

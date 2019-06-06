@@ -83,3 +83,110 @@ exports.getContractType = function(file) {
 		return 'None';
 	});
 }
+
+exports.buildOverriddingList = function(file) {
+    //gathering location of files that contract inherits from
+    importList = this.collectImportContracts(file);
+    inheritedList = this.collectInheritedContracts(file);
+    matchList = this.matchInheritedImportedContracts(inheritedList, importList);
+
+    functionMatchLists = [];
+    //changing path to match relation to original contract
+    for(var i = 0; i < matchList.length; i++) {
+        functionMatchLists.push(utility.collectContractFunctions(
+            path.dirname(file) + '/' + matchList[i])
+        );
+    }
+
+    currFunctionList = this.collectContractFunctions(file);
+    overridingList = [];
+    for(var i = 0; i < functionMatchLists.length; i++) {
+        for(var j = 0; j < functionMatchLists[i].length; j++){
+            //if both lists contain same function name
+            if(currFunction.indexOf(functionMatchLists[i][j]) > -1){
+                overridingList.push(functionMatchLists[i][j]);
+            }
+        }
+    }
+    return overridingList;
+}
+
+exports.getStateVariables = function(file) {
+    stateVariableList = [];
+    fs.readFile(file, function(err, data) {
+        if(err) throw err;
+
+        let mutCode = solm.edit(data.toString(), function(node) {
+            if(node.type == 'StateVariableDeclaration' && node.is.length > 0){
+                for(var i = 0; i < node.is.length; i++) {
+                    stateVariableList.push(node.is[i].name);
+                }
+            }
+        });
+    });
+    return stateVariableList;
+}
+
+exports.getParentStateVariables = function(file) {
+    inheritedList = this.collectInheritedContracts(file);
+    importedList = this.collectImportedContracts(file);
+
+    matchedList = this.matchInheritedImportedContracts(inheritedList, importedList);
+
+    parentStateVariables = [];
+    for(var i = 0; i < matchedList.legth; i++) {
+        parentStateVariables = parentStateVariables.concat(this.getStateVariables(matchedList[i]));
+    }
+    return parentStateVariables;
+}
+
+exports.getStateVariableDeclaration = function(file) {
+    stateVariableList = [];
+    fs.readFile(file, function(err, data) {
+        if(err) throw err;
+
+        let mutCode = solm.edit(data.toString(), function(node) {
+            if(node.type == 'StateVariableDeclaration' && node.is.length > 0){
+                for(var i = 0; i < node.is.length; i++) {
+                    stateVariableList.push(node.getSourceCode());
+                }
+            }
+        });
+    });
+    return stateVariableList;
+
+}
+
+exports.getParentStateVariableDeclaration = function(file) {
+    inheritedList = this.collectInheritedContracts(file);
+    importedList = this.collectImportedContracts(file);
+
+    matchedList = this.matchInheritedImportedContracts(inheritedList, importedList);
+
+    parentStateVariables = [];
+    for(var i = 0; i < matchedList.legth; i++) {
+        parentStateVariables = parentStateVariables.concat(this.getStateVariableDeclaration(matchedList[i]));
+    }
+    return parentStateVariables;
+}
+
+exports.getParentContractReference = function(file) {
+    parentList = this.collectInheritedContracts(file);
+    
+    parentDeclarationList = [];
+    fs.readFile(file, function(err, data) {
+        if(err) throw err;
+
+        let mutCode = solm.edit(data.toString(), function(node) {
+
+            if(node.type == 'DeclarativeExpression' && node.hasOwnProperty('literal')
+               && parentList.indexOf(node.literal.name) >= 0    
+            ) {
+                for(var i = 0; i < parentList.length; i++) {
+                    parentDeclarationList.push(node.name);
+                }
+            }
+        });
+    });
+    return parentDeclarationList;
+}
