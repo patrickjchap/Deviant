@@ -51,12 +51,14 @@ exports.mutateSelfdestructOperator = function(file, filename){
 				var pos = node.getSourceCode().lastIndexOf('}');
 
 				fs.writeFile("./sol_output/" + filename + "/"
-                                + path.basename(file).slice(0, -4) + "Selfdestruct"
-                                + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), node.getSourceCode().substring(0, pos) + selfdestruct_statement)
+                	+ path.basename(file).slice(0, -4) + "Selfdestruct"
+                    + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), 
+					node.getSourceCode().substring(0, pos) + selfdestruct_statement)
 					+ node.getSourceCode().substring(pos + 1), 'ascii', function(err) {
-                                        if(err) throw err;
-                                });
-                                fileNum++
+                    	if(err) throw err;
+                    }
+				);
+                fileNum++
 	
 			}
 

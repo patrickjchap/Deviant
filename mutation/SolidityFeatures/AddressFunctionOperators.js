@@ -36,22 +36,32 @@ exports.mutateAddressFunctionOperator = function(file, filename){
 			   && node.expression.type === 'CallExpression'
 			   && node.expression.callee.hasOwnProperty('property')
 			   && (node.expression.callee.property.name === 'transfer' || 
-			   node.expression.callee.property.name === 'send')) {
+			   node.expression.callee.property.name === 'send')
+			){
 				
-				console.log(node.expression.callee.property.name);
 				var mutOperator;
 				mutOperator = operators[node.expression.callee.property.name];
 				tmpNode = node.getSourceCode().replace(node.expression.callee.property.name, mutOperator);
-
-				console.log(mutOperator);
 
 				fs.writeFile("./sol_output/" + filename + '/'
 				+ path.basename(file).slice(0, -4) + "AddressFunction" 
 				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
 					if(err) throw err;
 				});
-				fileNum++
-		
+				fileNum++;
+	
+				tmpNodeCall = node.getSourceCode().replace(node.expression.callee.property.name,
+					"call.value"	
+				);
+				tmpNodeCall = tmpNodeCall.replace(';', '();');
+	
+                fs.writeFile("./sol_output/" + filename + '/'
+                + path.basename(file).slice(0, -4) + "AddressFunction"
+                + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNodeCall), 'ascii', function(err) {
+                    if(err) throw err;
+                });
+                fileNum++;
+
 
 				if(typeof node.expression.arguments[0] != 'undefined'
 				&& node.expression.arguments[0].type == 'Literal'){
@@ -59,7 +69,7 @@ exports.mutateAddressFunctionOperator = function(file, filename){
 					tmpNode = node.getSourceCode().replace(node.expression.arguments[0].value, '0')
 
 					fs.writeFile("./sol_output/" + filename + '/'
-						+ path.basename(file).slice(0, -4) + "AddressFunction"
+						+ path.basename(file).slice(0, -4) + "AddressFunctionLiteral"
 						+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
 							if(err) throw err;
 					});

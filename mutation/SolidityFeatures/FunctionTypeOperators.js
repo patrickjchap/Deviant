@@ -6,10 +6,11 @@ var parser = require('solparse');
 var path = require('path');
 
 var operators = {
-            "pure": ['payable', 'view'],
-	    'payable': ['pure', 'view'],
-	    'view': ['pure', 'payable'],
+        "pure": 'view',
+	    'view': 'pure',
 };
+
+var fTypes = ['pure', 'view', 'payable'];
 
 let options = {
 	format: {
@@ -33,25 +34,43 @@ exports.mutateFunctionTypeOperator = function(file, filename){
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type === 'ModifierArgument' && operators[node.name] != null) {
-				console.log(node.parent.getSourceCode());
 
-				tmpNodeSC1 = node.parent.getSourceCode().replace(node.name, operators[node.name][0]);
-				tmpNodeSC2 = node.parent.getSourceCode().replace(node.name, operators[node.name][1]);
+				tmpNode = node.parent.getSourceCode().replace(node.name, operators[node.name]);
 
 				fs.writeFile("./sol_output/" + filename + "/" 
-				+ path.basename(file).slice(0, -4) + "FunctionTypeMut" 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.parent.getSourceCode(), tmpNodeSC1), 'ascii', function(err) {
+				+ path.basename(file).slice(0, -4) + "FunctionTypeSwap" 
+				+ fileNum.toString() + ".sol", data.toString().replace(node.parent.getSourceCode(), tmpNode), 'ascii', function(err) {
 					if(err) throw err;
 				});
 				fileNum++;
+			
+			}
+
+			if(node.type == 'ModifierArgument' && fTypes.indexOf(node.name) >= 0){
+				
+				tmpNode = node.parent.getSourceCode().replace(node.name, "");
 
 				fs.writeFile("./sol_output/" + filename + "/"
-                                + path.basename(file).slice(0, -4) + "FunctionTypeMut"
-                                + fileNum.toString() + ".sol", data.toString().replace(node.parent.getSourceCode(), tmpNodeSC2), 'ascii', function(err) {
-                                        if(err) throw err;
-                                });
-                                fileNum++;
-			
+                + path.basename(file).slice(0, -4) + "FunctionTypeDel"
+                + fileNum.toString() + ".sol", data.toString().replace(node.parent.getSourceCode(), tmpNode), 'ascii', function(err) {
+                    if(err) throw err;
+                });
+                fileNum++;
+			}
+
+			if(node.type == 'FunctionDeclaration') {
+				for(var i = 0; i < fTypes.length; i++) {
+               		tmpNode = node.getSourceCode().replace('{', fTypes[i] + ' {');		
+
+					fs.writeFile("./sol_output/" + filename + "/"
+                		+ path.basename(file).slice(0, -4) + "FunctionTypeIns"
+                		+ fileNum.toString() + ".sol", data.toString().replace(
+						node.getSourceCode(), tmpNode), 'ascii', function(err) {
+                    		if(err) throw err;
+               			}
+					);
+                	fileNum++;
+				}
 			}
 
 		});

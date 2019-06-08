@@ -76,6 +76,30 @@ exports.mutateAddressOperator = function(file, filename){
                     });
 					fileNum++;
 				}
+			}else if(node.type == 'StateVariableDeclaration' && node.hasOwnProperty('literal')
+				&& node.literal.hasOwnProperty('literal') && node.literal.literal == 'address'
+				&& node.value.hasOwnProperty('value')	
+			){
+				tmpNodeZero = node.getSourceCode().replace(node.value.value, operators['zero']);
+                tmpNodeRand = node.getSourceCode().replace(node.value.value, operators['random']);
+
+                fs.writeFile("./sol_output/" + filename + "/"
+                    + path.basename(file).slice(0, -4) + "AddressMutZero"
+                    + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+                    tmpNodeZero), 'ascii', function(err) {
+                        if(err) throw err;
+                    }
+				);
+                fileNum++;
+
+                fs.writeFile("./sol_output/" + filename + "/"
+                    + path.basename(file).slice(0, -4) + "AddressMutRand"
+                    + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+                    tmpNodeRand), 'ascii', function(err) {
+                        if(err) throw err;
+                	}
+				);
+                fileNum++;
 			}
 
 		});
