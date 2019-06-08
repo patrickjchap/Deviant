@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <head>
 	<title>Select Mutation Operators</title>
-	<link rel="stylesheet" type="text/css" href="../css/mutOp.css">
+	<!--<link rel="stylesheet" type="text/css" href="../css/mutOp.css">-->
+	<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel = "stylesheet" href = "../css/main.css">
 </head>
-
 <body>
-	<div class="tabContainer">
-		<div class="buttonContainer">
-			<button onclick="showPanel(0)">Statement Level</button>
-			<button onclick="showPanel(1)">Function Level</button>
-			<button onclick="showPanel(2)">Contract Level</button>
-			<button onclick="showPanel(3)">Inter-Contract Level</button>
-			<button onclick="showPanel(4)">Solidity Features</button>
-		</div>
+<div class="container-fluid p-2 bg-dark text-white" style = "min-height:100%">
+
+	<script src="../js/req.js"></script>
+    
+	<!--Home menu navigation-->
+	<ul class = "nav nav-tabs nav-justified">
+        <li class = "nav-item">
+            <a class = "nav-link" href = "main.html">Home</a>
+        </li>
+        <li class = "nav-item">
+            <a class = "nav-link active" href = "mutOp.html">Mutation Operators</a>
+        </li>
+        <li class = "nav-item">
+            <a class = "nav-link" href = "report.html">Report</a>
+        </li>
+    </ul>
+
+
+	<div class="container mt-3">
+		<!--Mutation operator navigation-->
+		<ul class = "nav nav-tabs">
+			<li class = "nav-item">
+				<a class = "nav-link active" data-toggle="tab" href="#statementLvl">Statement/Expression-Level</a>
+			</li>
+			<li class = "nav-item">
+				<a class = "nav-link" data-toggle="tab" href="#functionLvl">Function-Level</a>
+			</li>
+			<li class = "nav-item">
+				<a class = "nav-link" data-toggle="tab" href="#intramoduleLvl">Intra-Module-Level</a>
+			</li>
+			<li class = "nav-item">
+				<a class = "nav-link" data-toggle="tab" href="#intermoduleLvl">Inter-Module-Level</a>
+			</li>
+			<li class = "nav-item">
+				<a class = "nav-link" data-toggle="tab" href="#solidityLvl">Solidity-Feature-Level</a>
+			</li>
+		</ul>
 
 
 		<!-- Select-all JS function -->
@@ -23,87 +53,278 @@
 					checkboxes[i].checked = source.checked;
 			}
 		</script>
+
+
+		<div class = "tab-content">
+			<!-- Statement/Expression Level Operators -->
+			<div id="statementLvl" class = "container tab-pane active">
+				<h3> Statement/Expression Level </h3>
+				<form>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" class = "form-check-input" onClick= "toggle(this, 'stLvl')" /> Select All 
+						</label> 
+					</div>
+					
+					<div class = "form-check">
+                        <label class = "form-check-label">
+							<input type = "checkbox" data-toggle = "collapse" data-target = "#binaryList" 
+							class = "form-check-input" name = "stLvl" value = "BinaryOp" oninput = "toggle(this, 'bLvl')">Binary Expression
+						</label>
+					</div>
+
+					<div id = "binaryList" class = "collapse" style="padding-left:20px">
+						<div class = "form-check">
+							<label class = "form-check-label">
+								<input type = "checkbox" class = "form-check-input" name = "bLvl" value = "binaryRel">Relationship Operators
+							</label>
+						</div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "bLvl" value = "binaryBW">Bitwise Operators
+                            </label>
+                        </div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "bLvl" value = "binaryAll">Arithmetic Operators
+                            </label>
+                        </div>
+					</div>
+
+
+					<div class = "form-check">
+                        <label class = "form-check-label">
+							<input type = "checkbox" data-toggle = "collapse" data-target = "#unaryList" class = "form-check-input" name = "stLvl" value = "UnaryOp">Unary Expression
+						</label>
+					</div>
+
+                    <div id = "unaryList" class = "collapse" style="padding-left:20px">
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "unaryNot">Delete Not Operator
+                            </label>
+                        </div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "unaryBWNot">Delete Bitwise Not Operator
+                            </label>
+                        </div>
+
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "unarySwpIncDec">Increment/Decrement Swap Operators
+                            </label>
+                        </div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "unaryDelIncDec">Delete Increment/Decrement Operators
+                            </label>
+                        </div>
+                    </div>
+
+
+					<div class = "form-check">
+                        <label class = "form-check-label">
+							<input type = "checkbox" data-toggle = "collapse" data-target = "#literalList" class = "form-check-input" name = "stLvl" value = "StringOp">Literal
+						</label>
+					</div>
+
+					<div id = "literalList" class = "collapse" style="padding-left:20px">
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalString">String Operators
+                            </label>
+                        </div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalInteger">Integer Operators
+                            </label>
+                        </div>
+
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalDecimal">Decimal Operators
+                            </label>
+                        </div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalHexadecimal">Hexadecimal Operators
+                            </label>
+                        </div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalByte">Byte Operators
+                            </label>
+                        </div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalBoolean">Boolean Operators
+                            </label>
+                        </div>
+                    </div>
+
+
+					<div class = "form-check">
+                        <label class = "form-check-label">
+							<input type = "checkbox" class = "form-check-input" name = "stLvl" value = "AssignmentOp">Assignment Expression
+						</label>
+					</div>
+    
+					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
+				</form>
+			</div>
+
+			<!-- Function Level Operators -->
+			<div id="functionLvl" class = "container tab-pane">
+				<h3> Function Level </h3>
+					<span><label><input type = "checkbox" onClick= "toggle(this, 'fLvl')" /> Select All </label> </span>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" class = "form-check-input" name = "fLvl" value = "swapStatement">Swap Statement Operators
+						</label>
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" class = "form-check-input" name = "fLvl" value = "dlStatement">Delete Statement Operators
+						</label>
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" class = "form-check-input" name = "fLvl" value = "dlBlock">Delete Block Operators
+						</label>
+					</div>
+					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
+
+			</div>
+
+			<!-- Intra-Module Level Operators -->
+			<div id="intramoduleLvl" class = "container tab-pane">
+				
+				<h3> Intra-Module Level </h3>
+					<span><label><input type = "checkbox" onClick= "toggle(this, 'intraLvl')" /> Select All </label> </span>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "overriding">Overriding Functions
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "overloading">Overloading Functions
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">Function Visibility
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">Function Type
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">State Variable Visibility
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">placeholder
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">placeholder
+                        </label>
+                    </div>
+
+					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
+
+			</div>
 	
-<form>
-		<!-- Statement Level Operators -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "BinaryOp">Binary Operators</label></span>
-				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "UnaryOp">Unary Operators</label></span>
-				<label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "StringOp">String</label>
-				<span><label><input type = "checkbox" name = "stLvl" class = "mutCheck" value = "AssignmentOp">Assignment</label><span>
-				<span><button type="submit">Save</button></li>
-			</ul>
-		</div>
+			<!-- Inter-Class Level Operators -->
+			<div id="intermoduleLvl" class = "container tab-pane">
+				<h3> Inter-Module Level </h3>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" onClick= "toggle(this, 'interLvl')" /> Select All 
+						</label> 
+					</div>
 
-		<!-- Method Level Operators -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Swap Method Calls</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Statement Order</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Statement</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Delete Method Body</label></span>
-				<span><button type = "submit">Save</button></span>
-			</ul>
-		</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" class = "mutCheck" name = "interlvl" value = "multInheritance">Multiple-Inheritance Operators
+						</label>
+					</div>
 
-		<!-- Class Level Operators -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Change Access Modifiers</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Deletion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overriding Method Rename</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Super Keyword Insertion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Super Keyword Deletion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Type Cast Insertion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Type Cast Deletion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Cast Type Change</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overloading Method Deletion</label></span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Overloading Method Argument Change</label></span>
-				<span><button type = "submit">Save</button></span>
-			</ul>
-		</div>
 
-		<!-- Inter-Class Level Operators -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'stLvl')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" class = "mutCheck" value = "BinaryOp">Temporary</label></span>
-			</ul>
-		</div>
 
-		<!-- Solidity Features -->
-		<div class="tabPanel">
-			<ul>
-				<span><label><input type = "checkbox" onClick= "toggle(this, 'solFeat')" /> Select All </label> </span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "a">Address Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "g">Gas Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "m">Modifier Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "e">Event Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "v">State Variable Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "f">Function Visibility Operators</label></span>
-				<span><label><input type = "checkbox" name = "solFeat" class = "mutCheck" value = "t">Function Type Operators</label></span>
-				<span><button type = "submit">Save</button></span>
-			</ul>
+					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
+
+			</div>
+		
+			<!-- Solidity Features -->
+			<div id="solidityLvl" class = "container tab-pane">
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" onClick= "toggle(this, 'solFeat')" /> Select All
+						</label> 
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "a">Address Operators
+						</label>
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "g">Gas Operators
+						</label>
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "m">Modifier Operators
+						</label>
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "e">Event Operators
+						</label>
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "v">State Variable Operators
+						</label>
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "f">Function Visibility Operators
+						</label>
+					</div>
+					<div class = "form-check">
+						<label class = "form-check-label">
+							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "t">Function Type Operators
+						</label>
+					</div>
+
+					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
+			
+			</div>
+	
 		</div>
-</form>
 	</div>
-
+		
 	<script>
-			const electron = require('electron');
-			const {ipcRenderer} = electron;
+		const electron = require('electron');
+		const {ipcRenderer} = electron;
 
-            const form = document.querySelector('form');
-            form.addEventListener('submit', submitForm);
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
 
 			//populating checkboxes with saved data
 			ipcRenderer.on('pop-checkboxes', function(e, data) {
-				e.preventDefault();
-				var mutOps = document.getElementsByClassName('mutCheck');
-
+				//e.preventDefault();
+				var mutOps = document.getElementsByClassName('form-check-input');
+				console.log(e);
 				for(var i = 0; mutOps[i]; ++i){
 					if(data.includes(mutOps[i].value)){
 						mutOps[i].checked = true;
@@ -114,7 +335,7 @@
             function submitForm(e){
 				//console.log(e.body.value)
 				var mutParam = "";
-				var mutOps = document.getElementsByClassName('mutCheck');
+				var mutOps = document.getElementsByClassName('form-check-input');
 				for(var i = 0; mutOps[i]; ++i){
 					if(mutOps[i].checked){
 						console.log(mutOps[i].value);
@@ -124,8 +345,16 @@
 				
                 ipcRenderer.send('op:select', mutParam);
             }
-        </script>
+			
+			window.onload = function(e) {
+				ipcRenderer.send('load:mutops');
+			}
 
-	<script src = "../js/mutOp.js"></script>
+			window.onunload = function(e) {
+				submitForm();
+				console.log('unload');
+			}
+        </script>
+</div>
 </body>
 </html>

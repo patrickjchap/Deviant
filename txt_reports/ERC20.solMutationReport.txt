@@ -1,0 +1,20 @@
+ERC20FunctionTypeMut1.sol	 live 
+ERC20FunctionTypeMut2.sol	 live 
+ERC20FunctionTypeMut3.sol	 live 
+ERC20FunctionTypeMut4.sol	 live 
+ERC20FunctionTypeMut5.sol	 live 
+ERC20FunctionTypeMut6.sol	 live 
+ERC20FunctionVisMut1.sol	 live 
+ERC20FunctionVisMut10.sol	 live 
+ERC20FunctionVisMut11.sol	 live 
+ERC20FunctionVisMut12.sol	 live 
+ERC20FunctionVisMut15.sol	 live 
+ERC20FunctionVisMut18.sol	 live 
+ERC20FunctionVisMut2.sol	 live 
+ERC20FunctionVisMut3.sol	 live 
+ERC20FunctionVisMut6.sol	 live 
+ERC20FunctionVisMut9.sol	 live 
+Live: 16
+Killed: 0
+Total: 16
+Mutation Score: 0

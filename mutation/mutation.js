@@ -17,6 +17,8 @@ var abstractContractOp = require('./SolidityFeatures/AbstractContractOperators.j
 var errorHandleOp = require('./SolidityFeatures/ErrorHandleOperators.js');
 var multipleInheritanceOp = require('./SolidityFeatures/MultipleInheritanceOperators.js');
 var libraryOp = require('./SolidityFeatures/LibraryOperators.js');
+var assignmentOp = require('./StatementLevel/AssignmentOperators.js');
+var superOp = require('./ContractLevel/SuperContractOperators.js');
 
 exports.generateMutant = function(file, filename, args){
 	if(!fs.existsSync('./sol_output/' + filename)){
@@ -41,4 +43,6 @@ exports.generateMutant = function(file, filename, args){
 	if(args.includes('h')){errorHandleOp.mutateErrorHandleOperator(file, filename)};
 	if(args.includes('i')){multipleInheritanceOp.mutateMultipleInheritanceOperator(file, filename)};
 	if(args.includes('l')){libraryOp.mutateLibraryOperator(file, filename)};
+	if(args.includes('j')){assignmentOp.mutateAssignmentOperator(file, filename)};
+	if(args.includes('!')){superOp.mutateSuperOperator(file, filename)};
 }

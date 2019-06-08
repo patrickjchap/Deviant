@@ -1,0 +1,15 @@
+DAOFactoryAbstractContract1.sol	 killed 
+DAOFactoryEventDelMut1.sol	 killed 
+DAOFactoryEventDelMut2.sol	 killed 
+DAOFactoryFunctionVisMut1.sol	 killed 
+DAOFactoryFunctionVisMut6.sol	 live 
+DAOFactoryStateVarMut1.sol	 live 
+DAOFactoryStateVarMut2.sol	 live 
+DAOFactoryStateVarMut3.sol	 live 
+DAOFactoryStateVarMut4.sol	 live 
+DAOFactoryStateVarMut5.sol	 live 
+DAOFactoryStateVarMut6.sol	 live 
+Live: 7
+Killed: 4
+Total: 11
+Mutation Score: 0.36363636363636365

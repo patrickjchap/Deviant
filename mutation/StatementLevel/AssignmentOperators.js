@@ -4,12 +4,15 @@ var path = require('path');
 var solparse = require('solparse');
 
 var operators = {
-            "++": '--',
-            "--": '++',
-            "~": '',
-            "!": ',',
-			'+': '-',
-			'-': '+'
+            "*=":  ['/=', '+=', '-=', '%=', '|=', '&=', '^=', '='],
+            "/=":  ['*=', '+=', '-=', '%=', '|=', '&=', '^=', '='],
+            "+=":  ['*=', '/=', '-=', '%=', '|=', '&=', '^=', '='],
+            "-=":  ['*=', '+=', '/=', '%=', '|=', '&=', '^=', '='],
+			'%=':  ['*=', '+=', '-=', '/=', '|=', '&=', '^=', '='],
+			'|=':  ['*=', '+=', '-=', '%=', '/=', '&=', '^=', '='],
+			'&=':  ['*=', '+=', '-=', '%=', '|=', '/=', '^=', '='],
+			'^=':  ['*=', '+=', '-=', '%=', '|=', '&=', '/=', '='],
+			'=':  ['*=', '+=', '-=', '%=', '|=', '&=', '/=', '^=']
 };
 
 let options = {
@@ -26,13 +29,12 @@ let options = {
 
 
 
-exports.mutateUnaryOperator = function(file){
+exports.mutateAssignmentOperator = function(file, filename){
 //	console.log("Binary Operators Found");
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
 		console.log("Unary Operators");
-
 
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
@@ -41,25 +43,29 @@ exports.mutateUnaryOperator = function(file){
 					if(err) throw err;
 				});
 			}
-			if(node.type === 'UnaryExpression' || node.type === 'UpdateExpression') {
+			if(node.type === 'AssignmentExpression'
+                && node.left.hasOwnProperty('literal')
+                && node.left.literal.hasOwnProperty('literal')
+                && node.left.literal.literal != "string"    
+            ) {
 				var mutOperator;
 				mutOperatorList = operators[node.operator];
-				if(typeof mutOperatorList !== 'string'){
-					mutOperator = mutOperatorList[Math.floor(Math.random()*mutOperatorList.length)];
-				}else{
-					mutOperator = mutOperatorList;
+				console.log(node.operator);				
+				for (i = 0; i < mutOperatorList.length; i++) {
+					mutOperator = mutOperatorList[i];	
+					tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
+
+					console.log(mutOperator);
+
+					fs.writeFile("./sol_output/" + filename
+						+ path.basename(file).slice(0, -4) + "AssignmentMut" 
+						+ fileNum.toString() + ".sol", data.toString().replace(
+						node.getSourceCode(), tmpNode), 'ascii', function(err) {
+							if(err) throw err;
+					});
+					
+					fileNum++
 				}
-				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
-
-
-				console.log(mutOperator);
-
-				fs.writeFile("./sol_output/" 
-				+ path.basename(file).slice(0, -4) + "UnaryMut" 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
-					if(err) throw err;
-				});
-				fileNum++
 			
 			}
 

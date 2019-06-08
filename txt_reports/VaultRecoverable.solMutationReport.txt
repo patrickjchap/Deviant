@@ -1,0 +1,16 @@
+VaultRecoverableAddressFunction1.sol	 live 
+VaultRecoverableErrorHandle2.sol	 killed 
+VaultRecoverableErrorHandle4.sol	 killed 
+VaultRecoverableErrorHandle6.sol	 killed 
+VaultRecoverableEventDelMut1.sol	 killed 
+VaultRecoverableFunctionVisMut1.sol	 live 
+VaultRecoverableStateVarMut1.sol	 live 
+VaultRecoverableStateVarMut2.sol	 live 
+VaultRecoverableStateVarMut3.sol	 live 
+VaultRecoverableStateVarMut4.sol	 live 
+VaultRecoverableStateVarMut5.sol	 live 
+VaultRecoverableStateVarMut6.sol	 live 
+Live: 8
+Killed: 4
+Total: 12
+Mutation Score: 0.3333333333333333

@@ -35,7 +35,15 @@ exports.mutateMultipleInheritanceOperator = function(file, filename){
 			if(node.type === 'ContractStatement' && node.is.length > 1) {
 			
 				for(i = 0; i < node.is.length; i++) {
-					tmpNode = node.getSourceCode().replace(' ' + node.is[i].name, "");
+                    tmpNode = node.getSourceCode().replace(node.is[i].name, "");
+
+                    if(node.getSourceCode().includes(', '+ node.is[i].name+',')){
+					    tmpNode = node.getSourceCode().replace(', ' + node.is[i].name, "");
+                    }else if(node.getSourceCode().includes(node.is[i].name+',')) {
+					    tmpNode = node.getSourceCode().replace(node.is[i].name+',', "");
+                    }else if(node.getSourceCode().includes(', ' + node.is[i].name)) {
+					    tmpNode = node.getSourceCode().replace(', ' + node.is[i].name, "");
+                    }
 
 					fs.writeFile("./sol_output/" + filename + '/'
 						+ path.basename(file).slice(0, -4) + "MultipleInheritance" 

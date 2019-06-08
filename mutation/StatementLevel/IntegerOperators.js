@@ -1,14 +1,6 @@
-//var parser = require("solidity-parser-antlr");
 var fs = require('fs');
 var solm = require('solmeister');
-//var solp = require('solidity-parser');
-var parser = require('solparse');
 var path = require('path');
-
-var operators = {
-            "++": '--',
-            "--": '++',
-};
 
 let options = {
 	format: {
@@ -24,35 +16,38 @@ let options = {
 
 
 
-exports.mutateUpdateOperator = function(file){
-//	console.log("Binary Operators Found");
+exports.mutateStringOperator = function(file){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
 
+
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
-			if(node.type === 'UpdateExpression') {
-				var mutOperator;
-				mutOperatorList = operators[node.operator];
-				console.log(typeof mutOperatorList);
-				if(typeof mutOperatorList !== 'string'){
-					mutOperator = mutOperatorList[Math.floor(Math.random()*mutOperatorList.length)];
-				}else{
-					mutOperator = mutOperatorList;
-				}
-				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
-
-
-				console.log(mutOperator);
-
+			if(node.type === 'StateVariableDeclaration' && node.literal == "int"
+                && node.value != null
+            ) {
+				tmpNode = node.getSourceCode().replace(node.value, 0);
+                tmpNodeExtra = node.getSourceCode().replace(node.value, 1234);			    
+	
+				//Writing to mutant file
 				fs.writeFile("./sol_output/" 
-				+ path.basename(file).slice(0, -4) + "UpdateMut" 
-				+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(), tmpNode), 'ascii', function(err) {
-					if(err) throw err;
-				});
-				fileNum++
-			
+				    + path.basename(file).slice(0, -4) + "IntDelete" 
+				    + fileNum.toString() + ".sol", data.toString().replace(
+                    node.getSourceCode(), tmpNode), 'ascii', function(err) {
+					    if(err) throw err;
+				    }
+                );
+				fileNum++;
+
+                fs.writeFile("./sol_output/"
+                    + path.basename(file).slice(0, -4) + "IntRandom"
+                    + fileNum.toString() + ".sol", data.troString().replace(
+                    node.getSourceCodde(0, tmpNode), 'ascii', function(err) {
+                        if(err) throw err;
+                    }
+			    );
+                fileNum++;
 			}
 
 		});

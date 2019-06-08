@@ -1,3 +1,4 @@
+import "./example3.sol";
 pragma solidity ^0.4.22;
 
 /// @title Voting with delegation.
@@ -29,8 +30,19 @@ contract Ballot {
 		address cool = 0x10;
 		hello = Ballot(chairperson);
 		byte = NotBallot(chairperson);
+        byte = hex"01";
+        goodbyeforever = 1;
+        goodbyeforever++;
+        ++goodbyeforever;
 
 	}
+
+    function byteExample() public {
+        byte thisIsAByte;
+        bytes1 thisIsAnotherByte;
+        bytes32 thisIs32Bytes;
+        bytes thisIsADynamicByteArray;
+    }
 
 	modifier modif() {
 		require(msg.sender == chairperson);
@@ -58,7 +70,11 @@ contract Ballot {
 }
 
 contract NotBallot {
+    int stateVarInt;
+    
+    function doNothing() {
 
+    }
 }
 
 contract something is NotBallot, Ballot {
@@ -67,12 +83,32 @@ contract something is NotBallot, Ballot {
 	function kill() {
 		if (msg.sender == NotBallot) selfdestruct(NotBallot);
 	}
-
+        
+    function testCasting() {
+        something somethingRef;
+        NotBallot notBallotRef = somethingRef;
+        notBallotRef.doNothing();
+        something(notBallotRef).doNothing();
+    }    
+    
 	function random() {
 		rand_addr.send(1);
 		rand_addr.transfer(1);
 		rand_addr.call();
 	}
+
+	function bye() public {
+		super.bye();
+		random();
+        super.stateVarInt + 3;
+        stateVarInt + 2;
+        super.stateVarInt = 3;
+        stateVarInt = 2;
+	}
+
+    function doNothing() {
+
+    }
 }
 
 library thisisalibrary {
