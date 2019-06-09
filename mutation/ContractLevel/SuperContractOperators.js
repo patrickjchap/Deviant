@@ -161,22 +161,21 @@ exports.mutateHidingVariableInsert = function (file, filename) {
 }
 
 exports.mutateTypeCastInsertion = function (file, filename) {
-    pRefList = utility.getParentContractReference(file);
-
     fs.readFile(file, function(err, data) {
         if(err) throw err;
-        var contractName = "";
-        fileNum = 1;
-        let mutCode = solm.edit(data.toString(), function(node) {
-            if(node.type == 'ContractStatement') {
-                contractName = node.name;
-            }            
 
-            if(node.hasOwnProperty('name') && pRefList.indexOf(node.name) >= 0) {
-                for(var i = 0; i < svList.length; i++) {
-                    tmpNode = node.getSourceCode().replace(node.name,
-                        '(('+contractName+')'+node.name+')'
-                    );
+        importList = utility.collectImportedContracts(file);
+		varTypeDict = utility.getVarTypeDict(file);
+		fileNum = 1;
+        let mutCode = solm.edit(data.toString(), function(node) {
+			if(node.type == 'CallExpression' && node.callee.hasOwnProperty('object')
+				&& node.callee.object != null && importList.indexOf(varTypeDict[node.callee.object.name]+'.sol') >= 0 
+			) {
+				importFile = file.replace(filename + '.sol', importList[importList.indexOf(varTypeDict[node.callee.object.name]+'.sol')]);
+				pContracts = utility.collectInheritedContracts(importFile);
+
+				for (var i = 0; i < pContracts.length; i++) {
+					tmpNode = node.getSourceCode().replace(node.callee.object.name, pContracts[i]+'('+node.callee.object.name+')');
 
                     fs.writeFile("./sol_output/" + filename + "/"
                         + path.basename(file).slice(0, -4) + "TypeCastInsertion"
@@ -186,39 +185,65 @@ exports.mutateTypeCastInsertion = function (file, filename) {
                         }
                     );
                     fileNum++;
-                }
+
+				}	
+			}	
+		
+		});
+    });
+}
+
+exports.mutateTypeCastDeletion = function(file, filename) {
+    fs.readFile(file, function(err, data) {
+        if(err) throw err;
+        
+		iList = utility.collectImportedContracts(file);
+		fileNum = 1;
+        let mutCode = solm.edit(data.toString(), function(node) {
+            if(node.type == 'CallExpression' && node.hasOwnProperty('object')
+				&& node.object.hasOwnProperty('callee') && iList.indexOf(node.object.callee.name+'.sol')
+			) {
+               
+            	tmpNode = node.getSourceCode().replace(node.object.callee.name+'(', "");
+				tmpNode = tmpNode.replace(')', "");
+
+                fs.writeFile("./sol_output/" + filename + "/"
+                    + path.basename(file).slice(0, -4) + "TypeCastDeletion"
+                    + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+                    tmpNode), 'ascii', function(err) {
+                        if(err) throw err;
+                    }
+                );
+                fileNum++;
+               
             }
         });
     });
 }
 
-exports.mutateTypeCastDeletion = function(file, filename) {
-    pRefList = utility.getParentContractReference(file);
-
+exports.mutateTypeCastChange = function(file, filename) {
     fs.readFile(file, function(err, data) {
         if(err) throw err;
-        var contractName = "";
+
+		importParentDict = utility.getImportedContractParentsDict(file, filename);
+	
         fileNum = 1;
         let mutCode = solm.edit(data.toString(), function(node) {
-            if(node.type == 'ContractStatement') {        
-                contractName = node.name;
-            }
+            if(node.type == 'CallExpression' && node.hasOwnProperty('object')
+                && node.object.hasOwnProperty('callee') && importParentDict[node.object.callee.name] != null
+            ) {
+				for(var i = 0; i < importParentDict[node.object.callee.name].length; i++){
+                	tmpNode = node.getSourceCode().replace(node.object.callee.name, importParentDict[node.object.callee.name][i];
 
-            if(node.hasOwnProperty('name') && pRefList.indexOf(node.name) >= 0) {
-                for(var i = 0; i < svList.length; i++) {
-                    tmpNode = node.getSourceCode().replace(node.name,
-                        '(('+contractName+')'+node.name+')'
-                    );
-
-                    fs.writeFile("./sol_output/" + filename + "/"
-                        + path.basename(file).slice(0, -4) + "TypeCastInsertion"
-                        + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
-                        tmpNode), 'ascii', function(err) {
-                            if(err) throw err;
-                        }
-                    );
-                    fileNum++;
-                }
+                	fs.writeFile("./sol_output/" + filename + "/"
+                    	+ path.basename(file).slice(0, -4) + "TypeCastChange"
+                    	+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+                    	tmpNode), 'ascii', function(err) {
+                        	if(err) throw err;
+                   		}
+                	);
+                	fileNum++;
+				}
             }
         });
     });

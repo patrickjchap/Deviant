@@ -190,3 +190,33 @@ exports.getParentContractReference = function(file) {
     });
     return parentDeclarationList;
 }
+
+exports.getVarTypeDict = function(file) {
+	varTypeDict = {};
+
+	fs.readFile(file, function(err, data) {
+        if(err) throw err;
+
+        let mutCode = solm.edit(data.toString(), function(node) {
+
+            if(node.type == 'DeclarativeExpression' && node.hasOwnProperty('literal')
+				&& node.literal != null
+			) {
+                varTypeDict[node.name] = node.literal.literal;
+            }
+        });
+    });
+    return varTypeDict;
+
+}
+
+exports.getImportedContractParentsDict = function(file, filename) {
+    importParentDict = {};
+
+	impList = this.collectImportedContracts(file);
+	for(var i = 0; i < impList.length; i++) {
+		importParentDict[impList[i].replace('.sol', '')] = this.collectInheritedContracts(filename, impList[i]);
+	}
+
+    return importParentDict;
+} 

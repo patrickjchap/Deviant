@@ -28,13 +28,13 @@ contract Ballot {
 		int memory goodbyeforever;
 		int memory helloforever;
 		address cool = 0x10;
-		hello = Ballot(chairperson);
-		byte = NotBallot(chairperson);
-        byte = hex"01";
+		Ballot hello = Ballot(chairperson);
+		NotBallot byteA = NotBallot(chairperson);
+        byteB = hex"01";
         goodbyeforever = 1;
         goodbyeforever++;
         ++goodbyeforever;
-
+		hello.bye();
 	}
 
     function byteExample() public {

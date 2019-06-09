@@ -45,9 +45,9 @@ exports.mutateSelfdestructOperator = function(file, filename){
 				fileNum++
 			
 			}else if(node.hasOwnProperty('parent') && node.parent != null
-                        	&& node.parent.hasOwnProperty('type')
-                        	&& node.parent.type === 'FunctionDeclaration'
-                    		&& node.type === 'BlockStatement') 
+            	&& node.parent.hasOwnProperty('type')
+                && node.parent.type === 'FunctionDeclaration'
+                && node.type === 'BlockStatement') 
 			{
 				var selfdestruct_statement = 'selfdestruct(0x0);\n }';
 				var pos = node.getSourceCode().lastIndexOf('}');
