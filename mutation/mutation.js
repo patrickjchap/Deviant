@@ -44,5 +44,5 @@ exports.generateMutant = function(file, filename, args){
 	if(args.includes('i')){multipleInheritanceOp.mutateMultipleInheritanceOperator(file, filename)};
 	if(args.includes('l')){libraryOp.mutateLibraryOperator(file, filename)};
 	if(args.includes('j')){assignmentOp.mutateAssignmentOperator(file, filename)};
-	if(args.includes('!')){superOp.mutateSuperOperator(file, filename)};
+	//if(args.includes('!')){superOp.mutateSuperOperator(file, filename)};
 }

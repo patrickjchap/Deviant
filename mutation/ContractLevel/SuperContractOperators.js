@@ -233,7 +233,7 @@ exports.mutateTypeCastChange = function(file, filename) {
                 && node.object.hasOwnProperty('callee') && importParentDict[node.object.callee.name] != null
             ) {
 				for(var i = 0; i < importParentDict[node.object.callee.name].length; i++){
-                	tmpNode = node.getSourceCode().replace(node.object.callee.name, importParentDict[node.object.callee.name][i];
+                	tmpNode = node.getSourceCode().replace(node.object.callee.name, importParentDict[node.object.callee.name][i]);
 
                 	fs.writeFile("./sol_output/" + filename + "/"
                     	+ path.basename(file).slice(0, -4) + "TypeCastChange"
