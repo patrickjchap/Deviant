@@ -5,6 +5,7 @@ const url = require('url');
 const path = require('path');
 const child = require('child_process');
 const mutation = require('./mutation/mutation');
+var project = ''
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
@@ -15,8 +16,8 @@ let mutOpWindow;
 // Listen for app
 app.on('ready', function(){
 	mainWindow = new BrowserWindow({
-		width: 1000,
-		height: 667,
+		width: 1200,
+		height: 800,
 		resizable: true,
 		"max-height": 2160,
 		"max-width": 3840,
@@ -175,6 +176,14 @@ ipcMain.on('run:tests', function(e, mutParam){
 			printStats();
 		});
 
+});
+
+ipcMain.on('save:project', function(e, projPath) {
+    project = projPath;
+});
+
+ipcMain.on('send:project', function(e) {
+     mainWindow.webContents.send('get:project', project);
 });
 
 ipcMain.on('load:mutops', function(e) {

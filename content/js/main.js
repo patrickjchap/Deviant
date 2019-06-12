@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+var path = require('path');
+var fs = require('fs');
+var dirpath = path.join(__dirname, '/path');
 
-const dirpath = path.join(__dirname, '/path');
-
-function listFiles(directory, parentDir) {
-	fs.readdir(directory, (err, files) => {
+function listFiles(divId, directory, is_mutant) {
+	console.log(typeof directory);
+    fs.readdir(directory, (err, files) => {
 		'use strict';
 
 		if (err) throw err;
@@ -13,14 +13,26 @@ function listFiles(directory, parentDir) {
 
 			if(fs.statSync(path.join(directory, file)).isDirectory()) {
 				
-				listFiles(path.join(directory, file));
+				listFiles(divId, path.join(directory, file), is_mutant);
 
-			}else if (file.split('.').pop() === 'sol' && !directory.includes("node_modules")){
-//				var pattern = "/contracts/"
+			}else if (file.split('.').pop() === 'sol' && !directory.includes("node_modules")
+                && !directory.includes('sol_output') && !is_mutant    
+            ){
 
-				document.getElementById('display-files').innerHTML += '<option name = "'+file+'" value="' + directory  + '/' + file + '">' + /*directory.substring(directory.indexOf(pattern) + pattern.length) + */file +  '</option>';
+				document.getElementById(divId).innerHTML +=
+                    '<option name = "'+file+'" value="' + 
+                    directory  + '/' + file + '">' + 
+                file +  '</option>';
 			
-			}
+			}else if(file.split('.').pop() === 'sol' && !directory.includes("node_modules")
+                && directory.includes('sol_output')  
+            ){
+                document.getElementById(divId).innerHTML += 
+                    '<option name = "'+file+'" value="' +  
+                    directory  + '/' + file + '">' + 
+                file +  '</option>';
+
+            }
 		}
 	});
 }

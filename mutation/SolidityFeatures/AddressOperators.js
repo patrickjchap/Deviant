@@ -4,6 +4,7 @@ var solm = require('solmeister');
 //var solp = require('solidity-parser');
 var parser = require('solparse');
 var path = require('path');
+var utility = require('../utility/utility.js');
 
 var operators = {
             'zero': '0x0',
@@ -24,7 +25,7 @@ let options = {
 
 
 
-exports.mutateAddressOperator = function(file, filename){
+exports.mutateAddressLiteralOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -35,70 +36,100 @@ exports.mutateAddressOperator = function(file, filename){
 			
 			//If contract has more than two calls to change addresses
 			//to different contracts. Swap the calls.
-			if(node.type === 'CallExpression' && node.callee.type == "Identifier"
-			&& node.hasOwnProperty('property') &&
-			(node.property.name == 'transfer' || node.property.name == 'call' ||
-			node.property.name == 'send')) {
-				
-				//Check to see if node with call expression has already been found
-				if(callNode == null) {
-					callNode = node;
-				}else{
-					fs.writeFile("./sol_output/" + filename + "/"  
-					+ path.basename(file).slice(0, -4) + "AddressMutCall" 
-					+ fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
-					callNode.getSourceCode()), 'ascii', function(err) {
-						if(err) throw err;
-					});
-					fileNum++;
-					callNode = null;
-				}
-			
-			}else if(node.type == "AssignmentExpression"){
-				console.log(node.left);
-				if(node.left.literal != null && node.left.literal.literal == "address"){
-					tmpNodeZero = node.getSourceCode().replace(node.right.value, operators['zero']);
-					tmpNodeRand = node.getSourceCode().replace(node.right.value, operators['random']);
+			if(node.type == "CallExpression" && node.callee.hasOwnProperty('name')
+                && node.callee.name == 'address' && node.arguments != null
+            ){
+                var tmpNodeZero = "";
+                var tmpNodeRand = "";               
 
-					fs.writeFile("./sol_output/" + filename + "/"
-                    + path.basename(file).slice(0, -4) + "AddressMutZero"
-                    + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+			    if(node.arguments[0].type == 'Literal') {
+                    tmpNodeZero = node.getSourceCode().replace(node.arguments[0].value,
+                         operators['zero']);
+                    tmpNodeRand = node.getSourceCode().replace(node.arguments[0].value,
+                        operators['random']);
+                }else if( node.arguments[0].type == 'Identifier') {
+                    tmpNodeZero = node.getSourceCode().replace(node.arguments[0].name,
+                         operators['zero']);
+                    tmpNodeRand = node.getSourceCode().replace(node.arguments[0].name,
+                        operators['random']);      
+                }else if(node.arguments[0].type == 'ThisExpression') {
+                    tmpNodeZero = node.getSourceCode().replace('this',
+                         operators['zero']);
+                    tmpNodeRand = node.getSourceCode().replace('this',
+                        operators['random']);
+                }
+
+                if(tmpNodeZero != "" && tmpNodeRand != "") {
+                    fs.writeFile("./sol_output/" + filename + "/"
+                        + path.basename(file).slice(0, -4) + "AddressZero"
+                        + fileNum.toString() + ".sol",
+                        data.toString().replace(node.getSourceCode(),
+                        tmpNodeZero), 'ascii', function(err) {
+                            if(err) throw err;
+                        });
+                    fileNum++;
+
+                    fs.writeFile("./sol_output/" + filename + "/"
+                        + path.basename(file).slice(0, -4) + "AddressRand"
+                        + fileNum.toString() + ".sol", 
+                        data.toString().replace(node.getSourceCode(),
+                        tmpNodeRand), 'ascii', function(err) {
+                            if(err) throw err;
+                        });
+                    fileNum++;
+                }
+			}else if(node.type == "AssignmentExpression" && node.left.literal != null
+                && node.left.literal.literal == "address"
+                && !(node.left.literal.hasOwnProperty('members') 
+                && node.left.literal.members.hasOwnProperty('length')
+                && node.left.literal.members.length  >= 0)
+            ){
+				tmpNodeZero = node.getSourceCode().replace(node.right.value, operators['zero']);
+				tmpNodeRand = node.getSourceCode().replace(node.right.value, operators['random']);
+				
+                console.log(node.getSourceCode());
+                console.log(node);
+	
+                fs.writeFile("./sol_output/" + filename + "/"
+                    + path.basename(file).slice(0, -4) + "AddressZeroAE"
+                    + fileNum.toString() + ".sol",
+                     data.toString().replace(node.getSourceCode(),
                     tmpNodeZero), 'ascii', function(err) {
                         if(err) throw err;
                     });
-					fileNum++;
+				fileNum++;
 						
-		            fs.writeFile("./sol_output/" + filename + "/"
-                    + path.basename(file).slice(0, -4) + "AddressMutRand"
-                    + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+		        fs.writeFile("./sol_output/" + filename + "/"
+                    + path.basename(file).slice(0, -4) + "AddressRandAE"
+                    + fileNum.toString() + ".sol", 
+                    data.toString().replace(node.getSourceCode(),
                     tmpNodeRand), 'ascii', function(err) {
                         if(err) throw err;
                     });
-					fileNum++;
-				}
+				fileNum++;
 			}else if(node.type == 'StateVariableDeclaration' && node.hasOwnProperty('literal')
 				&& node.literal.hasOwnProperty('literal') && node.literal.literal == 'address'
-				&& node.value.hasOwnProperty('value')	
+				&& node.value != null && node.value.hasOwnProperty('value')	
 			){
 				tmpNodeZero = node.getSourceCode().replace(node.value.value, operators['zero']);
                 tmpNodeRand = node.getSourceCode().replace(node.value.value, operators['random']);
 
                 fs.writeFile("./sol_output/" + filename + "/"
-                    + path.basename(file).slice(0, -4) + "AddressMutZero"
-                    + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+                    + path.basename(file).slice(0, -4) + "AddressZeroSV"
+                    + fileNum.toString() + ".sol", 
+                    data.toString().replace(node.getSourceCode(),
                     tmpNodeZero), 'ascii', function(err) {
                         if(err) throw err;
-                    }
-				);
+                    });
                 fileNum++;
 
                 fs.writeFile("./sol_output/" + filename + "/"
-                    + path.basename(file).slice(0, -4) + "AddressMutRand"
-                    + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
+                    + path.basename(file).slice(0, -4) + "AddressRandSV"
+                    + fileNum.toString() + ".sol",
+                    data.toString().replace(node.getSourceCode(),
                     tmpNodeRand), 'ascii', function(err) {
                         if(err) throw err;
-                	}
-				);
+                	});
                 fileNum++;
 			}
 
@@ -106,5 +137,39 @@ exports.mutateAddressOperator = function(file, filename){
 		
 	})
 	
+}
+
+exports.mutateAddressSwitchCallExpressionOperator = function(file, filename) {
+    contractNames = utility.collectImportedContracts(file).forEach(function(contract) {
+        contract = contract.replace('.sol', '');
+    });    
+    
+    console.log(contractNames);
+    
+    if (contractNames != null && contractNames.length >= 2) {
+        fs.readFile(file, function(err, data) {
+            let mutCode = solm.edit(data.toString(), function(node) {
+                if(node.type == "CallExpression" 
+                    && contractNames.indexOf(node.callee.name) >= 0
+                ){
+                    for(var i = 0; i < contractNames.length; i++) {
+                        if (node.callee.name != contractNames[i]) {
+                            tmpNodeSwitch = node.getSourceCode().replace(node.callee.name,
+                                contractNames[i]);
+
+                            fs.writeFile("./sol_output/" + filename + "/"
+                                + path.basename(file).slice(0, -4) + "AddressSwitchCall"
+                                + fileNum.toString() + ".sol",
+                                data.toString().replace(node.getSourceCode(),
+                                tmpNodeSwitch), 'ascii', function(err) {
+                                    if(err) throw err;
+                                });
+                            fileNum++;
+                        }
+                    }
+                }
+            });
+        });
+    }
 }
 

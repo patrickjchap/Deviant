@@ -35,6 +35,9 @@ contract Ballot {
         goodbyeforever++;
         ++goodbyeforever;
 		hello.bye();
+        address(byteB);
+        address(123);
+        address(this);
 	}
 
     function byteExample() public {

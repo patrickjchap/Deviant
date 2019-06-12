@@ -26,32 +26,68 @@
          </li>
     </ul>
 
+<div class = "container mt-3">
 	<div class = "row">
 		<div class = "col-sm-4">
-			<label for "display-file">Select mutant file</label>
-			<select class = "custom-select" size="5" id='display-files' multiple
-			onload = "listFiles('../../sol_output/aragonOS/ERC20/')"
-			onselect="loadFile(document.getElementById('mutantFile'), 
-			document.getElementById('display-files').options[e.selectedIndex].value)"></select>
-		</div>
+			<label for "display-file">Select original file</label>
+			<select class = "custom-select" size="7" id='display-files-orig' multiple
+                onchange="
+                    listFiles('display-files-mut',
+                    './sol_output/'+project.replace(/^.*[\\\/]/, '')+
+                    '/'+document.getElementById('display-files-orig').value.replace(/^.*[\\\/]/, '')
+                    .replace('.sol', ''),
+                    true
+                    );
+
+                    getMutantStats(document.getElementById('display-files-orig').value);
+                "
+            >
+			</select>
+        
+            <label for "display-file">Select mutant file</label>
+            <select class = "custom-select" size="7" id='display-files-mut' multiple
+                onchange="
+                    getMutantDiff(document.getElementById('display-files-orig').value,
+                    document.getElementById('display-files-mut').value);
+                "
+            >
+            </select>
+        </div>
+
 		
 		<div class = "col-sm-8">
-			<input type="text" readonly class = "form-control-plaintext" id = "diffDiv"
-			onclick = "document.getElementById('diffDiv', 'example2.sol', './sol_output/example2/example2BinMut1.sol')">
-				
-			</input>
-
-			
-
-			</input>
-		</div>
+            <label for "diff-textbox">Mutation Changes</label>
+		    <textarea rows='16' style="width:99%;" id="diff-textbox" readonly></textarea>
+        </div>
+        
 	
 	</div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            <label for 'stats-textbox'>Mutation Statistics</label>
+            <textarea rows='8' style = "width:99%" id='stats-textbox' readonly></textarea>
+        </div>
+    </div>
+</div>
 	<script>
-		loadFile = function(div, file) {
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+        var project = '';
+
+        ipcRenderer.on('get:project', function(e, data) {
+            project = data;
+            listFiles('display-files-orig',
+                project,
+                false
+            )
+
+        });
+
+        ipcRenderer.send('send:project');
+
+        loadFile = function(div, file) {
 			$(div).load(file);
-			console.log($(div).text());
 			$(div).text($(div).text().split("\n").join("\\n"));
 		}
 		loadDiff = function(div, orig, mut) {

@@ -1,48 +1,44 @@
 var fs = require('fs');
-var binOp = require('./StatementLevel/BinaryOperators.js');
-var unOp = require('./StatementLevel/UnaryOperators.js');
-//var upOp = require('./UpdateOperators.js');
-var strOp = require('./StatementLevel/StringOperators.js');
-var addOp = require('./SolidityFeatures/AddressOperators.js');
-var gasOp = require('./SolidityFeatures/GasOperators.js');
-var modOp = require('./SolidityFeatures/ModifierOperators.js');
-var eventOp = require('./SolidityFeatures/EventOperators.js');
-var stateVarOp = require('./SolidityFeatures/StateVariableOperators.js');
-var functionVisOp = require('./SolidityFeatures/FunctionVisibilityOperators.js');
-var functionTypeOp = require('./SolidityFeatures/FunctionTypeOperators.js');
-var dataLocOp = require('./SolidityFeatures/ModifiableDataOperators.js');
-var selfdestructOp = require('./SolidityFeatures/SelfdestructOperators.js');
-var addressFunctionOp = require('./SolidityFeatures/AddressFunctionOperators.js');
-var abstractContractOp = require('./SolidityFeatures/AbstractContractOperators.js');
-var errorHandleOp = require('./SolidityFeatures/ErrorHandleOperators.js');
-var multipleInheritanceOp = require('./SolidityFeatures/MultipleInheritanceOperators.js');
-var libraryOp = require('./SolidityFeatures/LibraryOperators.js');
-var assignmentOp = require('./StatementLevel/AssignmentOperators.js');
-var superOp = require('./ContractLevel/SuperContractOperators.js');
 
-exports.generateMutant = function(file, filename, args){
+exports.generateMutant = function(file, filename, functionNames){
 	if(!fs.existsSync('./sol_output/' + filename)){
 		fs.mkdirSync('./sol_output/' + filename);
 	}
 
-	if(args.includes('b')){binOp.mutateBinaryOperator(file, filename);}
-//	if(args.includes('u')){upOp.mutateUpdateOperator(file);}
-	if(args.includes('n')){unOp.mutateUnaryOperator(file, filename);}
-	if(args.includes('s')){strOp.mutateStringOperator(file, filename)};
-	if(args.includes('a')){addOp.mutateAddressOperator(file, filename)};
-	if(args.includes('g')){gasOp.mutateGasOperator(file, filename)};
-	if(args.includes('m')){modOp.mutateModifierOperator(file, filename)};
-	if(args.includes('e')){eventOp.mutateEventOperator(file, filename)};
-	if(args.includes('v')){stateVarOp.mutateStateVarOperator(file, filename)};
-	if(args.includes('f')){functionVisOp.mutateFunctionVisibilityOperator(file, filename)};
-	if(args.includes('t')){functionTypeOp.mutateFunctionTypeOperator(file, filename)};
-	if(args.includes('d')){dataLocOp.mutateDataLocationOperator(file, filename)};
-	if(args.includes('r')){selfdestructOp.mutateSelfdestructOperator(file, filename)};
-	if(args.includes('z')){addressFunctionOp.mutateAddressFunctionOperator(file, filename)};
-	if(args.includes('c')){abstractContractOp.mutateAbstractContractOperator(file, filename)};
-	if(args.includes('h')){errorHandleOp.mutateErrorHandleOperator(file, filename)};
-	if(args.includes('i')){multipleInheritanceOp.mutateMultipleInheritanceOperator(file, filename)};
-	if(args.includes('l')){libraryOp.mutateLibraryOperator(file, filename)};
-	if(args.includes('j')){assignmentOp.mutateAssignmentOperator(file, filename)};
-	//if(args.includes('!')){superOp.mutateSuperOperator(file, filename)};
+    for(var i = 0; i < functionNames; i++) {
+        window[functionNames[i]](file, filename);
+    }
+}
+
+exports.genAST = function(file, filename) {
+    bin = require('./StatementLevel/BinaryOperators.js');
+    bin.mutateBinaryOperator(file, filename);
+}
+
+var address = require("./SolidityFeatures/AddressOperators.js");
+var addressFunction = require("./SolidityFeatures/AddressFunctionOperators.js");
+var error = require("./SolidityFeatures/ErrorHandleOperators.js");
+var events = require("./SolidityFeatures/EventOperators.js");
+var functionType = require("./SolidityFeatures/FunctionTypeOperators.js");
+var functionVis = require("./SolidityFeatures/FunctionVisibilityOperators.js");
+var gas = require("./SolidityFeatures/GasOperators.js");
+var library = require("./SolidityFeatures/LibraryOperators.js");
+var modifiable = require("./SolidityFeatures/ModifiableDataOperators.js");
+var modifier = require("./SolidityFeatures/ModifierOperators.js");
+var sd = require("./SolidityFeatures/SelfdestructOperators.js");
+var sv = require("./SolidityFeatures/StateVariableOperators.js");
+exports.generateSolidityMutants = function(file, filename) {
+    addressFunction.mutateAddressFunctionOperator(file, filename);
+    address.mutateAddressLiteralOperator(file, filename);
+    address.mutateAddressSwitchCallExpressionOperator(file, filename);
+    error.mutateErrorHandleOperator(file, filename);
+    events.mutateEventOperator(file, filename);
+    functionType.mutateFunctionTypeOperator(file, filename);
+    functionVis.mutateFunctionVisibilityOperator(file, filename);
+    gas.mutateGasOperator(file, filename);
+    library.mutateLibraryOperator(file, filename);
+    modifiable.mutateDataLocationOperator(file, filename);
+    modifier.mutateModifierOperator(file, filename);
+    sd.mutateSelfdestructOperator(file, filename);
+    sv.mutateStateVarOperator(file, filename);
 }
