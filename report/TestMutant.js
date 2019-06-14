@@ -21,6 +21,9 @@ exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, 
 
 		let child;
 		try{
+			exec('sudo rm -rf /tmp/*', 
+				{encoding: 'utf8', maxBuffer: 50 * 1024 * 1024});
+
 			command = 'cd ' + '"'+sourceProject+'"' + ' && ' + 'npm test';
 			child = exec(
 				command, 
