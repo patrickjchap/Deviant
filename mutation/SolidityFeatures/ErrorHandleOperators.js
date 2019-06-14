@@ -45,9 +45,9 @@ exports.mutateErrorHandleOperator = function(file, filename){
                 && node.parent.type === 'FunctionDeclaration'
                 && node.type === 'BlockStatement')
             {
-                var require_statement = 'require(false);';
-				var assert_statement = 'assert(false);';
-				var revert_statement = 'revert("this is a mutant")';
+                var require_statement = 'require(false);}';
+				var assert_statement = 'assert(false);}';
+				var revert_statement = 'revert("this is a mutant");}';
                 var pos = node.getSourceCode().lastIndexOf('}');
 
                 fs.writeFile("./sol_output/" + filename + "/"

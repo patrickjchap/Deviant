@@ -23,6 +23,10 @@ contract Ballot {
 	int private privint;
     address public chairperson;
 	
+	function testpure() pure {
+
+	}
+		
 	function hello() public modif{
 		string hi = "what is up";
 		int memory goodbyeforever;

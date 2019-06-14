@@ -58,9 +58,24 @@ exports.mutateFunctionTypeOperator = function(file, filename){
                 fileNum++;
 			}
 
-			if(node.type == 'FunctionDeclaration') {
+			containsModif = false;
+			if (node.hasOwnProperty('modifiers') && node.modifiers != null) {
+				for(var i = 0; i < node.modifiers.length; i++) {
+					if(fTypes.indexOf(node.modifiers[i].name)){
+						containsModif = true;
+					}
+				}
+			}
+
+			if(node.type == 'FunctionDeclaration'
+				&& !containsModif
+			) {
 				for(var i = 0; i < fTypes.length; i++) {
                		tmpNode = node.getSourceCode().replace('{', fTypes[i] + ' {');		
+
+					if(node.getSourceCode().includes('return')) {
+						tmpNode = node.getSourceCode().replace('return', fTypes[i] + ' return');
+					}				
 
 					fs.writeFile("./sol_output/" + filename + "/"
                 		+ path.basename(file).slice(0, -4) + "FunctionTypeIns"

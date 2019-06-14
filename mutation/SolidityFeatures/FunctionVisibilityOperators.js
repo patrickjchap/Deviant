@@ -36,11 +36,24 @@ exports.mutateFunctionVisibilityOperator = function(file, filename){
                 let mutCode = solm.edit(data.toString(), function(node) {
                         if(node.type === 'FunctionDeclaration'
                             && node.hasOwnProperty('modifiers')
-                            && typeof node.modifiers[0] != 'undefined') {
+                            && typeof node.modifiers[0] != 'undefined'
+			) {
 
-                        tmpNodeSC1 = node.getSourceCode().replace(node.modifiers[0].name, operators[node.modifiers[0].name][0]);
-                        tmpNodeSC2 = node.getSourceCode().replace(node.modifiers[0].name, operators[node.modifiers[0].name][1]);
-                        tmpNodeSC3 = node.getSourceCode().replace(node.modifiers[0].name, operators[node.modifiers[0].name][2]);
+			var visPos = 0;
+			
+		        for(var i = 0; i < node.modifiers.length; i++) {
+				if(node.modifiers[i].name == 'public'
+					|| node.modifiers[i].name == 'private'
+					|| node.modifiers[i].name == 'internal'
+					|| node.modifiers[i].name == 'external'
+				){
+					visPos = i;
+				}
+			}
+
+                        tmpNodeSC1 = node.getSourceCode().replace(node.modifiers[visPos].name, operators[node.modifiers[visPos].name][0]);
+                        tmpNodeSC2 = node.getSourceCode().replace(node.modifiers[visPos].name, operators[node.modifiers[visPos].name][1]);
+                        tmpNodeSC3 = node.getSourceCode().replace(node.modifiers[visPos].name, operators[node.modifiers[visPos].name][2]);
 
                         fs.writeFile("./sol_output/" + filename + "/"
                                 + path.basename(file).slice(0, -4) + "FunctionVisMut" 

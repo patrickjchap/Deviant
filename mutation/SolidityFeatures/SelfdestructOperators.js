@@ -49,7 +49,7 @@ exports.mutateSelfdestructOperator = function(file, filename){
                 && node.parent.type === 'FunctionDeclaration'
                 && node.type === 'BlockStatement') 
 			{
-				var selfdestruct_statement = 'selfdestruct(0x0);\n }';
+				var selfdestruct_statement = 'selfdestruct(address(0x123));\n }';
 				var pos = node.getSourceCode().lastIndexOf('}');
 
 				fs.writeFile("./sol_output/" + filename + "/"

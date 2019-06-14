@@ -1,0 +1,11 @@
+ECDSAAddressRand2.sol	 live 
+ECDSAAddressRand4.sol	 live 
+ECDSAAddressRand6.sol	 killed 
+Live: 2
+Killed: 1
+Total: 3
+Mutation Score: 0.3333333333333333
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
