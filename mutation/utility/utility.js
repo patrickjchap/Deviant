@@ -84,9 +84,9 @@ exports.getContractType = function(file) {
 	});
 }
 
-exports.buildOverriddingList = function(file) {
+exports.buildOverridingList = function(file) {
     //gathering location of files that contract inherits from
-    importList = this.collectImportContracts(file);
+    importList = this.collectImportedContracts(file);
     inheritedList = this.collectInheritedContracts(file);
     matchList = this.matchInheritedImportedContracts(inheritedList, importList);
 

@@ -2,8 +2,15 @@ var path = require('path');
 var fs = require('fs');
 var dirpath = path.join(__dirname, '/path');
 
+function wipeList(divId){
+    document.getElementById(divId).innerHTML = "";
+}
+
 function listFiles(divId, directory, is_mutant) {
-	console.log(typeof directory);
+	//console.log(directory);
+    //console.log(typeof directory);
+
+
     fs.readdir(directory, (err, files) => {
 		'use strict';
 

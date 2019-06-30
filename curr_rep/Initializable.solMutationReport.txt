@@ -1,0 +1,36 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+InitializableErrorHandle1.sol	 killed 
+InitializableErrorHandle2.sol	 killed 
+InitializableErrorHandleAssertInsert10.sol	 killed 
+InitializableErrorHandleAssertInsert13.sol	 killed 
+InitializableErrorHandleAssertInsert4.sol	 live 
+InitializableErrorHandleAssertInsert7.sol	 live 
+InitializableErrorHandleReqInsert12.sol	 killed 
+InitializableErrorHandleReqInsert3.sol	 live 
+InitializableErrorHandleReqInsert6.sol	 live 
+InitializableErrorHandleReqInsert9.sol	 killed 
+InitializableErrorHandleRevertInsert11.sol	 killed 
+InitializableErrorHandleRevertInsert14.sol	 killed 
+InitializableErrorHandleRevertInsert5.sol	 live 
+InitializableErrorHandleRevertInsert8.sol	 live 
+InitializableFunctionTypeDel2.sol	 killed 
+InitializableFunctionTypeDel4.sol	 killed 
+InitializableModifierAddMut3.sol	 live 
+InitializableModifierDelMut1.sol	 killed 
+InitializableModifierDelMut2.sol	 live 
+InitializableSelfdestructInsert1.sol	 live 
+InitializableSelfdestructInsert2.sol	 live 
+InitializableSelfdestructInsert3.sol	 killed 
+InitializableSelfdestructInsert4.sol	 killed 
+InitializableStateVarMut1.sol	 live 
+InitializableStateVarMut3.sol	 live 
+InitializableStateVarMut4.sol	 live 
+InitializableStateVarMut5.sol	 live 
+InitializableStateVarMut6.sol	 live 
+Live: 15
+Killed: 13
+Total: 28
+Mutation Score: 0.4642857142857143

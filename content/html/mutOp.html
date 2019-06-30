@@ -9,22 +9,8 @@
 <div class="container-fluid p-2 bg-dark text-white" style = "min-height:100%">
 
 	<script src="../js/req.js"></script>
-    
-	<!--Home menu navigation-->
-	<ul class = "nav nav-tabs nav-justified">
-        <li class = "nav-item">
-            <a class = "nav-link" href = "main.html">Home</a>
-        </li>
-        <li class = "nav-item">
-            <a class = "nav-link active" href = "mutOp.html">Mutation Operators</a>
-        </li>
-        <li class = "nav-item">
-            <a class = "nav-link" href = "report.html">Report</a>
-        </li>
-    </ul>
 
-
-	<div class="container mt-3">
+	<div class="container-fluid mt-3">
 		<!--Mutation operator navigation-->
 		<ul class = "nav nav-tabs">
 			<li class = "nav-item">
@@ -38,9 +24,6 @@
 			</li>
 			<li class = "nav-item">
 				<a class = "nav-link" data-toggle="tab" href="#intermoduleLvl">Inter-Module-Level</a>
-			</li>
-			<li class = "nav-item">
-				<a class = "nav-link" data-toggle="tab" href="#solidityLvl">Solidity-Feature-Level</a>
 			</li>
 		</ul>
 
@@ -66,17 +49,27 @@
 						</label> 
 					</div>
 					
+                    
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "binary.mutateBinaryOperator(file, filename);">Binary Expression
+                        </label>
+                    </div>
+
+                    <!-- !!!FOR LATER IMPLMENTATION!!!
 					<div class = "form-check">
                         <label class = "form-check-label">
 							<input type = "checkbox" data-toggle = "collapse" data-target = "#binaryList" 
 							class = "form-check-input" name = "stLvl" value = "BinaryOp" oninput = "toggle(this, 'bLvl')">Binary Expression
 						</label>
 					</div>
+                    -->
 
-					<div id = "binaryList" class = "collapse" style="padding-left:20px">
+					<!-- !!!FOR LATER IMPLEMENTATION!!! 
+                    <div id = "binaryList" class = "collapse" style="padding-left:20px">
 						<div class = "form-check">
 							<label class = "form-check-label">
-								<input type = "checkbox" class = "form-check-input" name = "bLvl" value = "binaryRel">Relationship Operators
+								<input type = "checkbox" class = "form-check-input" name = "bLvl" value = "binary.mutateBinaryOperator(file, filename);">
 							</label>
 						</div>
                         <div class = "form-check">
@@ -89,9 +82,11 @@
                                 <input type = "checkbox" class = "form-check-input" name = "bLvl" value = "binaryAll">Arithmetic Operators
                             </label>
                         </div>
-					</div>
+					</div> 
+                    -->
 
 
+                    <!-- FOR FURTHER IMPLEMENTATION
 					<div class = "form-check">
                         <label class = "form-check-label">
 							<input type = "checkbox" data-toggle = "collapse" data-target = "#unaryList" class = "form-check-input" name = "stLvl" value = "UnaryOp">Unary Expression
@@ -121,6 +116,14 @@
                             </label>
                         </div>
                     </div>
+                    -->
+                    
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "unOp.mutateUnaryOperator(file, filename);">Unary Expression
+                        </label>
+                    </div>
+
 
 
 					<div class = "form-check">
@@ -132,43 +135,70 @@
 					<div id = "literalList" class = "collapse" style="padding-left:20px">
                         <div class = "form-check">
                             <label class = "form-check-label">
-                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalString">String Operators
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "strOp.mutateStringOperator(file, filename);">String Operators
                             </label>
                         </div>
                         <div class = "form-check">
                             <label class = "form-check-label">
-                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalInteger">Integer Operators
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "intOp.mutateIntegerOperator(file, filename);">Integer Operators
                             </label>
                         </div>
 
                         <div class = "form-check">
                             <label class = "form-check-label">
-                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalDecimal">Decimal Operators
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "hexOp.mutateHexadecimalOperator(file, filename);">Hexadecimal Operators
                             </label>
                         </div>
                         <div class = "form-check">
                             <label class = "form-check-label">
-                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalHexadecimal">Hexadecimal Operators
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "byteOp.mutateBytesOperator(file, filename);">Byte Operators
                             </label>
                         </div>
                         <div class = "form-check">
                             <label class = "form-check-label">
-                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalByte">Byte Operators
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "boolOp.mutateBooleanOperator(file, filename);">Boolean Operators
                             </label>
                         </div>
                         <div class = "form-check">
                             <label class = "form-check-label">
-                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "literalBoolean">Boolean Operators
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "address.mutateAddressLiteralOperator(file, filename);">Address Literal Operators*
                             </label>
                         </div>
+                        <div class = "form-check">
+                            <label class = "form-check-label">
+                                <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "gas.mutateGasOperator(file, filename);">Gas Literal Operators*
+                            </label>
+                        </div>
+
                     </div>
 
 
 					<div class = "form-check">
                         <label class = "form-check-label">
-							<input type = "checkbox" class = "form-check-input" name = "stLvl" value = "AssignmentOp">Assignment Expression
+							<input type = "checkbox" class = "form-check-input" name = "stLvl" value = "assign.mutateAssignmentOperator(file, filename);">Assignment Expression
 						</label>
 					</div>
+
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "addressFunction.mutateAddressFunctionOperator(file, filename);">Address Function*
+                        </label>
+                    </div>
+
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "address.mutateAddressSwitchCallExpressionOperator(file, filename);">Address Switch Call Expressions*
+                        </label>
+                    </div>
+
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "stLvl" value = "modifiable.mutateDataLocationOperator(file, filename);">Data Location Operators*
+                        </label>
+                    </div>
+
+
+
     
 					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
 				</form>
@@ -180,19 +210,34 @@
 					<span><label><input type = "checkbox" onClick= "toggle(this, 'fLvl')" /> Select All </label> </span>
 					<div class = "form-check">
 						<label class = "form-check-label">
-							<input type = "checkbox" class = "form-check-input" name = "fLvl" value = "swapStatement">Swap Statement Operators
+							<input type = "checkbox" class = "form-check-input" name = "fLvl" value = "statement.mutateStatementOperator(file, filename);">Delete Statement Operators
 						</label>
 					</div>
+
 					<div class = "form-check">
 						<label class = "form-check-label">
-							<input type = "checkbox" class = "form-check-input" name = "fLvl" value = "dlStatement">Delete Statement Operators
+							<input type = "checkbox" class = "form-check-input" name = "fLvl" value = "block.mutateBlockOperator(file, filename);">Delete Block Operators
 						</label>
 					</div>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" class = "form-check-input" name = "fLvl" value = "dlBlock">Delete Block Operators
-						</label>
-					</div>
+
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "fLvl" value = "error.mutateErrorHandleOperator(file, filename);">Exception-Handling Operators*
+                        </label>
+                    </div>
+
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "fLvl" value = "events.mutateEventOperator(file, filename);">Event Operators*
+                        </label>
+                    </div>
+
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "fLvl" value = "sd.mutateSelfdestructOperator(file, filename);">Selfdestruct Operators*
+                        </label>
+                    </div>
+
 					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
 
 			</div>
@@ -202,41 +247,113 @@
 				
 				<h3> Intra-Module Level </h3>
 					<span><label><input type = "checkbox" onClick= "toggle(this, 'intraLvl')" /> Select All </label> </span>
+                    
                     <div class = "form-check">
                         <label class = "form-check-label">
-                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "overriding">Overriding Functions
+                            <input type = "checkbox" data-toggle = "collapse" data-target = "#overList" 
+                                class = "form-check-input" name = "intraLvl">
+                                Overriding Operators
+                        </label>
+                    </div>
+                    
+                    <div id = "overList" class = "collapse" style="padding-left:20px">
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "over.mutateOverrideFunctionRename(file, filename);">Overriding Function Rename
                         </label>
                     </div>
                     <div class = "form-check">
                         <label class = "form-check-label">
-                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "overloading">Overloading Functions
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "over.mutateOverrideFunctionCPC(file, filename);">Overriding Function CPC
                         </label>
                     </div>
                     <div class = "form-check">
                         <label class = "form-check-label">
-                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">Function Visibility
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "over.mutateOverrideFunctionDeleteOperator(file, filename);">Overriding Function Delete
+                        </label>
+                    </div>
+                    </div>            
+    
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" data-toggle = "collapse" data-target = "#HVList" class = "form-check-input" name = "stLvl">Hiding Variable Operators
+                        </label>
+                    </div>
+
+                    <div id = "HVList" class = "collapse" style="padding-left:20px">
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "superOp.mutateHidingVariableInsert(file, filename);">Hiding Variable Insertion
                         </label>
                     </div>
                     <div class = "form-check">
                         <label class = "form-check-label">
-                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">Function Type
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "superOp.mutateHidingVariableDelete(file, filename);">Hiding Variable Deletion
+                        </label>
+                    </div>
+                    </div>
+
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" data-toggle = "collapse" data-target = "#typeList" class = "form-check-input" name = "intralLvl">Type Operators
+                        </label>
+                    </div>
+
+                    <div id = "typeList" class = "collapse" style="padding-left:20px">
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "superOp.mutateDeleteSuper(file, filename);">Delete Super Keyword
                         </label>
                     </div>
                     <div class = "form-check">
                         <label class = "form-check-label">
-                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">State Variable Visibility
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "superOp.mutateInsertSuper(file, filename);">Insert Super Keyword
                         </label>
                     </div>
                     <div class = "form-check">
                         <label class = "form-check-label">
-                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">placeholder
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "superOp.mutateTypeCastInsertion(file, filename);">Type Cast Insertion
                         </label>
                     </div>
                     <div class = "form-check">
                         <label class = "form-check-label">
-                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "AssignmentOp">placeholder
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "superOp.mutateTypeCastDeletion(file, filename);">Type Cast Deletion
                         </label>
                     </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "superOp.mutateTypeCastChange(file, filename);">Type Cast Change
+                        </label>
+                    </div>
+                    </div>
+
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "sv.mutateStateVarOperator(file, filename);">State Variably Visibility*
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "functionType.mutateFunctionTypeOperator(file, filename);">Function Type Operators*
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "functionVis.mutateFunctionVisibilityOperator(file, filename);">Function Visibility Operators*
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "library.mutateLibraryOperator(file, filename);">Library Visibility Operators*
+                        </label>
+                    </div>
+                    <div class = "form-check">
+                        <label class = "form-check-label">
+                            <input type = "checkbox" class = "form-check-input" name = "intraLvl" value = "modifier.mutateModifierOperator(file, filename);">Function Modifier Operators*
+                        </label>
+                    </div>
+
+
 
 					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
 
@@ -245,13 +362,8 @@
 			<!-- Inter-Class Level Operators -->
 			<div id="intermoduleLvl" class = "container tab-pane">
 				<h3> Inter-Module Level </h3>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" onClick= "toggle(this, 'interLvl')" /> Select All 
-						</label> 
-					</div>
-
-					<div class = "form-check">
+					<span><label><input type = "checkbox" onClick= "toggle(this, 'interLvl')" /> Select All </label> </span>
+                    <div class = "form-check">
 						<label class = "form-check-label">
 							<input type = "checkbox" class = "mutCheck" name = "interlvl" value = "multInheritance">Multiple-Inheritance Operators
 						</label>
@@ -259,57 +371,10 @@
 
 
 
-					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
+					<button type="submit" class = "btn btn-primary btn-sm pt-2">Save</button>
 
 			</div>
 		
-			<!-- Solidity Features -->
-			<div id="solidityLvl" class = "container tab-pane">
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" onClick= "toggle(this, 'solFeat')" /> Select All
-						</label> 
-					</div>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "a">Address Operators
-						</label>
-					</div>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "g">Gas Operators
-						</label>
-					</div>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "m">Modifier Operators
-						</label>
-					</div>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "e">Event Operators
-						</label>
-					</div>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "v">State Variable Operators
-						</label>
-					</div>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "f">Function Visibility Operators
-						</label>
-					</div>
-					<div class = "form-check">
-						<label class = "form-check-label">
-							<input type = "checkbox" name = "solFeat" class = "mutCheck" value = "t">Function Type Operators
-						</label>
-					</div>
-
-					<button type="submit" class = "btn btn-primary btn-sm">Save</button>
-			
-			</div>
-	
 		</div>
 	</div>
 		
@@ -337,7 +402,9 @@
 				var mutParam = "";
 				var mutOps = document.getElementsByClassName('form-check-input');
 				for(var i = 0; mutOps[i]; ++i){
-					if(mutOps[i].checked){
+					if(mutOps[i].checked && mutOps[i].value != "on"
+                        && mutOps[i].value != "StringOp"
+                    ){
 						console.log(mutOps[i].value);
 						mutParam += mutOps[i].value;
 					}
@@ -351,7 +418,7 @@
 			}
 
 			window.onunload = function(e) {
-				submitForm();
+				//submitForm();
 				console.log('unload');
 			}
         </script>

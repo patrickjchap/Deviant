@@ -1,7 +1,9 @@
 const fs = require('fs');
 const exec = require('child_process').execSync;
+const electron = require('electron');
+const {ipcRenderer} = electron;
 
-exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, sourceProject){
+exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, sourceProject, reportDirectory, reportWindow){
 	var killed = 0;
 	var live = 0;
 	var total_mutants = 0;
@@ -19,10 +21,17 @@ exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, 
 			if(err) console.log(err);
 		});
 
+        ipcRenderer.send('get:statusUpdate', 'Status: Testing ' + filename);
+
 		let child;
 		try{
-			exec('sudo rm -rf /tmp/*', 
-				{encoding: 'utf8', maxBuffer: 50 * 1024 * 1024});
+			try{
+
+                exec('sudo rm -rf /tmp/*', 
+				    {encoding: 'utf8', maxBuffer: 50 * 1024 * 1024});
+            }catch(err) {
+                
+            }
 
 			command = 'cd ' + '"'+sourceProject+'"' + ' && ' + 'npm test';
 			child = exec(
@@ -31,25 +40,39 @@ exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, 
 			).toString();
 				
 			console.log(child);
-			if(child.includes('passing')){
+            if(child.includes('failing')) {
+                killed++
+                total_mutants++;
+                console.log('Mutant killed: ' + file);
+                
+				fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', filename + '\t killed \n');
+            }else if(child.includes('passing')){
 				live++;
 				total_mutants++;
 				console.log('Mutant live: ' + file);
-				fs.appendFileSync(contractName + 'MutationReport.txt', filename + '\t live \n');
 				
-			}
+				fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', filename + '\t live \n');
+			}else if(child.includes('Compilation failed')){
+                console.log('Mutant not valid: ' + file);
+                fs.unlinkSync(file);
+            }
 			fs.unlinkSync(contractFile);
 			
 			
 		}catch(err){
-			console.log(err);
-			if(err.hasOwnProperty('stdout')) console.log(err.stdout.toString());	
+			if(err.hasOwnProperty('stdout')){
+                console.log(err.stdout.toString());
+            }else{
+                console.log(err);
+            }	
 			if(err.stdout.toString().includes('failing')){
 				killed++;
                 total_mutants++;
 				console.log('Mutant killed: ' + file);
-                fs.appendFileSync(contractName + 'MutationReport.txt', filename + '\t killed \n');
-			}else if(err.stdout.toString().includes('Compilation failed')){
+                fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', filename + '\t killed \n');
+			}else if(err.stdout.toString().includes('Compilation failed')
+                || err.stdout.toString().includes('Compiliation failed') //mispelling that exists in output
+            ){
 				console.log('Mutant not valid: ' + file);
 				fs.unlinkSync(file);
 			}
@@ -58,10 +81,12 @@ exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, 
 		}
 	});
 
-	fs.appendFileSync(contractName + 'MutationReport.txt', 'Live: ' + live + '\n');
-	fs.appendFileSync(contractName + 'MutationReport.txt', 'Killed: ' + killed + '\n');
-	fs.appendFileSync(contractName + 'MutationReport.txt', 'Total: ' + total_mutants+ '\n');
-	fs.appendFileSync(contractName + 'MutationReport.txt', 'Mutation Score: ' + killed/total_mutants + '\n');
+    ipcRenderer.send('get:statusUpdate', 'Status: Finished testing. Click "View Report" to see results.');
+	
+    fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', 'Live: ' + live + '\n');
+	fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', 'Killed: ' + killed + '\n');
+	fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', 'Total: ' + total_mutants+ '\n');
+	fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', 'Mutation Score: ' + killed/total_mutants + '\n');
 
 	fs.rename(contractFile + '.tmp', contractFile, function(err) {
 		if (err) {

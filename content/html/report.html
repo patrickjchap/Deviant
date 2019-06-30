@@ -14,32 +14,22 @@
 	<script src="../js/main.js"></script>
 	<script src="../js/report.js"></script>
 
-    <ul class = "nav nav-tabs nav-justified">
-        <li class = "nav-item">
-            <a class = "nav-link" href = "main.html">Home</a>
-        </li>
-        <li class = "nav-item">
-            <a class = "nav-link" href = "mutOp.html">Mutation Operators</a>
-        </li>
-        <li class = "nav-item">
-            <a class = "nav-link active" href = "report.html">Report</a>
-         </li>
-    </ul>
-
 <div class = "container mt-3">
 	<div class = "row">
 		<div class = "col-sm-4">
 			<label for "display-file">Select original file</label>
 			<select class = "custom-select" size="7" id='display-files-orig' multiple
                 onchange="
+                    wipeList('display-files-mut');
+            
                     listFiles('display-files-mut',
-                    './sol_output/'+project.replace(/^.*[\\\/]/, '')+
+                    outputLoc+
                     '/'+document.getElementById('display-files-orig').value.replace(/^.*[\\\/]/, '')
                     .replace('.sol', ''),
                     true
                     );
 
-                    getMutantStats(document.getElementById('display-files-orig').value);
+                    getMutantStats(document.getElementById('display-files-orig').value, outputLoc.replace('./sol_output/', ''));
                 "
             >
 			</select>
@@ -74,9 +64,18 @@
         const electron = require('electron');
         const {ipcRenderer} = electron;
         var project = '';
+        var outputLoc;
+
+        ipcRenderer.send('send:outputLoc');
+        ipcRenderer.on('get:outputLoc', function(e, data) {
+            console.log(outputLoc);
+            outputLoc = data;
+        });
 
         ipcRenderer.on('get:project', function(e, data) {
             project = data;
+            console.log(project);
+            wipeList('display-files-orig');
             listFiles('display-files-orig',
                 project,
                 false

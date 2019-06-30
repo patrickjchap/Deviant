@@ -1,0 +1,34 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+ScriptHelpersErrorHandleAssertInsert11.sol	 killed 
+ScriptHelpersErrorHandleAssertInsert14.sol	 killed 
+ScriptHelpersErrorHandleAssertInsert17.sol	 live 
+ScriptHelpersErrorHandleAssertInsert2.sol	 live 
+ScriptHelpersErrorHandleAssertInsert5.sol	 killed 
+ScriptHelpersErrorHandleAssertInsert8.sol	 killed 
+ScriptHelpersErrorHandleReqInsert1.sol	 live 
+ScriptHelpersErrorHandleReqInsert10.sol	 killed 
+ScriptHelpersErrorHandleReqInsert13.sol	 killed 
+ScriptHelpersErrorHandleReqInsert16.sol	 live 
+ScriptHelpersErrorHandleReqInsert4.sol	 killed 
+ScriptHelpersErrorHandleReqInsert7.sol	 killed 
+ScriptHelpersErrorHandleRevertInsert12.sol	 killed 
+ScriptHelpersErrorHandleRevertInsert15.sol	 killed 
+ScriptHelpersErrorHandleRevertInsert18.sol	 live 
+ScriptHelpersErrorHandleRevertInsert3.sol	 live 
+ScriptHelpersErrorHandleRevertInsert6.sol	 killed 
+ScriptHelpersErrorHandleRevertInsert9.sol	 killed 
+ScriptHelpersFunctionTypeDel10.sol	 live 
+ScriptHelpersFunctionTypeDel12.sol	 live 
+ScriptHelpersFunctionTypeDel2.sol	 live 
+ScriptHelpersFunctionTypeDel6.sol	 live 
+ScriptHelpersFunctionTypeSwap1.sol	 live 
+ScriptHelpersFunctionTypeSwap11.sol	 live 
+ScriptHelpersFunctionTypeSwap5.sol	 live 
+ScriptHelpersFunctionTypeSwap9.sol	 live 
+Live: 14
+Killed: 12
+Total: 26
+Mutation Score: 0.46153846153846156

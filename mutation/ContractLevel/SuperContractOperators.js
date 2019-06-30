@@ -43,7 +43,7 @@ exports.mutateInsertSuper = function(file, filename){
 			        }
                 );
 			    fileNum++;
-            }else if (node.type('AssignmentExpression') && node.hasOwnProperty('left')
+            }else if (node.type == 'AssignmentExpression' && node.hasOwnProperty('left')
                 && svList.indexOf(node.left.name) >= 0
             ){
                 tmpNode = node.getSourceCode().replace(node.left.name,'super.'+node.left.name);
@@ -58,7 +58,7 @@ exports.mutateInsertSuper = function(file, filename){
                 );
                 fileNum++;
 
-            }else if (node.type('BinaryExpression') && 
+            }else if (node.type == 'BinaryExpression' && 
                 (svList.indexOf(node.left.name) >= 0 || svList.indexOf(node.right.name) >=0)
             ){
 

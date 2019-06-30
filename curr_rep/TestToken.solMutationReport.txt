@@ -1,0 +1,74 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+TestTokenBinMut1.sol	 killed 
+TestTokenBinMut10.sol	 killed 
+TestTokenBinMut13.sol	 killed 
+TestTokenBinMut14.sol	 killed 
+TestTokenBinMut15.sol	 live 
+TestTokenBinMut16.sol	 killed 
+TestTokenBinMut17.sol	 live 
+TestTokenBinMut18.sol	 killed 
+TestTokenBinMut19.sol	 live 
+TestTokenBinMut2.sol	 live 
+TestTokenBinMut20.sol	 live 
+TestTokenBinMut21.sol	 live 
+TestTokenBinMut22.sol	 live 
+TestTokenBinMut23.sol	 live 
+TestTokenBinMut24.sol	 live 
+TestTokenBinMut25.sol	 live 
+TestTokenBinMut26.sol	 live 
+TestTokenBinMut27.sol	 live 
+TestTokenBinMut28.sol	 live 
+TestTokenBinMut29.sol	 live 
+TestTokenBinMut3.sol	 live 
+TestTokenBinMut4.sol	 killed 
+TestTokenBinMut5.sol	 killed 
+TestTokenBinMut6.sol	 killed 
+TestTokenBinMut7.sol	 killed 
+TestTokenBinMut8.sol	 killed 
+TestTokenBinMut9.sol	 killed 
+TestTokenBooleanMut1.sol	 live 
+TestTokenBooleanMut2.sol	 live 
+TestTokenBooleanMut3.sol	 live 
+TestTokenBooleanMut4.sol	 live 
+TestTokenStmtDelMut1.sol	 live 
+TestTokenStmtDelMut10.sol	 live 
+TestTokenStmtDelMut11.sol	 live 
+TestTokenStmtDelMut12.sol	 live 
+TestTokenStmtDelMut13.sol	 live 
+TestTokenStmtDelMut14.sol	 live 
+TestTokenStmtDelMut15.sol	 live 
+TestTokenStmtDelMut2.sol	 live 
+TestTokenStmtDelMut3.sol	 live 
+TestTokenStmtDelMut4.sol	 live 
+TestTokenStmtDelMut5.sol	 live 
+TestTokenStmtDelMut6.sol	 live 
+TestTokenStmtDelMut7.sol	 live 
+TestTokenStmtDelMut8.sol	 live 
+TestTokenStmtDelMut9.sol	 live 
+Live: 34
+Killed: 12
+Total: 46
+Mutation Score: 0.2608695652173913

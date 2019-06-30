@@ -16,7 +16,7 @@ let options = {
 
 
 
-exports.mutateStringOperator = function(file){
+exports.mutateIntegerOperator = function(file){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -43,7 +43,7 @@ exports.mutateStringOperator = function(file){
                 fs.writeFile("./sol_output/"
                     + path.basename(file).slice(0, -4) + "IntRandom"
                     + fileNum.toString() + ".sol", data.troString().replace(
-                    node.getSourceCodde(0, tmpNode), 'ascii', function(err) {
+                    node.getSourceCode(), tmpNode), 'ascii', function(err) {
                         if(err) throw err;
                     }
 			    );

@@ -23,7 +23,6 @@ exports.mutateBlockOperator = function(file, filename) {
         fileNum = 1;
         let mutCode = solm.edit(data.toString(), function(node) {
             if(node.type === 'BlockStatement') {
-                mutOperator = mutOperatorList;
 
                 tmpNode = node.getSourceCode().replace(node.operator, "");
 

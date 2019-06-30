@@ -23,14 +23,12 @@ exports.mutateStatementOperator = function(file, filename){
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
 		    if(node.type === 'ExpressionStatement') {
-				mutOperator = mutOperatorList;
 				
-				tmpNode = node.getSourceCode().replace(node.operator, "");
 
 				fs.writeFile("./sol_output/" +  filename + '/'
 					+ path.basename(file).slice(0, -4) + "StmtDelMut" 
 					+ fileNum.toString() + ".sol", data.toString().replace(
-                    node.getSourceCode(), tmpNode), 'ascii', function(err) {
+                    node.getSourceCode(), ""), 'ascii', function(err) {
 						if(err) throw err;
 					}
                 );

@@ -19,35 +19,9 @@ let options = {
 	}
 };
 
-buildOverriddingList = function(file) {
-	//gathering location of files that contract inherits from
-    importList = utility.collectImportContracts(file);
-    inheritedList = utility.collectInheritedContracts(file);
-    matchList = utility.matchInheritedImportedContracts(inheritedList, importList);
-
-    functionMatchLists = [];
-    //changing path to match relation to original contract
-    for(var i = 0; i < matchList.length; i++) {
-        functionMatchLists.push(utility.collectContractFunctions(
-            path.dirname(file) + '/' + matchList[i])
-        );
-    }
-
-    currFunctionList = utility.collectContractFunctions(file);
-    overridingList = [];
-    for(var i = 0; i < functionMatchLists.lengthi; i++) {
-        for(var j = 0; j < functionMatchLists[i].length; j++){
-            //if both lists contain same function name
-            if(currFunction.indexOf(functionMatchLists[i][j]) > -1){
-                overridingList.push(functionMatchLists[i][j]);
-            }
-        }
-    }
-	return overridingList;
-}
 
 exports.mutateOverrideFunctionDeleteOperator = function(file, filename){
-	overridingList = buildOverridingList(file);
+	overridingList = utility.buildOverridingList(file);
 
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -71,7 +45,7 @@ exports.mutateOverrideFunctionDeleteOperator = function(file, filename){
 }
 
 exports.mutateOverrideFunctionCPC = function(file, filename) {
-   overridingList = buildOverridingList(file); 
+   overridingList = utility.buildOverridingList(file); 
 
 	fs.readFile(file, function(err, data) {
         if(err) throw err;
@@ -99,7 +73,7 @@ exports.mutateOverrideFunctionCPC = function(file, filename) {
 }
 
 exports.mutateOverrideFunctionRename = function(file, filename) {
-	overridingList = buildOverridingList(file);
+	overridingList = utility.buildOverridingList(file);
 
     fs.readFile(file, function(err, data) {
         if(err) throw err;
@@ -112,7 +86,7 @@ exports.mutateOverrideFunctionRename = function(file, filename) {
 				replaceCode = node.getSourceCode().replace(node.name, node.name + "MUTANT");
 				
 				fs.writeFile("./sol_output/" + filename + "/"
-                + path.basename(file).slice(0, -4) + "OverriddenFunctionRename"
+                + path.basename(file).slice(0, -4) + "OverridenFunctionRename"
                 + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
                 replaceCode), 'ascii', function(err) {
                     if(err) throw err;

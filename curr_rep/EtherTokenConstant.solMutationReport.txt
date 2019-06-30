@@ -1,0 +1,11 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+EtherTokenConstantAddressRand2.sol	 live 
+EtherTokenConstantAddressZero1.sol	 live 
+EtherTokenConstantStateVarMut1.sol	 live 
+Live: 3
+Killed: 0
+Total: 3
+Mutation Score: 0

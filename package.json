@@ -14,6 +14,7 @@
     "jquery": "^3.4.0",
     "json-to-ast": "~2.0.3",
     "popper.js": "^1.15.0",
+    "remote": "^0.2.6",
     "solidity-parser": "^0.4.0",
     "solidity-parser-antlr": "^0.3.1",
     "solmeister": "~0.0.0",

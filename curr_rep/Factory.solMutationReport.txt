@@ -1,0 +1,56 @@
+FactoryErrorHandleAssertInsert2.sol	 live 
+FactoryErrorHandleAssertInsert5.sol	 live 
+FactoryErrorHandleReqInsert1.sol	 live 
+FactoryErrorHandleReqInsert4.sol	 live 
+FactoryErrorHandleRevertInsert3.sol	 live 
+FactoryErrorHandleRevertInsert6.sol	 live 
+FactoryFunctionTypeIns1.sol	 live 
+FactoryFunctionTypeIns2.sol	 live 
+FactoryFunctionTypeIns3.sol	 live 
+FactoryFunctionTypeIns4.sol	 live 
+FactoryFunctionTypeIns5.sol	 live 
+FactoryFunctionTypeIns6.sol	 live 
+FactoryModifierAddMut2.sol	 live 
+FactoryModifierDelMut1.sol	 live 
+FactorySelfdestructInsert1.sol	 live 
+FactorySelfdestructInsert2.sol	 live 
+FactoryStateVarMut1.sol	 live 
+FactoryStateVarMut2.sol	 live 
+FactoryStateVarMut3.sol	 live 
+FactoryStateVarMut4.sol	 live 
+Live: 20
+Killed: 0
+Total: 20
+Mutation Score: 0
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+FactoryBooleanMut1.sol	 live 
+FactoryStmtDelMut1.sol	 live 
+FactoryStmtDelMut2.sol	 live 
+FactoryStmtDelMut3.sol	 live 
+Live: 4
+Killed: 0
+Total: 4
+Mutation Score: 0

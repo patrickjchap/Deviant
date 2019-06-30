@@ -1,0 +1,9 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+BaseEVMScriptExecutorStateVarMut1.sol	 live 
+Live: 1
+Killed: 0
+Total: 1
+Mutation Score: 0

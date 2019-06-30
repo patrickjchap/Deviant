@@ -41,7 +41,7 @@ exports.mutateHexadecimalOperator = function(file){
                 fs.writeFile("./sol_output/"
                     + path.basename(file).slice(0, -4) + "HexRandom"
                     + fileNum.toString() + ".sol", data.troString().replace(
-                    node.getSourceCodde(0, tmpNode), 'ascii', function(err) {
+                    node.getSourceCode(), tmpNode), 'ascii', function(err) {
                         if(err) throw err;
                     }
 			    );

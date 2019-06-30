@@ -1,0 +1,16 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Uint256HelpersErrorHandle4.sol	 killed 
+Uint256HelpersErrorHandleAssertInsert2.sol	 live 
+Uint256HelpersErrorHandleReqInsert1.sol	 live 
+Uint256HelpersErrorHandleRevertInsert3.sol	 live 
+Uint256HelpersStateVarMut1.sol	 live 
+Uint256HelpersStateVarMut2.sol	 live 
+Uint256HelpersStateVarMut3.sol	 live 
+Uint256HelpersStateVarMut4.sol	 live 
+Live: 7
+Killed: 1
+Total: 8
+Mutation Score: 0.125

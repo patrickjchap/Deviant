@@ -1,0 +1,30 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+MultiSigWalletFactoryStmtDelMut1.sol	 live 
+MultiSigWalletFactoryStmtDelMut2.sol	 live 
+Live: 2
+Killed: 0
+Total: 2
+Mutation Score: 0

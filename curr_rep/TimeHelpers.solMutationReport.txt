@@ -1,0 +1,28 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+TimeHelpersErrorHandleAssertInsert11.sol	 live 
+TimeHelpersErrorHandleAssertInsert2.sol	 live 
+TimeHelpersErrorHandleAssertInsert5.sol	 live 
+TimeHelpersErrorHandleAssertInsert8.sol	 live 
+TimeHelpersErrorHandleReqInsert1.sol	 live 
+TimeHelpersErrorHandleReqInsert10.sol	 live 
+TimeHelpersErrorHandleReqInsert4.sol	 live 
+TimeHelpersErrorHandleReqInsert7.sol	 live 
+TimeHelpersErrorHandleRevertInsert12.sol	 live 
+TimeHelpersErrorHandleRevertInsert3.sol	 live 
+TimeHelpersErrorHandleRevertInsert6.sol	 live 
+TimeHelpersErrorHandleRevertInsert9.sol	 live 
+TimeHelpersFunctionTypeDel2.sol	 live 
+TimeHelpersFunctionTypeDel4.sol	 live 
+TimeHelpersFunctionTypeDel6.sol	 live 
+TimeHelpersFunctionTypeDel8.sol	 live 
+TimeHelpersSelfdestructInsert1.sol	 live 
+TimeHelpersSelfdestructInsert2.sol	 live 
+TimeHelpersSelfdestructInsert3.sol	 live 
+TimeHelpersSelfdestructInsert4.sol	 live 
+Live: 20
+Killed: 0
+Total: 20
+Mutation Score: 0

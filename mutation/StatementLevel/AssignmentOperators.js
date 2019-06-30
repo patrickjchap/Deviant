@@ -34,7 +34,6 @@ exports.mutateAssignmentOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
-		console.log("Unary Operators");
 
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
@@ -44,9 +43,10 @@ exports.mutateAssignmentOperator = function(file, filename){
 				});
 			}
 			if(node.type === 'AssignmentExpression'
-                && node.left.hasOwnProperty('literal')
+                && ((node.left.hasOwnProperty('literal')
                 && node.left.literal.hasOwnProperty('literal')
-                && node.left.literal.literal != "string"    
+                && node.left.literal.literal != "string") ||
+                (!node.left.hasOwnProperty('literal')))    
             ) {
 				var mutOperator;
 				mutOperatorList = operators[node.operator];

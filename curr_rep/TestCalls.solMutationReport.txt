@@ -1,0 +1,35 @@
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+Live: 0
+Killed: 0
+Total: 0
+Mutation Score: NaN
+TestCallsStmtDelMut1.sol	 live 
+TestCallsStmtDelMut2.sol	 live 
+TestCallsStmtDelMut3.sol	 live 
+TestCallsStmtDelMut4.sol	 live 
+TestCallsStmtDelMut5.sol	 live 
+TestCallsStmtDelMut6.sol	 live 
+TestCallsStmtDelMut7.sol	 live 
+Live: 7
+Killed: 0
+Total: 7
+Mutation Score: 0

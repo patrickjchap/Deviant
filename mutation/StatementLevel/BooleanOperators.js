@@ -24,7 +24,7 @@ let options = {
 
 
 
-exports.mutateBooleanOperator = function(file){
+exports.mutateBooleanOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
