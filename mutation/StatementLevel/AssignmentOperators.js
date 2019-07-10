@@ -57,7 +57,7 @@ exports.mutateAssignmentOperator = function(file, filename){
 
 					console.log(mutOperator);
 
-					fs.writeFile("./sol_output/" + filename
+					fs.writeFile("./sol_output/" + filename + '/'
 						+ path.basename(file).slice(0, -4) + "AssignmentMut" 
 						+ fileNum.toString() + ".sol", data.toString().replace(
 						node.getSourceCode(), tmpNode), 'ascii', function(err) {

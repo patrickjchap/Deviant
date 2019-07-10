@@ -16,7 +16,7 @@ let options = {
 
 
 
-exports.mutateHexadecimalOperator = function(file){
+exports.mutateHexadecimalOperator = function(file, filename){
 	var ast;
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;
@@ -29,7 +29,7 @@ exports.mutateHexadecimalOperator = function(file){
                 tmpNodeExtra = node.getSourceCode().replace(node.value, "1234");			    
 	
 				//Writing to mutant file
-				fs.writeFile("./sol_output/" 
+				fs.writeFile("./sol_output/" + filename + '/' 
 				    + path.basename(file).slice(0, -4) + "HexZero" 
 				    + fileNum.toString() + ".sol", data.toString().replace(
                     node.getSourceCode(), tmpNode), 'ascii', function(err) {
@@ -38,9 +38,9 @@ exports.mutateHexadecimalOperator = function(file){
                 );
 				fileNum++;
 
-                fs.writeFile("./sol_output/"
+                fs.writeFile("./sol_output/" + filename + '/'
                     + path.basename(file).slice(0, -4) + "HexRandom"
-                    + fileNum.toString() + ".sol", data.troString().replace(
+                    + fileNum.toString() + ".sol", data.toString().replace(
                     node.getSourceCode(), tmpNode), 'ascii', function(err) {
                         if(err) throw err;
                     }

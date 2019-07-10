@@ -95,10 +95,12 @@ exports.mutateDeleteSuper = function (file, filename) {
                 && node.object.name == 'super'    
             ) {
 
+                tmpNode = node.getSourceCode().replace('super', 'this');
+
                 fs.writeFile("./sol_output/" + filename + "/"
                 + path.basename(file).slice(0, -4) + "SuperDelete"
                 + fileNum.toString() + ".sol", data.toString().replace(node.getSourceCode(),
-                "this"), 'ascii', function(err) {
+                tmpNode), 'ascii', function(err) {
                     if(err) throw err;
                 });
                 fileNum++;

@@ -20,33 +20,29 @@ let options = {
 
 exports.collectContractFunctions = function(file) {
 	functionList = []
-	fs.readFile(file, function(err, data) {	
-		if(err) throw err;
+	data = fs.readFileSync(file);
 
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type == 'FunctionDeclaration') {functionList.push(node.name);}
 		});
 
-	});
 	return functionList;
 }
 
 exports.collectImportedContracts = function(file) {
 	importList = [];
-	fs.readFile(file, function(err, data) {
-		if(err) throw err;
+	data = fs.readFileSync(file);
 
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type == 'ImportStatement') {importList.push(node.from)};
 		});
-	});
+    console.log(importList);
 	return importList;
 }
 
 exports.collectInheritedContracts = function(file) {
 	inheritedList = [];
-	fs.readFile(file, function(err, data) {
-		if(err) throw err;
+	data = fs.readFileSync(file);
 
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type == 'ContractStatement' && node.is.length > 0){
@@ -55,7 +51,6 @@ exports.collectInheritedContracts = function(file) {
 				}
 			}
 		});	
-	});
 	return inheritedList;
 }
 
@@ -71,8 +66,7 @@ exports.matchInheritedImportedContracts = function (inheritedList, importList) {
 }
 
 exports.getContractType = function(file) {
-	fs.readFile(file, function(err, data) {
-		if(err) throw err;
+	data = fs.readFileSync(file);
 
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type == 'LibraryStatement') {return 'Library';}
@@ -81,7 +75,6 @@ exports.getContractType = function(file) {
 
 		});
 		return 'None';
-	});
 }
 
 exports.buildOverridingList = function(file) {
@@ -90,10 +83,11 @@ exports.buildOverridingList = function(file) {
     inheritedList = this.collectInheritedContracts(file);
     matchList = this.matchInheritedImportedContracts(inheritedList, importList);
 
+
     functionMatchLists = [];
     //changing path to match relation to original contract
     for(var i = 0; i < matchList.length; i++) {
-        functionMatchLists.push(utility.collectContractFunctions(
+        functionMatchLists.push(this.collectContractFunctions(
             path.dirname(file) + '/' + matchList[i])
         );
     }
@@ -103,7 +97,7 @@ exports.buildOverridingList = function(file) {
     for(var i = 0; i < functionMatchLists.length; i++) {
         for(var j = 0; j < functionMatchLists[i].length; j++){
             //if both lists contain same function name
-            if(currFunction.indexOf(functionMatchLists[i][j]) > -1){
+            if(currFunctionList.indexOf(functionMatchLists[i][j]) > -1){
                 overridingList.push(functionMatchLists[i][j]);
             }
         }
@@ -113,8 +107,7 @@ exports.buildOverridingList = function(file) {
 
 exports.getStateVariables = function(file) {
     stateVariableList = [];
-    fs.readFile(file, function(err, data) {
-        if(err) throw err;
+    data = fs.readFileSync(file);
 
         let mutCode = solm.edit(data.toString(), function(node) {
             if(node.type == 'StateVariableDeclaration' && node.is.length > 0){
@@ -123,7 +116,6 @@ exports.getStateVariables = function(file) {
                 }
             }
         });
-    });
     return stateVariableList;
 }
 
@@ -142,8 +134,7 @@ exports.getParentStateVariables = function(file) {
 
 exports.getStateVariableDeclaration = function(file) {
     stateVariableList = [];
-    fs.readFile(file, function(err, data) {
-        if(err) throw err;
+    data = fs.readFileSync(file);
 
         let mutCode = solm.edit(data.toString(), function(node) {
             if(node.type == 'StateVariableDeclaration' && node.is.length > 0){
@@ -152,7 +143,6 @@ exports.getStateVariableDeclaration = function(file) {
                 }
             }
         });
-    });
     return stateVariableList;
 
 }
@@ -174,8 +164,8 @@ exports.getParentContractReference = function(file) {
     parentList = this.collectInheritedContracts(file);
     
     parentDeclarationList = [];
-    fs.readFile(file, function(err, data) {
-        if(err) throw err;
+
+    data = fs.readFileSync(file);
 
         let mutCode = solm.edit(data.toString(), function(node) {
 
@@ -187,24 +177,21 @@ exports.getParentContractReference = function(file) {
                 }
             }
         });
-    });
     return parentDeclarationList;
 }
 
 exports.getVarTypeDict = function(file) {
 	varTypeDict = {};
 
-	fs.readFile(file, function(err, data) {
-        if(err) throw err;
+	data = fs.readFileSync(file);
 
-        let mutCode = solm.edit(data.toString(), function(node) {
+    let mutCode = solm.edit(data.toString(), function(node) {
 
-            if(node.type == 'DeclarativeExpression' && node.hasOwnProperty('literal')
-				&& node.literal != null
-			) {
-                varTypeDict[node.name] = node.literal.literal;
-            }
-        });
+        if(node.type == 'DeclarativeExpression' && node.hasOwnProperty('literal')
+			&& node.literal != null
+		) {
+            varTypeDict[node.name] = node.literal.literal;
+        }
     });
     return varTypeDict;
 
@@ -215,7 +202,7 @@ exports.getImportedContractParentsDict = function(file, filename) {
 
 	impList = this.collectImportedContracts(file);
 	for(var i = 0; i < impList.length; i++) {
-		importParentDict[impList[i].replace('.sol', '')] = this.collectInheritedContracts(filename, impList[i]);
+		importParentDict[impList[i].replace('.sol', '')] = this.collectInheritedContracts(file.replace(filename+'.sol' + impList[i]));
 	}
 
     return importParentDict;

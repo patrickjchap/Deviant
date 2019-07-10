@@ -22,6 +22,8 @@ let options = {
 
 exports.mutateOverrideFunctionDeleteOperator = function(file, filename){
 	overridingList = utility.buildOverridingList(file);
+    console.log(overridingList);
+
 
 	fs.readFile(file, function(err, data) {	
 		if(err) throw err;

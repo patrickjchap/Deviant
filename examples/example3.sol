@@ -7,6 +7,10 @@ import "./ConvertLib.sol";
 // coin/token contracts. If you want to create a standards-compliant
 // token, see: https://github.com/ConsenSys/Tokens. Cheers!
 
+contract example3 {
+    function testpure() pure {}
+}
+
 contract MetaCoin {
 	mapping (address => uint) balances;
 

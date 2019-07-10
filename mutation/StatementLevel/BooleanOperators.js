@@ -32,15 +32,15 @@ exports.mutateBooleanOperator = function(file, filename){
 		fileNum = 1;
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.type === 'Literal' && (node.value == true ||
-                node.value == false)
+                node.value == false) && operators[node.value] != undefined
             ) {
                 mutOperator = operators[node.value];
-				tmpNode = node.getSourceCode().replace(node.operator, mutOperator);
+				tmpNode = node.parent.getSourceCode().replace(Boolean(node.value).toString(), Boolean(mutOperator).toString());
 
                 fs.writeFile("./sol_output/" + filename + "/"
                     + path.basename(file).slice(0, -4) + "BooleanMut"
                     + fileNum.toString() + ".sol",
-                    data.toString().replace(node.getSourceCode(),
+                    data.toString().replace(node.parent.getSourceCode(),
                     tmpNode), 'ascii', function(err) {
                         if(err) throw err;
                     }

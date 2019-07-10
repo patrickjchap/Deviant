@@ -2,7 +2,7 @@ import "./example3.sol";
 pragma solidity ^0.4.22;
 
 /// @title Voting with delegation.
-contract Ballot {
+contract Ballot is example3{
     // This declares a new complex type which will
     // be used for variables later.
     // It will represent a single voter.

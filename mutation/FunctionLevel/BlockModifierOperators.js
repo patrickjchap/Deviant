@@ -24,12 +24,11 @@ exports.mutateBlockOperator = function(file, filename) {
         let mutCode = solm.edit(data.toString(), function(node) {
             if(node.type === 'BlockStatement') {
 
-                tmpNode = node.getSourceCode().replace(node.operator, "");
 
                 fs.writeFile("./sol_output/" +  filename + '/' 
-                    + path.basename(file).slice(0, -4) + "StmtDelMut"  
+                    + path.basename(file).slice(0, -4) + "BlkDelMut"  
                     + fileNum.toString() + ".sol", data.toString().replace(
-                    node.getSourceCode(), tmpNode), 'ascii', function(err) {
+                    node.getSourceCode(), "{}"), 'ascii', function(err) {
                         if(err) throw err;
                     }   
                 );
