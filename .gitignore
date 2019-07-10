@@ -1,0 +1,9 @@
+gitignore
+sol_output
+node_modules
+txt_reports
+*.swp
+*.sol
+MSW_reports
+aragon_reports
+examples

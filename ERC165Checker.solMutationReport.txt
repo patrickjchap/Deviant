@@ -1,8 +1,0 @@
-ERC165CheckerStateVarMut1.sol	 live 
-ERC165CheckerStateVarMut2.sol	 live 
-ERC165CheckerStateVarMut3.sol	 live 
-ERC165CheckerStateVarMut4.sol	 live 
-Live: 4
-Killed: 0
-Total: 4
-Mutation Score: 0
