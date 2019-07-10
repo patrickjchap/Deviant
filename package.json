@@ -17,7 +17,6 @@
     "remote": "^0.2.6",
     "solidity-parser": "^0.4.0",
     "solidity-parser-antlr": "^0.3.1",
-    "solmeister": "~0.0.0",
     "solparse": "~2.2.5",
     "soltar": "^2.0.6"
   },
