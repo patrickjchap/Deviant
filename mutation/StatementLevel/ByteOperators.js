@@ -66,6 +66,7 @@ exports.mutateBytesOperator = function(file, filename){
 		let mutCode = solm.edit(data.toString(), function(node) {
 			if(node.hasOwnProperty('literal')
                 && node.literal.hasOwnProperty('literal')
+                && typeof node.literal.literal == 'string' 
                 && node.literal.literal.includes('byte')
             ) {
 				tmpNode = node.getSourceCode().replace(node.operator, operators[node.operator]);

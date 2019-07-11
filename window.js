@@ -38,6 +38,22 @@ const url = require('url');
 const path = require('path');
 const child = require('child_process');
 const mutation = require('./mutation/mutation');
+var safeEval = require('safe-eval')
+var context = {
+    address: require("./mutation/SolidityFeatures/AddressOperators.js"),
+    addressFunction: require("./mutation/SolidityFeatures/AddressFunctionOperators.js"),
+    error: require("./mutation/SolidityFeatures/ErrorHandleOperators.js"),
+    events: require("./mutation/SolidityFeatures/EventOperators.js"),
+    functionType: require("./mutation/SolidityFeatures/FunctionTypeOperators.js"),
+    functionVis: require("./mutation/SolidityFeatures/FunctionVisibilityOperators.js"),
+    gas: require("./mutation/SolidityFeatures/GasOperators.js"),
+    library: require("./mutation/SolidityFeatures/LibraryOperators.js"),
+    modifiable: require("./mutation/SolidityFeatures/ModifiableDataOperators.js"),
+    modifier: require("./mutation/SolidityFeatures/ModifierOperators.js"),
+    sd: require("./mutation/SolidityFeatures/SelfdestructOperators.js"),
+    sv: require("./mutation/SolidityFeatures/StateVariableOperators.js")
+}
+
 
 var project = '';
 var projectDict;
@@ -129,21 +145,24 @@ function createMutOpWindow(){
 
 //Report Window
 function createReportWindow() {
-    reportWindow = new BrowserWindow({
-        width: 1200,
-        height: 800,
-        title: 'Mutation Report'
-    });
+    testTasks--;
+    if(testTasks <= 0) {
+        reportWindow = new BrowserWindow({
+            width: 1200,
+            height: 800,
+            title: 'Mutation Report'
+        });
 
-    reportWindow.loadURL(url.format({
-        pathname: path.join(__dirname, './content/html/report.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
+        reportWindow.loadURL(url.format({
+            pathname: path.join(__dirname, './content/html/report.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
 
-    reportWindow.on('close', function() {
-        reportWindow = null;
-    });
+        reportWindow.on('close', function() {
+            reportWindow = null;
+        });
+    }
 
     //reportWindow.webContents.openDevTools();
 }
@@ -184,24 +203,25 @@ function dirExist (dirpath) {
   }
 }
 
-//Catching the items from main window
-ipcMain.on('file:select', function(e, mutParam){
-    var dir = mutParam[1];
+//Generating mutants based on selected files and selected operators
+ipcMain.on('generateMutants', function(e, mutParam){
+    var dir = mutParam[1]; //directory where file is located
+    var files = mutParam[0]; //selected files
 
-    var files = mutParam[0];
-
+    //Generating mutants for each file and inserting into separate directories
     for(var i = 0; i < files.length; i++) {
-        var file = files[i];//.replace(/^.*[\\\/]/, '');
+        var file = files[i];
 	    var filename = './sol_output/' + project.replace(/^.*[\\\/]/, '') + '-' + currTime;
-	    console.log(filename);
+	    //console.log(filename);
    
         outputLoc = filename; 
 
         filename = filename + '/' + file.replace(/^.*[\\\/]/, '');
         filename = filename.replace('.sol', '');
 
-        console.log(filename);   
+        //console.log(filename);   
 
+        //creating directories for mutants
         try{
             dirExist(outputLoc);
             dirExist(filename);
@@ -209,30 +229,33 @@ ipcMain.on('file:select', function(e, mutParam){
         }catch(err){
             console.error(err); 
         }
-    
         filename = filename.replace('./sol_output/', '') + '/';
-        //DANGEROUS!!
-	    eval(mutOpt);
-	    //var runScript = exec('sh solm -f ' + filename + ' -d ' + dir + ' -o '+  mutOpt,
-	    //(error, stdout, stderr) => {
-	    //	console.log(`${stdout}`);
-	    //	console.log(`${stderr}`);
-	    //	if (error !== null) {
-	    //		console.log(`exec error: ${error}`);
-	    //	}
-	    //});
+        //Updating main page with status
+        mainWindow.webContents.send('send:update', 'Generating Mutant: ' + filename);
+        
+        //Splitting each line based on ; delimiter
+        mutOptList = mutOpt.split(';');
+        context['file'] = file;
+        context['filename'] = filename;
+        console.log(mutOptList);
+        //last statement is a blank string (skip it)
+        for(var j = 0; j < mutOptList.length-1; j++) {
+            evalStatement = mutOptList[j] + '(file, filename);';
+            console.log(evalStatement);
+            safeEval(evalStatement, context);
+        }
     }
 });
 
 var killed = 0;
 var live = 0;
+var testTasks;
 ipcMain.on('run:tests', function(e, mutParam){
 		dir = mutParam[0];
 		filenames = mutParam[1];
 
-        //createStatusWindow();
+            testTasks = filenames.length;
 
-        //statusWindow.once('did-finish-load', ()=>{
             for(var i = 0; i < filenames.length; i++) {
                 filename = filenames[i]
                 dir = filename.match(/(.*)[\/\\]/)[1]||'' + '/';
@@ -252,8 +275,7 @@ ipcMain.on('run:tests', function(e, mutParam){
                 //console.log(execProj);
                 //console.log(reportDir);
                
-                createStatusWindow();
-                    
+                createStatusWindow();    
                 statusWindow.webContents.once('dom-ready', ()=>{
                     param = [mutDir, dir, filename, execProj, reportDir];
                     statusWindow.webContents.send('run:mutants', param);
@@ -262,11 +284,10 @@ ipcMain.on('run:tests', function(e, mutParam){
 
                 ipcMain.on('get:statusUpdate', function(e, statusUpdate) {
                     mainWindow.webContents.send('send:update', statusUpdate);
+                    createReportWindow();
                 });
-
+                
             }
-        
-       // });
 
 });
 

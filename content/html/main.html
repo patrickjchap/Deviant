@@ -46,17 +46,9 @@
             value = "selectMut" onclick = "openMutPage()">
             Select Mutation Operators
         </button>
-		<button id="generate" type = "button" class = "btn btn-primary btn-md"
-             value = "Generate" onclick = "genMutants()">
-            Generate Mutants
-        </button>
 		<button id="run" type = "button" class = "btn btn-primary btn-md" 
             value="Run" onclick = "runTests()">
-            Run Tests
-        </button>
-		<button id="viewReport" type = "button" class = "btn btn-primary btn-md" 
-            value = "viewReport" onclick = "openReportPage()">
-            View Report
+            Run Mutants
         </button>
 	</form>
 
@@ -94,7 +86,11 @@
 //            ipcRenderer.send('file:select', mutParam);
 //		}
 
+        /*
+         * Builds parameters from GUI and sends back information to renderer
+         */
 		function genMutants(){
+            //Building parameters to send back to renderer
 			const mutDirectory = document.getElementById('mutDir').files[0].path;
 			const fileEle = document.getElementById('display-files')
 			const mutFiles = [];
@@ -107,12 +103,16 @@
 
 			var mutParam = [mutFiles, mutDirectory]
 
-			// Sending back to the application
-			ipcRenderer.send('file:select', mutParam);
+			//Using renderer to generate mutants
+			ipcRenderer.send('generateMutants', mutParam);
 		}
 
+        /*
+         * Calls genMutants() and then sends parameteres to renderer to run tests
+         */
 		function runTests(){
-			const mutDirectory = document.getElementById('mutDir').files[0].path;
+			genMutants();
+            const mutDirectory = document.getElementById('mutDir').files[0].path;
 			const fileEle = document.getElementById('display-files');
 			var mutFiles = [];
 
@@ -122,16 +122,13 @@
                 }
             }
 
-
-            //document.getElementById('status').innerHTML = 'Status: Running tests...';
 			var mutParam = [mutDirectory, mutFiles];
 			ipcRenderer.send('run:tests', mutParam);
-            //document.getElementById('status').innerHTML = 'Status: Test have been completed!';
 		}
 
-        function openReportPage(){
-            ipcRenderer.send('open:report');      
-        }
+        //function openReportPage(){
+        //    ipcRenderer.send('open:report');      
+        //}
 
         function openMutPage(){
             ipcRenderer.send('open:mut');

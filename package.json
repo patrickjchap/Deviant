@@ -15,6 +15,7 @@
     "json-to-ast": "~2.0.3",
     "popper.js": "^1.15.0",
     "remote": "^0.2.6",
+    "safe-eval": "^0.4.1",
     "solidity-parser": "^0.4.0",
     "solidity-parser-antlr": "^0.3.1",
     "solparse": "~2.2.5",
