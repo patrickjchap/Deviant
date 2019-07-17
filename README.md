@@ -4,19 +4,42 @@
 
 Mutant generation for Solidity.
 
-Mutation testing is a method for testing the effectiveness of a test suite. Mutation
-testing is simply modifying the code to contain some singular change and then running
-a provided test suite against the mutant version of the program. If the test suite
-contains a test that is failing that was previously passing on the normal program
-version, then that mutant is marked as killed. It the mutant version manages to pass
-all tests same as the normal version, then the mutant is considered live.
-
 ## Setup
 
-### Install Dependencies
+To install Deviant:
 
-npm install
+**npm install**
 
-## Packages Used
-* solmeister
-* solparse
+Launching Deviant:
+
+**npm start**
+
+
+## Using Deviant
+
+1. Select the folder at the root of a project (where you use npm test)
+
+2. Select the appropriate contracts for mutation testing from the list
+
+3. Click the select mutation operators button
+
+4. Select and **save** the mutation operators that you wish to use
+* Note: If you close the window before saving, the mutation operators will not be saved
+
+5. Click the **Run Tests** button
+
+6. The status text should appear, displaying current progress in the generation and running of mutants
+
+7. Once all the mutants have been ran, the report window will appear
+
+8. In the report window, select the file that you want to view a report for
+* Note: Clicking the mutant file will display the difference between the original file and the mutant
+* Note: The report is shown for each individual file, not the entire project
+
+### Important Dependencies
+
+* [Solparse](https://github.com/duaraghav8/solparse)
+
+* [Solmeister](https://github.com/duaraghav8/solmeister)
+	* Note: We have forked this library as its depencies are out of date. The current version that we use is located [here](https://github.com/patrickjchap/solmeister).
+

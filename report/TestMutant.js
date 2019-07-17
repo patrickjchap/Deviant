@@ -21,7 +21,10 @@ exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, 
 			if(err) console.log(err);
 		});
 
-        ipcRenderer.send('get:statusUpdate', 'Status: Testing ' + filename);
+        	ipcRenderer.send('get:statusUpdate', 'Status: Testing ' + filename
+			+ '&emsp; Total: ' + total_mutants + ' Killed: ' + killed
+			+ ' Live: ' + live
+		);
 
 		let child;
 		try{
@@ -81,7 +84,7 @@ exports.runMutants = function(mutantDirectory, contractDirectory, contractFile, 
 		}
 	});
 
-    ipcRenderer.send('get:statusUpdate', 'Status: Finished testing. Click "View Report" to see results.');
+    ipcRenderer.send('get:statusUpdate', 'Status: Finished testing... View report for details.');
 	
     fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', 'Live: ' + live + '\n');
 	fs.appendFileSync(reportDirectory + contractName + 'MutationReport.txt', 'Killed: ' + killed + '\n');

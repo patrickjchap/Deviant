@@ -39,6 +39,8 @@ const path = require('path');
 const child = require('child_process');
 const mutation = require('./mutation/mutation');
 var safeEval = require('safe-eval')
+
+//Adding mutation functions to context for safeEval
 var context = {
     address: require("./mutation/SolidityFeatures/AddressOperators.js"),
     addressFunction: require("./mutation/SolidityFeatures/AddressFunctionOperators.js"),
@@ -51,9 +53,26 @@ var context = {
     modifiable: require("./mutation/SolidityFeatures/ModifiableDataOperators.js"),
     modifier: require("./mutation/SolidityFeatures/ModifierOperators.js"),
     sd: require("./mutation/SolidityFeatures/SelfdestructOperators.js"),
-    sv: require("./mutation/SolidityFeatures/StateVariableOperators.js")
-}
+    sv: require("./mutation/SolidityFeatures/StateVariableOperators.js"),
 
+    //Statement Level
+    assign: require('./mutation/StatementLevel/AssignmentOperators.js'),
+    binary: require('./mutation/StatementLevel/BinaryOperators.js'),
+    boolOp: require('./mutation/StatementLevel/BooleanOperators.js'),
+    byteOp: require('./mutation/StatementLevel/ByteOperators.js'),
+    hexOp: require('./mutation/StatementLevel/HexadecimalOperators.js'),
+    intOp: require('./mutation/StatementLevel/IntegerOperators.js'),
+    strOp: require('./mutation/StatementLevel/StringOperators.js'),
+
+    //Function Level
+    block: require('./mutation/FunctionLevel/BlockModifierOperators.js'),
+    statement: require('./mutation/FunctionLevel/StatementModifierOperators.js'),
+
+    //Contract Level
+    over:require('./mutation/ContractLevel/OverridingOperators.js'),
+    superOp: require('./mutation/ContractLevel/SuperContractOperators.js')
+
+}
 
 var project = '';
 var projectDict;
@@ -98,8 +117,8 @@ app.on('ready', function(){
 
 function createStatusWindow() {
     statusWindow = new BrowserWindow({
-        width: 0,
-        height: 0,
+        width: 500,
+        height: 500,
         title: 'Test Status'
     });
 
@@ -247,9 +266,6 @@ ipcMain.on('generateMutants', function(e, mutParam){
     }
 });
 
-var killed = 0;
-var live = 0;
-var testTasks;
 ipcMain.on('run:tests', function(e, mutParam){
 		dir = mutParam[0];
 		filenames = mutParam[1];
@@ -282,13 +298,17 @@ ipcMain.on('run:tests', function(e, mutParam){
                 });
                 
 
-                ipcMain.on('get:statusUpdate', function(e, statusUpdate) {
-                    mainWindow.webContents.send('send:update', statusUpdate);
-                    createReportWindow();
-                });
                 
             }
+	//createReportWindow();
 
+});
+
+ipcMain.on('get:statusUpdate', function(e, statusUpdate) {
+	mainWindow.webContents.send('send:update', statusUpdate);
+	if(statusUpdate.includes('Finished')) {
+		createReportWindow();
+	}
 });
 
 ipcMain.on('save:project', function(e, projPath) {
