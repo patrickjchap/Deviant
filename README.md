@@ -8,16 +8,16 @@ Mutant generation for Solidity.
 
 To install Deviant:
 
-**npm install**
+```npm install```
 
 Launching Deviant:
 
-**npm start**
+```npm start```
 
 
 ## Using Deviant
 
-1. Select the folder at the root of a project (where you use npm test)
+1. Select the folder at the root of a project (where you use ```npm test```)
 
 2. Select the appropriate contracts for mutation testing from the list
 
