@@ -54,6 +54,7 @@ function getMutantStats(origFile, projectWithDate) {
         reportStr = fs.readFileSync(reportPath).toString();
         reportLines = reportStr.split('\n');    
 
+	mutantStatus = {};
         mutantTypeDict = {};
         mutantTypeGenDict = {};
         totalLive = 0;
@@ -64,6 +65,8 @@ function getMutantStats(origFile, projectWithDate) {
                 mutantFileName = reportLines[i].substr(0, reportLines[i].indexOf('\t'));
                 mutantType = mutantFileName.replace(/[0-9]/g, '');
                 mutantType = mutantType.replace(removedOrigSol, '').replace('.sol', '');
+
+		mutantStatus[mutantFileName] = "Live";
     
                 if(mutantTypeDict[mutantType] == null){
                     mutantTypeDict[mutantType] = 1;
@@ -81,6 +84,8 @@ function getMutantStats(origFile, projectWithDate) {
                 mutantFileName = reportLines[i].substr(0, reportLines[i].indexOf('\t'));
                 mutantType = mutantFileName.replace(/[0-9]/g, '');
                 mutantType = mutantType.replace(removedOrigSol, '').replace('.sol', '');
+
+		mutantStatus[mutantFileName] = "Killed";
 
                 if(mutantTypeGenDict[mutantType] == null) {
                     mutantTypeGenDict[mutantType] = 1;
@@ -118,6 +123,8 @@ function getMutantStats(origFile, projectWithDate) {
         document.getElementById('stats-textbox').value = 'Error: Report not found! It is likely'
             + ' that the tests have not ran yet, meaning that no report has been generated!';      
     }    
+
+    return mutantStatus;
 }
 
     

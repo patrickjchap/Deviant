@@ -183,7 +183,7 @@ function createReportWindow() {
         });
     }
 
-    //reportWindow.webContents.openDevTools();
+    reportWindow.webContents.openDevTools();
 }
 
 const mainMenuTemp = [

@@ -29,8 +29,22 @@
                     true
                     );
 
-                    getMutantStats(document.getElementById('display-files-orig').value, outputLoc.replace('./sol_output/', ''));
-                "
+                    mutantStats = getMutantStats(document.getElementById('display-files-orig').value, outputLoc.replace('./sol_output/', ''));
+               
+		console.log(mutantStats);
+		 mutantFileEle = document.getElementById('display-files-mut'); 
+
+		console.log(mutantFileEle.options.length);
+		 for (var i = 0; i < mutantFileEle.options.length; i++) {
+                        console.log('-----'+i+'----');
+			console.log(mutantFileEle.options[i].name);
+			mutantFileEle.options[i].text = mutantFileEle.options[i].text 				 
+			    + ' '
+			    + mutantStats[mutantFile.options[i].text];
+
+			console.log(mutantFileEle.options[i].text);
+		   }
+		"
             >
 			</select>
         
@@ -65,6 +79,7 @@
         const {ipcRenderer} = electron;
         var project = '';
         var outputLoc;
+	var mutantStats;
 
         ipcRenderer.send('send:outputLoc');
         ipcRenderer.on('get:outputLoc', function(e, data) {
@@ -79,7 +94,7 @@
             listFiles('display-files-orig',
                 project,
                 false
-            )
+            );
 
         });
 
@@ -88,10 +103,10 @@
         loadFile = function(div, file) {
 			$(div).load(file);
 			$(div).text($(div).text().split("\n").join("\\n"));
-		}
-		loadDiff = function(div, orig, mut) {
+	}
+	loadDiff = function(div, orig, mut) {
 			
-		}
+	}
 	</script>
 
 </div>
